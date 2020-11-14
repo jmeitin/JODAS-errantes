@@ -1,17 +1,24 @@
 h1 {
   text-align: center;
+  font-family: Courier;
 }
-body{
+a {
+  text-align: right;
+}
+
+h3 {
+  text-align: center;
+  color: #FFFFFF;
+}
+h5 {
+  text-align: center;
+  color: #FFFFFF;
+}
+body {
 	background-image: url("Fondo.jpg");
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
 	background-attachment: fixed;
 }
-a{
-	text-align: right;
-h3 {
-  text-align: center;
-}
-h5{
-  text-align: center;
-}
+
+
