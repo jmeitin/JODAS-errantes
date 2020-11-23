@@ -12,15 +12,17 @@ export default class Game extends Phaser.Scene {
   create() {
     this.add.text(10, 10, "¡Hola, mundo!", { fontColor: 0xffff00 });
 
-    this.player = new Persona(this, 300, 500, "guy");
-    
     this.cursorKeys = this.input.keyboard.createCursorKeys();
+
+    this.player = new Persona(this, 300, 500, "guy", this.cursorKeys);
+    
+    
 
   }
 
   update(time, delta) {
-    this.player.moveLeft();
-
+    //this.player.moveLeft();
+    this.player.movementManager();
   }
 
 
