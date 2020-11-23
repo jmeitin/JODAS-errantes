@@ -1,3 +1,4 @@
 Página web: https://jmeitin.github.io/JODAS-errantes/
 Repositorio: https://github.com/jmeitin/JODAS-errantes
 Twitter: https://twitter.com/JODASerrantes
+Pivotal: https://www.pivotaltracker.com/n/projects/2467974
