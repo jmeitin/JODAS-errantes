@@ -48,7 +48,9 @@ margin: 0;
     <br><br>
     
     <script type="module">
+
       import Game from "./game.js";
+      import MainMenu from "./Scenes/mainMenu.js";
 
       var config = {
         type: Phaser.AUTO,
@@ -62,7 +64,7 @@ margin: 0;
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         },
-        scene: [Game],
+        scene: [MainMenu, Game],
         physics: {
           default: "arcade",
           arcade: { gravity: { y: 0 }, debug: false },

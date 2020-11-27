@@ -1,5 +1,5 @@
 import Game from "../game.js";
-import Sprites from "../sprites.js"
+import Sprites from "../sprites.js";
 
 export default class Person extends Sprites{
 
