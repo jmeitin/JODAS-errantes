@@ -45,5 +45,13 @@ export default class Person extends Sprites{
     moveDown(){
         this.y+= this.speed;
     }
+
+    getX(){
+        return this.x;
+    }
+
+    getY(){
+        return this.y;
+    }
 }
 
