@@ -3,44 +3,47 @@ import Sprites from "../sprites.js"
 
 export default class Person extends Sprites{
 
-    constructor(scene, x, y, type, cursorKeys){
+    constructor(scene, x, y, type, speed){
 
         super(scene, x, y, type);
 		this.x = x;
-		this.y = y;
-        this.cursorkeys = cursorKeys;
+        this.y = y;
+        this.speed = speed;
+        //this.cursorkeys = cursorKeys;
 
 	}
     
-    movementManager(){//podrias decirle moveLeft, moveDown... probablemente seria mas correcto y todo...me la suda...borrar esto antes de que lo lea un profesor
-        if(this.cursorkeys.left.isDown){
-            this.x-=10;
-        }
-        else if(this.cursorkeys.right.isDown){
-            this.x+=10;
-        }
-        else if(this.cursorkeys.up.isDown){
-            this.y-=10;
-        }
-        else if(this.cursorkeys.down.isDown){
-            this.y+=10;
-        }
-    }
+    // movementManager(){
+        
+    //     if(this.cursorkeys.right.isDown){
+    //         this.moveRight();
+    //     }
+    //     else if(this.cursorkeys.left.isDown){
+    //         this.moveLeft();
+    //     }
+        
+    //     if(this.cursorkeys.up.isDown){
+    //         this.moveUp();
+    //     }
+    //     else if(this.cursorkeys.down.isDown){
+    //         this.moveDown();
+    //     }
+    // }
 
     moveLeft(){
-        this.x--;
+        this.x -= this.speed;
     }
 
     moveRight(){
-        this.x++;
+        this.x+= this.speed;
     }
 
     moveUp(){
-        this.y--;
+        this.y-= this.speed;
     }
 
     moveDown(){
-        this.y++;
+        this.y+= this.speed;
     }
 }
 
