@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<style>
-body{
-margin: 0;
-}
-</style>
-<canvas>
-  
-  </canvas>
-  <script src = "./index.js">
-  
-  </script>
-<html lang="es">
+ <!DOCTYPE html>
+  <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
@@ -46,31 +35,6 @@ margin: 0;
 			</ul>
 		</div>
     <br><br>
-    
-    <script type="module">
-      import Game from "./game.js";
-
-      var config = {
-        type: Phaser.AUTO,
-        width: 1400,
-        height: 800,
-        pixelArt: true,
-        input: {
-          gamepad: true,
-        },
-        scale: {
-          mode: Phaser.Scale.FIT,
-          autoCenter: Phaser.Scale.CENTER_BOTH,
-        },
-        scene: [Game],
-        physics: {
-          default: "arcade",
-          arcade: { gravity: { y: 0 }, debug: false },
-        },
-      };
-      new Phaser.Game(config);
-    </script>
-    <!-- <script src="./Player.js"></script> -->
 	<br>
 	<br>
 	<a href="https://github.com/jmeitin/JODAS-errantes"> Ver repositorio</a>
