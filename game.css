@@ -4,6 +4,7 @@ h1 {
 }
 a {
   text-align: right;
+  color:white;
 }
 
 h3 {
@@ -13,10 +14,11 @@ h5 {
   text-align: right;
 }
 body {
-	background-image: url("Fondo.jpg");
+	background-image: url("HTMLimgs/Fondo.png");
+	background-size: 105%;
 	background-repeat: no-repeat;
-	background-position: 50% 0%;
-	background-attachment: fixed;
+	background-position: 100% 30%;
+	background-attachment: scroll;
 }
 * {
 	margin:0px;
@@ -27,6 +29,14 @@ body {
 	margin:auto;
 	width:1080px;
 	font-family:Courier;
+}
+
+#content{
+	background-color: rgba(0,0,0,0.5);
+	margin: auto;
+	width: 80%;
+	text-align: center;
+	display: table;
 }
 			
 ul, ol {
@@ -70,4 +80,12 @@ ul, ol {
 	top:0px;
 }
 
+ul#rrss{
+	padding-bottom: 20px;
+}
+ul#rrss li{
+	font-size: 25px;
+	display: inline;
+	padding-inline: 147px;
+}
 
