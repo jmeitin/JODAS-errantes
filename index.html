@@ -51,6 +51,7 @@ margin: 0;
 
       import Game from "./game.js";
       import MainMenu from "./Scenes/mainMenu.js";
+      import fase1 from "./Scenes/fase1.js";
 
       var config = {
         type: Phaser.AUTO,
@@ -63,8 +64,8 @@ margin: 0;
         scale: {
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
-        },
-        scene: [MainMenu, Game],
+        },//la primera escena de la lista de abajo es la que se muestra nada mas empezar
+        scene: [MainMenu, fase1,  Game],
         physics: {
           default: "arcade",
           arcade: { gravity: { y: 0 }, debug: false },
