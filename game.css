@@ -88,4 +88,13 @@ ul#rrss li{
 	display: inline;
 	padding-inline: 147px;
 }
+#menu0{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/juego.png");
+	transition: 0.5s;
+}
+#menu0:hover{
+	background-image: url("HTMLimgs/juegoh.png");
+}
 
