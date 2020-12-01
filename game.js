@@ -25,8 +25,12 @@ export default class Game extends Phaser.Scene {
     this.policia = new Policia(this, 300, 600, "guy", 0.5);
     this.civiles = [];
     for(let i = 0; i < 10; i++){
-      let civil = new Civil(this, 600 + 70 * i, 600, "civil", 1).setScale(3);
-      this.civiles.push(civil);
+      for(let j = 0; j < 10; j++){
+        if(!((i < 1 && j < 3) || (i > 8 && j < 3)) && ((i < 3 || i > 6) || (j < 3 || j > 6))){
+          let civil = new Civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 1).setScale(3);
+        this.civiles.push(civil);
+        }
+      }
     }
 
   }
@@ -35,7 +39,7 @@ export default class Game extends Phaser.Scene {
     console.debug(this.civiles.length);
     this.player.movementManager();
     this.policia.update();
-    for(let i = 0; i < 10; i++){
+    for(let i = 0; i < this.civiles.length; i++){
       this.civiles[i].update();
     }
   }
