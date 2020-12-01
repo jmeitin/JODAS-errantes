@@ -24,6 +24,12 @@ body {
 	margin:0px;
 	padding:0px;
 }
+
+#banner{
+	margin: auto;
+	width: 100%;
+	text-align: center;
+}
 			
 #header {
 	margin:auto;
