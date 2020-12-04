@@ -23,6 +23,7 @@ export default class Game extends Phaser.Scene {
 
     this.player = new Player(this, 300, 600, "guy", this.cursorKeys, 10);
     this.policia = new Policia(this, 300, 600, "guy", 0.5);
+    this.cameras.main.startFollow(this.player);
     this.civiles = [];
     for(let i = 0; i < 10; i++){
       for(let j = 0; j < 10; j++){
