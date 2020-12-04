@@ -32,9 +32,9 @@ body {
 }
 			
 #header {
-	margin:auto;
-	width:1080px;
-	font-family:Courier;
+	margin: auto;
+	width: 100%;
+	text-align: center;
 }
 
 #content{
@@ -50,23 +50,8 @@ ul, ol {
 }
 			
 .nav > li {
-	float:left;
-}
-			
-.nav li a {
-	background-color:#804000;
-	text-align: center;
-	color:#fff;
-	text-decoration:none;
-	padding:10px 90px;
-	display:block;
-	border-radius: 98px 98px 98px 98px;
-	border: 5px outset #6e4900;
-}
-.nav li a:hover {
-	background-color:#434343;
-}
-			
+	display: inline-block;
+}	
 .nav li ul {
 	display:none;
 	position:absolute;
@@ -90,17 +75,83 @@ ul#rrss{
 	padding-bottom: 20px;
 }
 ul#rrss li{
+	font-family: 'Arial Black', sans-serif;
 	font-size: 25px;
 	display: inline;
-	padding-inline: 147px;
+	padding-inline: 142px;
 }
 #menu0{
 	width: 300px;
 	height: 90px;
 	background-image: url("HTMLimgs/juego.png");
-	transition: 0.5s;
 }
 #menu0:hover{
 	background-image: url("HTMLimgs/juegoh.png");
+}
+#menu1{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/historia.png");
+}
+#menu10{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/narrativa.png");
+}
+#menu10:hover{
+	background-image: url("HTMLimgs/narrativah.png");
+}
+#menu11{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/personajes.png");
+}
+#menu11:hover{
+	background-image: url("HTMLimgs/personajesh.png");
+}
+#menu12{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/esptie.png");
+}
+#menu12:hover{
+	background-image: url("HTMLimgs/esptieh.png");
+}
+#menu2{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/acerca.png");
+}
+#menu20{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/ajuego.png");
+}
+#menu20:hover{
+	background-image: url("HTMLimgs/ajuegoh.png");
+}
+#menu21{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/jodas.png");
+}
+#menu21:hover{
+	background-image: url("HTMLimgs/jodash.png");
+}
+#menu22{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/trabajo.png");
+}
+#menu22:hover{
+	background-image: url("HTMLimgs/trabajoh.png");
+}
+#menu3{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/redes.png");
+}
+#menu3:hover{
+	background-image: url("HTMLimgs/redesh.png");
 }
 
