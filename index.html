@@ -62,7 +62,7 @@
         scene: [MainMenu, fase1,  Game],
         physics: {
           default: "arcade",
-          arcade: { gravity: { y: 0 }, debug: false },
+          arcade: { gravity: { y: 0 }, debug: true }, //vemos los colliders
         },
       };
       new Phaser.Game(config);
