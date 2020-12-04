@@ -4,6 +4,7 @@ h1 {
 }
 a {
   text-align: right;
+  color:white;
 }
 
 h3 {
@@ -13,20 +14,35 @@ h5 {
   text-align: right;
 }
 body {
-	background-image: url("Fondo.jpg");
+	background-image: url("HTMLimgs/Fondo.png");
+	background-size: 105%;
 	background-repeat: no-repeat;
-	background-position: 50% 0%;
-	background-attachment: fixed;
+	background-position: 100% 30%;
+	background-attachment: scroll;
 }
 * {
 	margin:0px;
 	padding:0px;
 }
+
+#banner{
+	margin: auto;
+	width: 100%;
+	text-align: center;
+}
 			
 #header {
-	margin:auto;
-	width:450px;
-	font-family:Courier;
+	margin: auto;
+	width: 100%;
+	text-align: center;
+}
+
+#content{
+	background-color: rgba(0,0,0,0.5);
+	margin: auto;
+	width: 80%;
+	text-align: center;
+	display: table;
 }
 			
 ul, ol {
@@ -34,25 +50,12 @@ ul, ol {
 }
 			
 .nav > li {
-	float:left;
-}
-			
-.nav li a {
-	background-color:#804000;
-	text-align: center;
-	color:#fff;
-	text-decoration:none;
-	padding:10px 12px;
-	display:block;
-}
-.nav li a:hover {
-	background-color:#434343;
-}
-			
+	display: inline-block;
+}	
 .nav li ul {
 	display:none;
 	position:absolute;
-	min-width:90px;
+	min-width:50px;
 }
 			
 .nav li:hover > ul {
@@ -68,4 +71,87 @@ ul, ol {
 	top:0px;
 }
 
+ul#rrss{
+	padding-bottom: 20px;
+}
+ul#rrss li{
+	font-family: 'Arial Black', sans-serif;
+	font-size: 25px;
+	display: inline;
+	padding-inline: 142px;
+}
+#menu0{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/juego.png");
+}
+#menu0:hover{
+	background-image: url("HTMLimgs/juegoh.png");
+}
+#menu1{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/historia.png");
+}
+#menu10{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/narrativa.png");
+}
+#menu10:hover{
+	background-image: url("HTMLimgs/narrativah.png");
+}
+#menu11{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/personajes.png");
+}
+#menu11:hover{
+	background-image: url("HTMLimgs/personajesh.png");
+}
+#menu12{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/esptie.png");
+}
+#menu12:hover{
+	background-image: url("HTMLimgs/esptieh.png");
+}
+#menu2{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/acerca.png");
+}
+#menu20{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/ajuego.png");
+}
+#menu20:hover{
+	background-image: url("HTMLimgs/ajuegoh.png");
+}
+#menu21{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/jodas.png");
+}
+#menu21:hover{
+	background-image: url("HTMLimgs/jodash.png");
+}
+#menu22{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/trabajo.png");
+}
+#menu22:hover{
+	background-image: url("HTMLimgs/trabajoh.png");
+}
+#menu3{
+	width: 300px;
+	height: 90px;
+	background-image: url("HTMLimgs/redes.png");
+}
+#menu3:hover{
+	background-image: url("HTMLimgs/redesh.png");
+}
 
