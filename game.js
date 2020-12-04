@@ -20,7 +20,7 @@ export default class Game extends Phaser.Scene {
 
 
     this.player = new Player(this, 300, 600, "guy", this.cursorKeys, 10);
-    this.policia = new Policia(this, 300, 600, "guy", 0.5);
+    this.policia = new Policia(this, 500, 600, "guy", 0.5);
 
   }
 
@@ -28,6 +28,10 @@ export default class Game extends Phaser.Scene {
     //this.player.moveLeft();
     this.player.movementManager();
     this.policia.update();
+    if(this.physics.overlap(this.player, this.policia)) {
+      //this.plauyer.matar();
+      console.log("Hola");
+    }
   }
 
 

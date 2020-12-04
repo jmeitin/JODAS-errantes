@@ -5,15 +5,23 @@ export default class Policia extends Persona{
         super(scene, x, y, type, speed);
         
         this.rangoVisual = 10;
+        this.dif = 10;
+
+        this.scene.physics.add.existing(this); //le dota de fisicas
+        this.body.allowGravity = false;
     }
 
+    calcularDif (){
+        this.dif = 0;
+    }
     
 
     update(){
-        const dif = calcularDif();
+        this.calcularDif();
         
-        if (dif<= rangoVisual) {
+        if (this.dif<= this.rangoVisual) {
             this.moveLeft();
+            console.log(this.dif);
         }
 
         else {
@@ -22,11 +30,7 @@ export default class Policia extends Persona{
         }
 
        
-    }
-
-    calcularDif (){
-        return 0;
-    }
+    }   
 
 
 

@@ -11,6 +11,8 @@ export default class Person extends Sprites{
         this.speed = speed;
         //this.cursorkeys = cursorKeys;
 
+      
+
 	}
     
     // movementManager(){
