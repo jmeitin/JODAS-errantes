@@ -46,10 +46,15 @@ export default class Game extends Phaser.Scene {
     console.debug(this.civiles.length);
     this.player.movementManager();
     this.policia.update();
+
+
+
     if(this.physics.overlap(this.player, this.policia)) {
       //this.plauyer.matar();
       console.log("Hola");
     }
+
+    
     for(let i = 0; i < this.civiles.length; i++){
       this.civiles[i].update();
     }
