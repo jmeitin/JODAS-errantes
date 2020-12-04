@@ -21,8 +21,8 @@ export default class MainMenu extends Phaser.Scene {
         this.add.image(700, 400, 'fondoMenu').setScale(2);
 
         var botonComenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"botComenzar");
-        let botonSonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"botSonido").setScale(0.8);
-        let botonCreditos = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 200,"botCreditos").setScale(0.8);
+        var botonSonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"botSonido").setScale(0.8);
+        var botonCreditos = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 200,"botCreditos").setScale(0.8);
         
         botonComenzar.setInteractive();
         botonSonido.setInteractive();
@@ -39,7 +39,7 @@ export default class MainMenu extends Phaser.Scene {
 
         botonComenzar.on("pointerdown", ()=>{
             
-            var theOtherScene=this.scene.start('main');
+            var theOtherScene=this.scene.start('fase1');
 
         })
 

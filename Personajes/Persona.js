@@ -9,26 +9,8 @@ export default class Person extends Sprites{
 		this.x = x;
         this.y = y;
         this.speed = speed;
-        //this.cursorkeys = cursorKeys;
 
 	}
-    
-    // movementManager(){
-        
-    //     if(this.cursorkeys.right.isDown){
-    //         this.moveRight();
-    //     }
-    //     else if(this.cursorkeys.left.isDown){
-    //         this.moveLeft();
-    //     }
-        
-    //     if(this.cursorkeys.up.isDown){
-    //         this.moveUp();
-    //     }
-    //     else if(this.cursorkeys.down.isDown){
-    //         this.moveDown();
-    //     }
-    // }
 
     moveLeft(){
         this.x -= this.speed;

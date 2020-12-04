@@ -24,19 +24,5 @@ export default class Player extends Persona{
         }
     }
 
-    // moveLeft(){
-    //     this.x -= this.speed;
-    // }
 
-    // moveRight(){
-    //     this.x+= this.speed;
-    // }
-
-    // moveUp(){
-    //     this.y-= this.speed;
-    // }
-
-    // moveDown(){
-    //     this.y+= this.speed;
-    // }
 }
