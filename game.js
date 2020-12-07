@@ -19,11 +19,24 @@ export default class Game extends Phaser.Scene {
   create() {
     this.add.text(10, 10, "¡Hola, mundo!", { fontColor: 0xffff00 });
 
-    this.cursorKeys = this.input.keyboard.createCursorKeys();
+    this.cursorKeys = this.input.keyboard.createCursorKeys();    
 
-    this.player = new Player(this, 300, 600, "guy", this.cursorKeys, 10);
-    this.policia = new Policia(this, 300, 600, "guy", 0.5);
+    this.player = new Player(this, 300, 800, "guy", this.cursorKeys, 10);
+
+    
+    this.trigger = this.add.zone(200, 600);
+    this.trigger.setSize(400, 400);
+    this.physics.world.enable(this.trigger);
+    this.trigger.body.setAllowGravity(false);
+    this.trigger.body.moves = true;//queremos moverlo con el poli
+   // this.trigger.moves(10, 0); ==> como mover un trigger?
+
+    this.policia = new Policia(this, 200, 600, "guy", 0.5, this.trigger);
+
+
     this.cameras.main.startFollow(this.player);
+    
+
     this.civiles = [];
     for(let i = 0; i < 10; i++){
       for(let j = 0; j < 10; j++){
@@ -39,6 +52,7 @@ export default class Game extends Phaser.Scene {
         }
       }
     }
+
 
   }
 

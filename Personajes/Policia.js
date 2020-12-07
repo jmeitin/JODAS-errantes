@@ -1,7 +1,7 @@
 import Persona from "./Persona.js"
 
 export default class Policia extends Persona{
-    constructor(scene, x, y, type, speed){
+    constructor(scene, x, y, type, speed, trigger){
         super(scene, x, y, type, speed);
         
         this.rangoVisual = 10;
@@ -9,6 +9,9 @@ export default class Policia extends Persona{
 
         this.scene.physics.add.existing(this); //le dota de fisicas
         this.body.allowGravity = false;
+
+        this.trigger = trigger; //referencia al trigger
+        //this.trigger.setSize(200, 200);
     }
 
     calcularDif (){
