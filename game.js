@@ -1,6 +1,7 @@
 import Civil from "./Personajes/Civil.js";
 import Player from "./Personajes/Player.js";
 import Policia from "./Personajes/Policia.js";
+import MyContainer from "./Personajes/MyContainer.js";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -20,19 +21,23 @@ export default class Game extends Phaser.Scene {
     this.add.text(10, 10, "¡Hola, mundo!", { fontColor: 0xffff00 });
 
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
+   
 
-    this.player = new Player(this, 300, 800, "guy", this.cursorKeys, 10);
+    this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);
 
     
-    this.trigger = this.add.zone(200, 600);
+    this.trigger = this.add.zone(0, 0);//TRIGGER
     this.trigger.setSize(400, 400);
     this.physics.world.enable(this.trigger);
     this.trigger.body.setAllowGravity(false);
     this.trigger.body.moves = true;//queremos moverlo con el poli
    // this.trigger.moves(10, 0); ==> como mover un trigger?
 
-    this.policia = new Policia(this, 200, 600, "guy", 0.5, this.trigger);
+    this.policia = new Policia(this, 0, 0, "guy", 0.5);
 
+    this.container = new MyContainer(this, 400, 500); //CONTAINER
+    this.container.add(this.policia, 0); //los hago hijos
+    this.container.add(this.trigger, 1);
 
     this.cameras.main.startFollow(this.player);
     
@@ -59,7 +64,8 @@ export default class Game extends Phaser.Scene {
   update(time, delta) {
     console.debug(this.civiles.length);
     this.player.movementManager();
-    this.policia.update();
+    this.container.update();
+    //this.policia.update();
 
 
 
