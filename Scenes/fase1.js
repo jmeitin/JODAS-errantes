@@ -1,10 +1,12 @@
+import button from '../UI/button.js';
+
 export default class MainMenu extends Phaser.Scene {
     
     constructor(){
         super({
             key: 'fase1'
         })
-        
+        this.numImgs = 5;
     }
 
     preload(){
@@ -24,7 +26,18 @@ export default class MainMenu extends Phaser.Scene {
         var fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/fondoScale), (this.game.renderer.height/fondoScale), 'fondo').setScale(fondoScale);
         fondo.setOrigin(0,0);
 
-        var botonBomba = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bomba");
+        var posX = 200;
+        var posY = 200;
+        var variacion = 200;
+
+        for(var i = 0; i < this.numImgs; i++){
+            
+        }
+
+
+        
+        var bomba = new button(this, 200, 200, 'capa', 7);
+        //var botonBomba = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bomba");
 
 
         
