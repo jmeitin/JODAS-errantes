@@ -9,6 +9,9 @@ export default class Policia extends Persona{
 
         this.scene.physics.add.existing(this); //le dota de fisicas
         this.body.allowGravity = false;
+
+        //this.trigger = trigger; //referencia al trigger
+        //this.trigger.setSize(200, 200);
     }
 
     calcularDif (){
@@ -17,18 +20,9 @@ export default class Policia extends Persona{
     
 
     update(){
-        this.calcularDif();
-        
-        if (this.dif<= this.rangoVisual) {
-            this.moveLeft();
-            console.log(this.dif);
-        }
-
-        else {
-            this.moveRight();
-
-        }
-
+       //MUEVO EL PADRE SOLO
+       this.moveLeft();
+       console.log("MOVER");
        
     }   
 
