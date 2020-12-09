@@ -25,19 +25,19 @@ export default class Game extends Phaser.Scene {
 
     this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);
 
-    
-    this.trigger = this.add.zone(0, 0);//TRIGGER
-    this.trigger.setSize(400, 400);
-    this.physics.world.enable(this.trigger);
-    this.trigger.body.setAllowGravity(false);
-    this.trigger.body.moves = true;//queremos moverlo con el poli
+    //TRIGGER ==> TRIGGER
+    this.campoVision = this.add.zone(0, 0);
+    this.campoVision.setSize(400, 400);
+    this.physics.world.enable(this.campoVision);
+    this.campoVision.body.setAllowGravity(false);
+    this.campoVision.body.moves = true;//queremos moverlo con el poli
    // this.trigger.moves(10, 0); ==> como mover un trigger?
 
     this.policia = new Policia(this, 0, 0, "guy", 0.5);
 
     this.container = new MyContainer(this, 400, 500); //CONTAINER
     this.container.add(this.policia, 0); //los hago hijos
-    this.container.add(this.trigger, 1);
+    this.container.add(this.campoVision, 1);
 
     this.cameras.main.startFollow(this.player);
     
@@ -69,10 +69,13 @@ export default class Game extends Phaser.Scene {
 
 
 
-    if(this.physics.overlap(this.player, this.policia)) {
+    //POLICIA VE A PLAYER
+    if(this.physics.overlap(this.player, this.campoVision)) { 
       //this.plauyer.matar();
-      console.log("Hola");
+      console.log("Colision");
     }
+
+    
 
     
     for(let i = 0; i < this.civiles.length; i++){
