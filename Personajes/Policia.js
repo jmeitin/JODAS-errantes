@@ -21,7 +21,7 @@ export default class Policia extends Persona{
 
     update(){
        //MUEVO EL PADRE SOLO
-       this.moveLeft();
+      // this.moveLeft();
        console.log("MOVER");
        
     }   

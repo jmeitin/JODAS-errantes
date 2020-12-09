@@ -35,8 +35,9 @@ export default class Game extends Phaser.Scene {
 
     this.policia = new Policia(this, 0, 0, "guy", 0.5);
 
-    this.container = new MyContainer(this, 400, 500); //CONTAINER
+    this.container = new MyContainer(this, 400, 500, 1); //CONTAINER
     this.container.add(this.campoVision, 1);
+    //this.policia.add(this.campoVision, 0);
 
     this.container.add(this.policia, 0); //los hago hijos
     
@@ -70,7 +71,7 @@ export default class Game extends Phaser.Scene {
   update(time, delta) {
     console.debug(this.civiles.length);
     this.player.movementManager();
-    //this.container.moveLeft();
+   // this.container.moveLeft();
     this.container.update();
     //this.policia.update();
 

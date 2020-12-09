@@ -1,9 +1,10 @@
 export default class MyContainerextends extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, children) {
+    constructor(scene, x, y, speed, children) {
         super(scene, x, y, children);
         // ...
         this.x = x;
         this.y = y;
+        this.speed = speed;
        // this.speed = speed;
 
         this.scene.physics.add.existing(this); //
