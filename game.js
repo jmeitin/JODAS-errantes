@@ -36,8 +36,14 @@ export default class Game extends Phaser.Scene {
     this.policia = new Policia(this, 0, 0, "guy", 0.5);
 
     this.container = new MyContainer(this, 400, 500); //CONTAINER
-    this.container.add(this.policia, 0); //los hago hijos
     this.container.add(this.campoVision, 1);
+
+    this.container.add(this.policia, 0); //los hago hijos
+    
+//va mal?
+    //Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
+
+
 
     this.cameras.main.startFollow(this.player);
     
@@ -64,6 +70,7 @@ export default class Game extends Phaser.Scene {
   update(time, delta) {
     console.debug(this.civiles.length);
     this.player.movementManager();
+    //this.container.moveLeft();
     this.container.update();
     //this.policia.update();
 

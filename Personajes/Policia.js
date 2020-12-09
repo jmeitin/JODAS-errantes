@@ -20,18 +20,9 @@ export default class Policia extends Persona{
     
 
     update(){
-        this.calcularDif();
-        
-        if (this.dif<= this.rangoVisual) {
-            //this.moveLeft();
-            console.log(this.dif);
-        }
-
-        else {
-            this.moveRight();
-
-        }
-
+       //MUEVO EL PADRE SOLO
+       this.moveLeft();
+       console.log("MOVER");
        
     }   
 

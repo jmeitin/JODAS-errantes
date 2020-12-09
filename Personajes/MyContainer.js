@@ -4,6 +4,7 @@ export default class MyContainerextends extends Phaser.GameObjects.Container {
         // ...
         this.x = x;
         this.y = y;
+       // this.speed = speed;
 
         this.scene.physics.add.existing(this); //
     }
@@ -13,8 +14,9 @@ export default class MyContainerextends extends Phaser.GameObjects.Container {
 
     update(){
         //this.calcularDif();
-        
-        this.x-=1;
+        //this.update();
+        //this.x-=speed;
+        this.x -= 1;
         //console.log('HOLLLLLA');
        
     }   
