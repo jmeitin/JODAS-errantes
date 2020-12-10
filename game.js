@@ -2,6 +2,7 @@ import Civil from "./Personajes/Civil.js";
 import Player from "./Personajes/Player.js";
 import Policia from "./Personajes/Policia.js";
 import MyContainer from "./Personajes/MyContainer.js";
+import Persona from "./Personajes/Persona.js";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -35,14 +36,15 @@ export default class Game extends Phaser.Scene {
 
     this.policia = new Policia(this, 0, 0, "guy", 0.5);
 
-    this.container = new MyContainer(this, 400, 500, 1); //CONTAINER
+    //CONTAINER
+    this.container = new MyContainer(this, 400, 500, 1); 
     this.container.add(this.campoVision, 1);
     //this.policia.add(this.campoVision, 0);
 
     this.container.add(this.policia, 0); //los hago hijos
     
-//va mal?
-    //Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
+    //va mal?
+    Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
 
 
 
@@ -71,8 +73,10 @@ export default class Game extends Phaser.Scene {
   update(time, delta) {
     console.debug(this.civiles.length);
     this.player.movementManager();
-   // this.container.moveLeft();
-    this.container.update();
+
+
+    //this.container.moveLeft(); //NO ES UNA FUNCION
+    //this.container.update();
     //this.policia.update();
 
 

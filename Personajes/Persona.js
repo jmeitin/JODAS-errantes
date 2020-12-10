@@ -32,6 +32,7 @@ export default class Person extends Sprites{
     //     }
     // }
 
+    //function
     moveLeft(){
         this.x -= this.speed;
     }
@@ -56,4 +57,6 @@ export default class Person extends Sprites{
         return this.y;
     }
 }
+
+
 

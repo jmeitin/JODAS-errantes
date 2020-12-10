@@ -17,7 +17,7 @@ export default class MyContainerextends extends Phaser.GameObjects.Container {
         //this.calcularDif();
         //this.update();
         //this.x-=speed;
-        this.x -= 1;
+       // this.x -= 1;
         console.log('Container');
 
        
