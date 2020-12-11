@@ -9,7 +9,7 @@ export default class MyContainerextends extends Phaser.GameObjects.Container {
 
         this.scene.physics.add.existing(this); //
     }
-    // ...
+   
 
     // preUpdate(time, delta) {}
 
