@@ -71,6 +71,7 @@ export default class Game extends Phaser.Scene {
     console.debug(this.civiles.length);
 
     this.player.movementManager();
+    if(this.player.pausa()) this.scene.pause();
     else this.scene.resume(); // no vuelve a cargar la escena
     //this.container.moveLeft(); //NO ES UNA FUNCION
     //this.container.update();
