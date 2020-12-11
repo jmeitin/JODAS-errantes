@@ -1,7 +1,6 @@
-import Game from "../game.js";
-import Sprites from "../sprites.js";
+import gameObject from "../gameObject.js";
 
-export default class Object extends Sprites{
+export default class Object extends gameObject{
 
     constructor(scene, x, y, peso, type, speed){
 
@@ -10,8 +9,5 @@ export default class Object extends Sprites{
         this.y = y;
         this.peso=peso;
         this.speed = speed;
-        //this.cursorkeys = cursorKeys;
-
-      
 
 	}
