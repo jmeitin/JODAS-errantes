@@ -5,6 +5,9 @@ export default class Player extends Persona{
         super(scene, x, y, type, speed);
 
         this.cursorkeys = cursorKeys;
+
+        this.scene.physics.add.existing(this); //
+        //this.body.allowGravity = true;
     }
 
     movementManager(){

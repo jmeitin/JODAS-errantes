@@ -9,8 +9,11 @@ export default class Person extends gameObject{
         this.y = y;
         this.speed = speed;
 
+      //hola
+
 	}
 
+    //function
     moveLeft(){
         this.x -= this.speed;
     }
@@ -26,5 +29,15 @@ export default class Person extends gameObject{
     moveDown(){
         this.y+= this.speed;
     }
+
+    getX(){
+        return this.x;
+    }
+
+    getY(){
+        return this.y;
+    }
 }
+
+
 
