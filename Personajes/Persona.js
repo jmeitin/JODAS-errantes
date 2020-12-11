@@ -1,7 +1,6 @@
-import Game from "../game.js";
-import Sprites from "../sprites.js";
+import gameObject from "../gameObject.js";
 
-export default class Person extends Sprites{
+export default class Person extends gameObject{
 
     constructor(scene, x, y, type, speed){
 

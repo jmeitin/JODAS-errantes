@@ -26,18 +26,7 @@ export default class MainMenu extends Phaser.Scene {
         var fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/fondoScale), (this.game.renderer.height/fondoScale), 'fondo').setScale(fondoScale);
         fondo.setOrigin(0,0);
 
-        var posX = 200;
-        var posY = 200;
-        var variacion = 200;
-
-        for(var i = 0; i < this.numImgs; i++){
-            
-        }
-
-
-        
-        var bomba = new button(this, 200, 200, 'capa', 7);
-        //var botonBomba = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bomba");
+        this.colocaImgs();
 
 
         
@@ -45,5 +34,19 @@ export default class MainMenu extends Phaser.Scene {
 
     update(){
 
+    }
+
+    colocaImgs(){
+        
+        //para tener a las imagenes con posiciones relativas
+        var container = this.add.container(this.game.renderer.width/2, this.game.renderer.height/2);
+        
+        var bomba = new button(this, -this.game.renderer.width/2 + 200, -this.game.renderer.height/2 + 200, 'bomba', 4);
+        
+        var capa = new button(this, 0, -200, 'capa', 7);
+
+        container.add(bomba);
+        container.add(capa);
+        //var botonBomba = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bomba");
     }
 }
