@@ -1,7 +1,7 @@
-import Civil from "./Personajes/Civil.js";
+import Civil from "./Personajes/NPCs/Civil.js";
 import Player from "./Personajes/Player.js";
-import Policia from "./Personajes/Policia.js";
-import MyContainer from "./Personajes/MyContainer.js";
+import Policia from "./Personajes/NPCs/Policia.js";
+import MyContainer from "./Personajes/NPCs/MyContainer.js";
 import Persona from "./Personajes/Person.js";
 
 export default class Game extends Phaser.Scene {

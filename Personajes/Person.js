@@ -1,4 +1,4 @@
-import gameObject from "../gameObject.js";
+import gameObject from "../Clases/gameObject.js";
 
 export default class Person extends gameObject{
 

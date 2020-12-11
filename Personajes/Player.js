@@ -1,4 +1,4 @@
-import Game from "../Game.js";
+//import Game from "../Game.js";
 import Persona from "./Person.js"
 
 export default class Player extends Persona{

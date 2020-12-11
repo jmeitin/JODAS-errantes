@@ -1,4 +1,4 @@
-import Sprites from "../Sprites.js";
+import Sprites from "../Clases/Sprites.js";
 
 export default class button extends Sprites{
     constructor(scene, x, y, type, scale){

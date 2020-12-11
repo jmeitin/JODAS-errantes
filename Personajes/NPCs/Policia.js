@@ -1,4 +1,4 @@
-import Persona from "./Person.js"
+import Persona from "../Person.js"
 
 export default class Policia extends Persona{
     constructor(scene, x, y, type, speed){
