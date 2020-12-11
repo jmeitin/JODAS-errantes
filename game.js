@@ -19,8 +19,6 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
-    this.add.text(10, 10, "¡Hola, mundo!", { fontColor: 0xffff00 });
-
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
    
 
