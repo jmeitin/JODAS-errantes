@@ -1,4 +1,4 @@
-export default class MyContainerextends extends Phaser.GameObjects.Container {
+export default class MyContainer extends Phaser.GameObjects.Container {
     constructor(scene, x, y, speed, children) {
         super(scene, x, y, children);
         // ...
