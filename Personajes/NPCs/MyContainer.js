@@ -12,6 +12,8 @@ export default class MyContainer extends Phaser.GameObjects.Container {
        this.dirY = this.getRandomInt(-1, 2);
 
         this.scene.physics.add.existing(this); //
+
+        this.sospecha = false;
     }
    
 
@@ -59,10 +61,20 @@ export default class MyContainer extends Phaser.GameObjects.Container {
     }
 
 
-    CalcularDir(jugadorX, jugadorY){
+    //CALCULA LA DIR EN LA QUE TIENE QUE SEGUIR AL JUGADOR
+    calcularDir(jugadorX, jugadorY){
         this.jugadorX = jugadorX;
-        this.jugadorY = jugadorY;        
+        this.jugadorY = jugadorY;    
+  
+        //get angle
+        this.angle = Math.atan2(this.jugadorY - this.y, this.jugadorX - this.x); //CALCULA EL ANGULO
 
+        this.dirX = Math.cos(this.angle);
+        this.dirY = Math.sin(this.angle);
+    }
+
+    sospechar(sospecha){
+        this.sospecha = sospecha;
     }
 
   // Retorna un entero aleatorio entre min (incluido) y max (excluido)

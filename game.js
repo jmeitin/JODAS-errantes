@@ -22,6 +22,8 @@ export default class Game extends Phaser.Scene {
   create() {
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
    
+    //policias = []; //array
+    
 
     this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);
 
@@ -66,6 +68,9 @@ export default class Game extends Phaser.Scene {
 
   }
 
+
+
+
   update(time, delta) {
     console.debug(this.civiles.length);
 
@@ -82,18 +87,26 @@ export default class Game extends Phaser.Scene {
 
     //POLICIA VE A PLAYER
     if(this.physics.overlap(this.player, this.campoVision)) { 
-      
-       this.jugadorX = this.player.getX();
+
+      if (this.physics.overlap(this.player, this.policia)){  //MUERTO
+       
+        console.log ("MUERTO");
+      }
+
+      else{
+        this.jugadorX = this.player.getX();
        this.jugadorY = this.player.getY();
        
+       this.container.calcularDir(this.jugadorX, this.jugadorY);
 
+       this.container.sospechar(true);
 
-      console.log("Colision");
+      }
     }
 
     
 
-    
+    //CIVILES
     for(let i = 0; i < this.civiles.length; i++){
       this.civiles[i].update();
     }
