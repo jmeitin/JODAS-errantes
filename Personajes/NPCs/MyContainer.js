@@ -22,4 +22,20 @@ export default class MyContainer extends Phaser.GameObjects.Container {
 
        
     }   
+
+    moveLeft(){
+        this.x -= this.speed;
+    }
+
+    moveRight(){
+        this.x+= this.speed;
+    }
+
+    moveUp(){
+        this.y-= this.speed;
+    }
+
+    moveDown(){
+        this.y+= this.speed;
+    }
 }

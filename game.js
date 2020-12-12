@@ -42,13 +42,14 @@ export default class Game extends Phaser.Scene {
     this.container.add(this.policia, 0); //los hago hijos
     
     //va mal?
-    Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
+   // Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
 
 
 
     this.cameras.main.startFollow(this.player);
     
 
+    //CIVILES
     this.civiles = [];
     for(let i = 0; i < 10; i++){
       for(let j = 0; j < 10; j++){
@@ -73,7 +74,9 @@ export default class Game extends Phaser.Scene {
     this.player.movementManager();
     if(this.player.pausa()) this.scene.pause();
     else this.scene.resume(); // no vuelve a cargar la escena
-    //this.container.moveLeft(); //NO ES UNA FUNCION
+
+
+    this.container.moveLeft(); //NO ES UNA FUNCION
     //this.container.update();
     //this.policia.update();
 
