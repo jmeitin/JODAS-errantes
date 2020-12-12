@@ -77,7 +77,10 @@ export default class MyContainer extends Phaser.GameObjects.Container {
         this.sospecha = sospecha;
     }
 
-  // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+    
+
+
+    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
     getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
