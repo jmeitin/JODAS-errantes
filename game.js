@@ -3,6 +3,7 @@ import Player from "./Personajes/Player.js";
 import Policia from "./Personajes/NPCs/Policia.js";
 import MyContainer from "./Personajes/NPCs/MyContainer.js";
 import Persona from "./Personajes/Person.js";
+import Sprites from "./Clases/sprites.js";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -21,6 +22,8 @@ export default class Game extends Phaser.Scene {
   create() {
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
    
+    //policias = []; //array
+    
 
     this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);
 
@@ -30,18 +33,15 @@ export default class Game extends Phaser.Scene {
     this.physics.world.enable(this.campoVision);
     this.campoVision.body.setAllowGravity(false);
     this.campoVision.body.moves = true;//queremos moverlo con el poli
-   // this.trigger.moves(10, 0); ==> como mover un trigger?
 
-    this.policia = new Policia(this, 0, 0, "guy", 0.5);
+    this.policia = new Sprites(this, 0, 0, "guy");
 
     //CONTAINER
     this.container = new MyContainer(this, 400, 500, 1); 
     this.container.add(this.campoVision, 1);
-    //this.policia.add(this.campoVision, 0);
-
     this.container.add(this.policia, 0); //los hago hijos
     
-    //va mal?
+    //va mal? ==> MOVELEFT NO ES UNA FUNCION. HERENCIA PARA QUE MyContainer herede de Person
    // Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
 
 
@@ -68,6 +68,9 @@ export default class Game extends Phaser.Scene {
 
   }
 
+
+
+
   update(time, delta) {
     console.debug(this.civiles.length);
 
@@ -76,21 +79,34 @@ export default class Game extends Phaser.Scene {
     else this.scene.resume(); // no vuelve a cargar la escena
 
 
-    this.container.moveLeft(); //NO ES UNA FUNCION
-    //this.container.update();
+    //this.container.moveLeft(); //NO ES UNA FUNCION
+    this.container.update();
     //this.policia.update();
 
 
 
     //POLICIA VE A PLAYER
     if(this.physics.overlap(this.player, this.campoVision)) { 
-      //this.plauyer.matar();
-      console.log("Colision");
+
+      if (this.physics.overlap(this.player, this.policia)){  //MUERTO
+       
+        console.log ("MUERTO");
+      }
+
+      else{
+        this.jugadorX = this.player.getX();
+       this.jugadorY = this.player.getY();
+       
+       this.container.calcularDir(this.jugadorX, this.jugadorY);
+
+       this.container.sospechar(true);
+
+      }
     }
 
     
 
-    
+    //CIVILES
     for(let i = 0; i < this.civiles.length; i++){
       this.civiles[i].update();
     }
