@@ -41,7 +41,7 @@ export default class Game extends Phaser.Scene {
 
     this.container.add(this.policia, 0); //los hago hijos
     
-    //va mal?
+    //va mal? ==> MOVELEFT NO ES UNA FUNCION. HERENCIA PARA QUE MyContainer herede de Person
    // Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
 
 
