@@ -88,6 +88,7 @@ export default class Game extends Phaser.Scene {
     //POLICIA VE A PLAYER
     if(this.physics.overlap(this.player, this.campoVision)) { 
 
+      // SI POLICIA CHOCA CON PLAYER
       if (this.physics.overlap(this.player, this.policia)){  //MUERTO
        
         console.log ("MUERTO");
