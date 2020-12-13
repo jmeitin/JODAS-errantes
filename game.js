@@ -21,8 +21,9 @@ export default class Game extends Phaser.Scene {
 
   create() {
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
-   
+
     //policias = []; //array
+    //añadeObjetosInventario();//añade los objetos escogidos a la escena
     
 
     this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);
@@ -67,9 +68,6 @@ export default class Game extends Phaser.Scene {
     }
 
   }
-
-
-
 
   update(time, delta) {
     console.debug(this.civiles.length);

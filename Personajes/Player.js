@@ -21,6 +21,7 @@ export default class Player extends Persona{
             return false;
         }
     }
+    
     movementManager(){
         
         if(this.cursorkeys.right.isDown){

@@ -1,5 +1,3 @@
-import button from '../UI/button.js';
-
 export default class MainMenu extends Phaser.Scene {
     constructor(){
         super({
