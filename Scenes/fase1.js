@@ -7,11 +7,20 @@ export default class fase1 extends Phaser.Scene {
             key: 'fase1'
         })
         this.numImgs = 5;
-        
+        this.pesoMax = 4;
+        this.pesoActual = 0;
+
+        //pesos de objetos
+        this.pesoCape = 3;
+        this.pesoGun = 1;
+        this.pesoShoes = 2;
+        this.pesoHat = 3; 
+        //añadepesobomba
+
     }
 
     preload(){
-        // 8var imgArray = new Array();
+        // var imgArray = new Array();
 
         // for(i = 0; i < this.numImgs; i++){
         //     imgArray[i] = new Image();
@@ -37,6 +46,8 @@ export default class fase1 extends Phaser.Scene {
         this.load.image('zapatos', '../Imgs/Objetos/zapatos.png');
 
         this.load.image('textbox', '../Imgs/Objetos/textbox.png');
+
+        this.load.image('botonNext', '../Imgs/Botones/FlechaNext.png');
     }
 
     create(){
@@ -49,17 +60,36 @@ export default class fase1 extends Phaser.Scene {
         var fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/fondoScale), (this.game.renderer.height/fondoScale), 'fondo').setScale(fondoScale);
         fondo.setOrigin(0,0);
 
-        this.colocaBotones();
+        this.colocaBotones(inventario);
+
+        //boton para pasar de fase
+        var botonNext = this.add.image(this.game.renderer.width - 150, this.game.renderer.height - 150, 'botonNext');
+        botonNext.setInteractive();
+
+        //funcionalidad botonNext
+        botonNext.on('pointerover', () => { 
+            botonNext.setScale(1.1);            
+        });
+        
+        botonNext.on('pointerout', () => {
+            botonNext.setScale(1);
+        });
+
+        botonNext.on("pointerdown", ()=>{
+            
+            var theOtherScene = this.scene.start('main');
+
+        });
 
 
         
     }
 
     update(){
-
+        
     }
 
-    colocaBotones(){
+    colocaBotones(inventario){
         
         // for(i = 0; i < this.numImgs; i++){
 
@@ -68,15 +98,16 @@ export default class fase1 extends Phaser.Scene {
         //var container = this.add.container(this.game.renderer.width/2, this.game.renderer.height/2);
         //var boo = new button(this, 200, 200, 'textbox', 1, 'textbox');
         //this.scene.add.Image(300, 300, )
-        var bomba = new button(this, 200, 200, 'bomba', 1, 'textbox');
         
-        var capa = new button(this, 700, 200, 'capa', 1, 'textbox');
+        var bomba = new button(this, 200, 200, 'bomba', 1, 'textbox', inventario, this.pesoActual);
+        
+        var capa = new button(this, 700, 200, 'capa', 1, 'textbox', inventario, this.pesoActual);
 
-        var sombrero = new button(this, 1200, 200, 'sombrero', 1, 'textbox');
+        var sombrero = new button(this, 1200, 200, 'sombrero', 1, 'textbox', inventario, this.pesoActual);
 
-        var pistola = new button(this, 200, 600, 'pistola', 1, 'textbox');
+        var pistola = new button(this, 200, 600, 'pistola', 1, 'textbox', inventario, this.pesoActual);
 
-        var zapatos = new button(this, 700, 600, 'zapatos', 1, 'textbox');
+        var zapatos = new button(this, 700, 600, 'zapatos', 1, 'textbox', inventario, this.pesoActual);
 
         // container.add(bomba);
         // container.add(capa);

@@ -39,7 +39,7 @@ export default class MainMenu extends Phaser.Scene {
             
             var theOtherScene=this.scene.start('fase1');
 
-        })
+        });
 
         //funcionalidad boton sonido
         botonSonido.on('pointerover', () => { 
