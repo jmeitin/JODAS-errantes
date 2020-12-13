@@ -55,16 +55,21 @@ export default class buttonF1 extends Sprites{
     añadeInventario(){
         let nuevoInventario = this.inventario.push(this.type);
         this.pesoActual += this.pesoObj;
+        console.log("PesoActual", this.pesoActual);
     }
 
     quitaInventario(){
         let pos = this.inventario.indexOf(this.type);
         let elementoEliminado = this.inventario.splice(pos, 1);
         this.pesoActual -= this.pesoObj;
+        console.log("PesoActual", this.pesoActual);
     }
 
     devuelvePesoActual(){       
         return this.pesoActual;
+    }
+    setPesoActual(pesoActual){
+        this.pesoActual = pesoActual;
     }
  
 }

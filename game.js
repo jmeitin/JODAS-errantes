@@ -30,6 +30,7 @@ export default class Game extends Phaser.Scene {
 
     //POLICIA ==> SPRITE
     this.policia = new Sprites(this, 0, 0, "guy");
+    //this.policia.setSize(400, 400);
 
     //POLICIA ==> TRIGGER ==> CAMPO DE VISION
     this.campoVision = this.add.zone(0, 0);
@@ -47,9 +48,11 @@ export default class Game extends Phaser.Scene {
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.container = new MyContainer(this, 400, 500, 1); 
-    this.container.add(this.policia, 0); //los hago hijos    
+    this.container.setSize(700, 700);
+    this.container.add(this.policia, 3); //los hago hijos    
     this.container.add(this.campoVision, 1);
     this.container.add (this.campoAuditivo, 2);
+    //this.policia
     
     //va mal? ==> MOVELEFT NO ES UNA FUNCION. HERENCIA PARA QUE MyContainer herede de Person
    // Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona

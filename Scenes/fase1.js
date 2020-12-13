@@ -99,15 +99,15 @@ export default class fase1 extends Phaser.Scene {
         //var boo = new button(this, 200, 200, 'textbox', 1, 'textbox');
         //this.scene.add.Image(300, 300, )
         
-        var bomba = new button(this, 200, 200, 'bomba', 1, 'textbox', inventario, this.pesoActual);
+        var bomba = new button(this, 200, 200, 'bomba', 1, 'textbox', inventario, this.pesoActual, this.pesoMax);
         
-        var capa = new button(this, 700, 200, 'capa', 1, 'textbox', inventario, this.pesoActual);
+        var capa = new button(this, 700, 200, 'capa', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoCape);
 
-        var sombrero = new button(this, 1200, 200, 'sombrero', 1, 'textbox', inventario, this.pesoActual);
+        var sombrero = new button(this, 1200, 200, 'sombrero', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoHat);
 
-        var pistola = new button(this, 200, 600, 'pistola', 1, 'textbox', inventario, this.pesoActual);
+        var pistola = new button(this, 200, 600, 'pistola', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoGun);
 
-        var zapatos = new button(this, 700, 600, 'zapatos', 1, 'textbox', inventario, this.pesoActual);
+        var zapatos = new button(this, 700, 600, 'zapatos', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoShoes);
 
         // container.add(bomba);
         // container.add(capa);
