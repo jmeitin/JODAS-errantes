@@ -12,6 +12,8 @@ export default class Game extends Phaser.Scene {
   preload() {   
     this.load.image('guy', './Imgs/jugador1.png');
     this.load.image('civil', './Imgs/viandante0.png');
+    this.load.tilemapTiledJSON('mapajuego','./Mapas/mapajuego.json');
+    this.load.image('tilemapjuego', './Mapas/tilemapjuego.png');
     // this.load.spritesheet('golem', './Imgs/golem.png',
     // {
     //   frameHeight: 32,
@@ -20,6 +22,14 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.map = this.make.tilemap({
+      key: 'mapajuego',
+      tileWidth: 64,
+      tileHeight: 64
+    });
+    const tileset1 = this.map.addTilesetImage('tilemapjuego','tilemapjuego');
+    this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
+    
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
    
     //policias = []; //array
