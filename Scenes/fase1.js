@@ -7,7 +7,7 @@ export default class fase1 extends Phaser.Scene {
             key: 'fase1'
         })
         this.numImgs = 5;
-        this.pesoMax = 4;
+        this.pesoMax = 6;
         this.pesoActual = 0;
 
         //pesos de objetos
@@ -15,8 +15,10 @@ export default class fase1 extends Phaser.Scene {
         this.pesoGun = 1;
         this.pesoShoes = 2;
         this.pesoHat = 3; 
+        this.pesoBomb = 2; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OTRA BOMBA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //añadepesobomba
 
+        this.inventario = [];
     }
 
     preload(){
@@ -51,8 +53,9 @@ export default class fase1 extends Phaser.Scene {
     }
 
     create(){
-        let listaObjetos = ['bomba' , 'capa' , 'pistola' , 'sombrero' , 'zapatos'];          
-        let inventario = [];
+        //let listaObjetos = ['bomba' , 'capa' , 'pistola' , 'sombrero' , 'zapatos'];          
+        //let inventario = [];
+        //var pesoActual = 0;
         
         var fondoScale = 7;//tamaño de los tiles de madera de fondo
 
@@ -60,7 +63,7 @@ export default class fase1 extends Phaser.Scene {
         var fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/fondoScale), (this.game.renderer.height/fondoScale), 'fondo').setScale(fondoScale);
         fondo.setOrigin(0,0);
 
-        this.colocaBotones(inventario);
+        this.colocaBotones();
 
         //boton para pasar de fase
         var botonNext = this.add.image(this.game.renderer.width - 150, this.game.renderer.height - 150, 'botonNext');
@@ -89,7 +92,7 @@ export default class fase1 extends Phaser.Scene {
         
     }
 
-    colocaBotones(inventario){
+    colocaBotones(){
         
         // for(i = 0; i < this.numImgs; i++){
 
@@ -99,15 +102,15 @@ export default class fase1 extends Phaser.Scene {
         //var boo = new button(this, 200, 200, 'textbox', 1, 'textbox');
         //this.scene.add.Image(300, 300, )
         
-        var bomba = new button(this, 200, 200, 'bomba', 1, 'textbox', inventario, this.pesoActual, this.pesoMax);
-        
-        var capa = new button(this, 700, 200, 'capa', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoCape);
+        var bomba = new button(this, 200, 200, 'bomba', 1, 'textbox', this.inventario, this.pesoMax, this.pesoBomb);
 
-        var sombrero = new button(this, 1200, 200, 'sombrero', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoHat);
+        var capa = new button(this, 700, 200, 'capa', 1, 'textbox', this.inventario, this.pesoMax, this.pesoCape);
 
-        var pistola = new button(this, 200, 600, 'pistola', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoGun);
+        var sombrero = new button(this, 1200, 200, 'sombrero', 1, 'textbox', this.inventario, this.pesoMax, this.pesoHat);
 
-        var zapatos = new button(this, 700, 600, 'zapatos', 1, 'textbox', inventario, this.pesoActual, this.pesoMax, this.pesoShoes);
+        var pistola = new button(this, 200, 600, 'pistola', 1, 'textbox', this.inventario, this.pesoMax, this.pesoGun);
+
+        var zapatos = new button(this, 700, 600, 'zapatos', 1, 'textbox', this.inventario, this.pesoMax, this.pesoShoes);
 
         // container.add(bomba);
         // container.add(capa);
@@ -115,5 +118,15 @@ export default class fase1 extends Phaser.Scene {
         // container.add(pistola);
         // container.add(zapatos);    
         //var botonBomba = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bomba");
+    }
+
+    devuelvePesoActual(){
+        return this.pesoActual;
+    }
+
+    setPesoActual(pesoNuevo){
+        this.pesoActual = pesoNuevo;
+        console.log(this.pesoActual);
+        console.log(this.inventario);
     }
 }
