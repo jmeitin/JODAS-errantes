@@ -1,7 +1,7 @@
 import Sprites from "../../Clases/sprites.js";
 
 export default class MyContainer extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, speed, children) {
+    constructor(scene, x, y, speed, image, children) {
         super(scene, x, y, children);
         // ...
         this.x = x;
@@ -13,7 +13,7 @@ export default class MyContainer extends Phaser.GameObjects.Container {
        this.scene.physics.add.existing(this); 
 
        //POLICIA ==> SPRITE
-       //this.image = new Sprites(this, 0, 0, "guy");
+       //this.image = new Sprites(this, 0, 0, image);
 
        //POLICIA ==> TRIGGER ==> CAMPO DE VISION
        this.campoVision = scene.add.zone(0, 0);
@@ -30,7 +30,7 @@ export default class MyContainer extends Phaser.GameObjects.Container {
        this.campoAuditivo.body.moves = false;//no queremos moverlo con el poli
        
 
-       //this.add(this.image);
+      // this.add(this.image);
        this.add(this.campoVision);
        this.add(this.campoAuditivo);
 
