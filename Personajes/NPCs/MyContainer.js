@@ -1,3 +1,5 @@
+import Sprites from "../../Clases/sprites.js";
+
 export default class MyContainer extends Phaser.GameObjects.Container {
     constructor(scene, x, y, speed, children) {
         super(scene, x, y, children);
@@ -7,11 +9,36 @@ export default class MyContainer extends Phaser.GameObjects.Container {
         this.speed = speed;
        // this.speed = speed;
 
+       this.scene.add.existing(this);
+       this.scene.physics.add.existing(this); 
+
+       //POLICIA ==> SPRITE
+       //this.image = new Sprites(this, 0, 0, "guy");
+
+       //POLICIA ==> TRIGGER ==> CAMPO DE VISION
+       this.campoVision = scene.add.zone(0, 0);
+       this.campoVision.setSize(400, 400);
+       this.scene.physics.world.enable(this.campoVision);
+       this.campoVision.body.setAllowGravity(false);
+       this.campoVision.body.moves = false;//no queremos moverlo con el poli
+
+       //POLICIA ==> TRIGGER ==> CAMPO AUDITIVO
+       this.campoAuditivo = scene.add.zone(0, 0);
+       this.campoAuditivo.setSize(700, 700);
+       this.scene.physics.world.enable(this.campoAuditivo);
+       this.campoAuditivo.body.setAllowGravity(false);
+       this.campoAuditivo.body.moves = false;//no queremos moverlo con el poli
+       
+
+       //this.add(this.image);
+       this.add(this.campoVision);
+       this.add(this.campoAuditivo);
+
        this.dirX = this.getRandomInt(-1, 2);
 
        this.dirY = this.getRandomInt(-1, 2);
 
-        this.scene.physics.add.existing(this); //
+        
 
         this.sospecha = false;
     }
@@ -20,17 +47,11 @@ export default class MyContainer extends Phaser.GameObjects.Container {
     // preUpdate(time, delta) {}
 
     update(){
-        //this.calcularDif();
-        //this.update();
-        //this.x-=speed;
-       // this.x -= 1;
-
-       
-
-
-       this.move();
+        this.move();
         console.log('Container');
 
+        //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
+    
        
     }   
 

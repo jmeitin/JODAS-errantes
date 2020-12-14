@@ -21,39 +21,18 @@ export default class Game extends Phaser.Scene {
 
   create() {
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
-   
-    //policias = []; //array
-    
 
-    this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);
+    this.campoVisionX = 400;
+    this.campoAuditivoX = 700;   
 
-    //POLICIA ==> SPRITE
-    this.policia = new Sprites(this, 0, 0, "guy");
-
-    //POLICIA ==> TRIGGER ==> CAMPO DE VISION
-    this.campoVision = this.add.zone(0, 0);
-    this.campoVision.setSize(400, 400);
-    this.physics.world.enable(this.campoVision);
-    this.campoVision.body.setAllowGravity(false);
-    this.campoVision.body.moves = false;//no queremos moverlo con el poli
-
-    //POLICIA ==> TRIGGER ==> CAMPO AUDITIVO
-    this.campoAuditivo = this.add.zone(0, 0);
-    this.campoAuditivo.setSize(700, 700);
-    this.physics.world.enable(this.campoAuditivo);
-    this.campoAuditivo.body.setAllowGravity(false);
-    this.campoAuditivo.body.moves = false;//no queremos moverlo con el poli
+    this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);  
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.container = new MyContainer(this, 400, 500, 1); 
-    this.container.add(this.policia, 0); //los hago hijos    
-    this.container.add(this.campoVision, 1);
-    this.container.add (this.campoAuditivo, 2);
+    
     
     //va mal? ==> MOVELEFT NO ES UNA FUNCION. HERENCIA PARA QUE MyContainer herede de Person
    // Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
-
-
 
     this.cameras.main.startFollow(this.player);
     
@@ -94,11 +73,12 @@ export default class Game extends Phaser.Scene {
 
     //this.container.moveLeft(); //NO ES UNA FUNCION
     this.container.update();
-    //this.policia.update();
+
+
 
 
     //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-    if (this.physics.overlap(this.player, this.campoAuditivo)){
+    if (this.physics.overlap(this.player, this.container.campoAuditivo)){
 
       this.civiles.forEach((civil) =>{
 
@@ -116,10 +96,10 @@ export default class Game extends Phaser.Scene {
 
 
       //PLAYER ESTA DENTRO DEL RANGO DE VISION
-      if(this.physics.overlap(this.player, this.campoVision)) { 
+      if(this.physics.overlap(this.player, this.container.campoVision)) { 
 
         // SI POLICIA CHOCA CON PLAYER
-        if (this.physics.overlap(this.player, this.policia)){  //MUERTO
+        if (this.physics.overlap(this.player, this.container.image)){  //MUERTO
          
           console.log ("MUERTO");
         }
@@ -135,6 +115,8 @@ export default class Game extends Phaser.Scene {
   
     
     }
+
+    
 
     
     //CIVILES
