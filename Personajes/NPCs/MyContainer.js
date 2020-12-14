@@ -49,7 +49,7 @@ export default class MyContainer extends Phaser.GameObjects.Container {
        }
        else{ //quieto
 
-       }
+       }//
     }
 
     moveX(){
