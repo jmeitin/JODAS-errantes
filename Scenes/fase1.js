@@ -15,7 +15,8 @@ export default class fase1 extends Phaser.Scene {
         this.pesoGun = 1;
         this.pesoShoes = 2;
         this.pesoHat = 3; 
-        this.pesoBomb = 2; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OTRA BOMBA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        this.pesoBombPlus = 1; 
+        this.pesoBombMinus = 1;
         //añadepesobomba
 
         this.inventario = [];
@@ -47,21 +48,26 @@ export default class fase1 extends Phaser.Scene {
         this.load.image('sombrero', '../Imgs/Objetos/sombrero.png');
         this.load.image('zapatos', '../Imgs/Objetos/zapatos.png');
 
-        this.load.image('textbox', '../Imgs/Objetos/textbox.png');
+        //this.load.image('textbox', '../Imgs/Objetos/textbox.png');
+        this.load.image('textoBomba+', '../Imgs/Objetos/ObjTxt/TextBoxBomb+.png');
+        this.load.image('textoBomba-', '../Imgs/Objetos/ObjTxt/TextBoxBomb-.png');
+        this.load.image('textoCapa', '../Imgs/Objetos/ObjTxt/TextBoxCape.png');
+        this.load.image('textoPistola', '../Imgs/Objetos/ObjTxt/TextBoxGun.png');
+        this.load.image('textoSombrero', '../Imgs/Objetos/ObjTxt/TextBoxHat.png');
+        this.load.image('textoZapatos', '../Imgs/Objetos/ObjTxt/TextBoxShoes.png');
 
         this.load.image('botonNext', '../Imgs/Botones/FlechaNext.png');
     }
 
     create(){
-        //let listaObjetos = ['bomba' , 'capa' , 'pistola' , 'sombrero' , 'zapatos'];          
-        //let inventario = [];
-        //var pesoActual = 0;
-        
+
         var fondoScale = 7;//tamaño de los tiles de madera de fondo
 
         //dividimos entre fondoScale para compensar el tamaño incrementado de los tiles que usamos de fondo y que ocupe el tamaño de la ventana
         var fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/fondoScale), (this.game.renderer.height/fondoScale), 'fondo').setScale(fondoScale);
         fondo.setOrigin(0,0);
+
+        this.creaTextos();        
 
         this.colocaBotones();
 
@@ -84,12 +90,32 @@ export default class fase1 extends Phaser.Scene {
 
         });
 
-
+        
         
     }
 
     update(){
         
+    }
+
+    creaTextos(){
+        this.TbombaPlus = this.add.image(200, 400, 'textoBomba+').setVisible(false);
+        this.TbombaPlus.depth = 1;
+
+        this.TbombaMinus = this.add.image(700, 400, 'textoBomba-').setVisible(false);
+        this.TbombaMinus.depth = 1;
+
+        this.Tsombrero = this.add.image(1200, 400, 'textoSombrero').setVisible(false);
+        this.Tsombrero.depth = 1;       
+
+        this.Tpistola = this.add.image(200, 400, 'textoPistola').setVisible(false);
+        this.Tpistola.depth = 1;
+
+        this.Tzapatos = this.add.image(700, 400, 'textoZapatos').setVisible(false);
+        this.Tzapatos.depth = 1;
+
+        this.Tcapa = this.add.image(1200, 400, 'textoCapa').setVisible(false);
+        this.Tcapa.depth = 1;
     }
 
     colocaBotones(){
@@ -102,15 +128,17 @@ export default class fase1 extends Phaser.Scene {
         //var boo = new button(this, 200, 200, 'textbox', 1, 'textbox');
         //this.scene.add.Image(300, 300, )
         
-        var bomba = new button(this, 200, 200, 'bomba', 1, 'textbox', this.inventario, this.pesoMax, this.pesoBomb);
+        var bombaPlus = new button(this, 200, 200, 'bomba', 1, this.TbombaPlus, this.inventario, this.pesoMax, this.pesoBomb);
 
-        var capa = new button(this, 700, 200, 'capa', 1, 'textbox', this.inventario, this.pesoMax, this.pesoCape);
+        var bombaMinus = new button(this, 700, 200, 'bomba', 0.6, this.TbombaMinus, this.inventario, this.pesoMax, this.pesoBomb).setScale(0.6);
 
-        var sombrero = new button(this, 1200, 200, 'sombrero', 1, 'textbox', this.inventario, this.pesoMax, this.pesoHat);
+        var sombrero = new button(this, 1200, 200, 'sombrero', 1, this.Tsombrero, this.inventario, this.pesoMax, this.pesoHat);
 
-        var pistola = new button(this, 200, 600, 'pistola', 1, 'textbox', this.inventario, this.pesoMax, this.pesoGun);
+        var pistola = new button(this, 200, 600, 'pistola', 1, this.Tpistola, this.inventario, this.pesoMax, this.pesoGun);
 
-        var zapatos = new button(this, 700, 600, 'zapatos', 1, 'textbox', this.inventario, this.pesoMax, this.pesoShoes);
+        var zapatos = new button(this, 700, 600, 'zapatos', 1, this.Tzapatos, this.inventario, this.pesoMax, this.pesoShoes);
+
+        var capa = new button(this, 1200, 600, 'capa', 1, this.Tcapa, this.inventario, this.pesoMax, this.pesoCape);
 
         // container.add(bomba);
         // container.add(capa);

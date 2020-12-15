@@ -25,6 +25,7 @@ export default class buttonF1 extends Sprites{
         
         this.on('pointerout', () => { 
             this.setScale(scale);
+            this.textbox.setVisible(false);
             
         });
 
@@ -46,7 +47,8 @@ export default class buttonF1 extends Sprites{
     }
 
     showTxtbox(){//mismo error q añadeinventario posiblemente
-        this.scene.add.image(this.x + 100, this.y + 100, this.textbox);
+        //this.scene.add.image(this.x + 100, this.y + 100, this.textbox);
+        this.textbox.setVisible(true);
     }
 
     añadeInventario(pesoAct){
