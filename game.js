@@ -37,7 +37,7 @@ export default class Game extends Phaser.Scene {
 
     this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);  
 
-    //POLICIA ==> SPRITE
+    //POLICIA ==> SPRITE ==> moverlo a container
        this.image = new Sprites(this, 0, 0, 'guy');
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
