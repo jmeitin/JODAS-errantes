@@ -24,6 +24,14 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    this.map = this.make.tilemap({
+      key: 'mapajuego',
+      tileWidth: 96,
+      tileHeight: 96
+    });
+    const tileset1 = this.map.addTilesetImage('tilemapjuego','tilemapjuego');
+    this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
+
     //VARIABLES DE JUEGO
     this.campoVisionX = 400;
     this.campoAuditivoX = 700;  
@@ -35,14 +43,7 @@ export default class Game extends Phaser.Scene {
     music.play();
 
     
-    this.map = this.make.tilemap({
-      key: 'mapajuego',
-      tileWidth: 64,
-      tileHeight: 64
-    });
-
-    const tileset1 = this.map.addTilesetImage('tilemapjuego','tilemapjuego');
-    this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
+    
     
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
 
