@@ -14,6 +14,7 @@ export default class Game extends Phaser.Scene {
     this.load.image('civil', './Imgs/viandante0.png');
     this.load.tilemapTiledJSON('mapajuego','./Mapas/mapajuego.json');
     this.load.image('tilemapjuego', './Mapas/tilemapjuego.png');
+    this.load.audio('music', ['./music/game.mp3', './music/game.ogg'])
     // this.load.spritesheet('golem', './Imgs/golem.png',
     // {
     //   frameHeight: 32,
@@ -22,6 +23,11 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    //Musica
+    let music=this.sound.add('music', {loop: true});
+    music.play();
+
+    
     this.map = this.make.tilemap({
       key: 'mapajuego',
       tileWidth: 64,
