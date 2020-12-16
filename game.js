@@ -11,6 +11,7 @@ export default class Game extends Phaser.Scene {
   }
   preload() {   
     this.load.image('guy', './Imgs/jugador1.png');
+    this.load.image('cop', './Imgs/poli.png');
     this.load.image('civil', './Imgs/viandante0.png');
     this.load.tilemapTiledJSON('mapajuego','./Mapas/mapajuego.json');
     this.load.image('tilemapjuego', './Mapas/tilemapjuego.png');
@@ -44,10 +45,10 @@ export default class Game extends Phaser.Scene {
     this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);  
 
     //POLICIA ==> SPRITE ==> moverlo a container
-       this.image = new Sprites(this, 0, 0, 'guy');
+       this.image = new Sprites(this, 0, 0, 'cop');
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.container = new MyContainer(this, 400, 500, 1, 'guy'); 
+    this.container = new MyContainer(this, 400, 500, 1, 'cop'); 
     this.container.add(this.image);
     
     
