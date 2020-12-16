@@ -1,36 +1,42 @@
 import Sprites from "../../Clases/sprites.js";
 
 export default class MyContainer extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, speed, image, children) {
+
+    //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
+    constructor(scene, x, y, speed,  image, campoVisionX, campoAuditivoX, children,) {
         super(scene, x, y, children);
         // ...
         this.x = x;
         this.y = y;
         this.speed = speed;
-       // this.speed = speed;
+        this.campoVisionX = campoVisionX;
+        this.campoAuditivoX = campoAuditivoX;
+
 
        this.scene.add.existing(this);
        this.scene.physics.add.existing(this); 
 
        //POLICIA ==> SPRITE
-       //this.image = new Sprites(this, 0, 0, image);
+       this.sprite = new Sprites(this.scene, 0, 0, image);
+    
 
+       
        //POLICIA ==> TRIGGER ==> CAMPO DE VISION
        this.campoVision = scene.add.zone(0, 0);
-       this.campoVision.setSize(400, 400);
+       this.campoVision.setSize(this.campoVisionX, this.campoVisionX);
        this.scene.physics.world.enable(this.campoVision);
        this.campoVision.body.setAllowGravity(false);
        this.campoVision.body.moves = false;//no queremos moverlo con el poli
 
        //POLICIA ==> TRIGGER ==> CAMPO AUDITIVO
        this.campoAuditivo = scene.add.zone(0, 0);
-       this.campoAuditivo.setSize(700, 700);
+       this.campoAuditivo.setSize(this.campoAuditivoX, this.campoAuditivoX);
        this.scene.physics.world.enable(this.campoAuditivo);
        this.campoAuditivo.body.setAllowGravity(false);
        this.campoAuditivo.body.moves = false;//no queremos moverlo con el poli
        
 
-      // this.add(this.image);
+       this.add(this.sprite);
        this.add(this.campoVision);
        this.add(this.campoAuditivo);
 
