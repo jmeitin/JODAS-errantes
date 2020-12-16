@@ -24,6 +24,12 @@ export default class Game extends Phaser.Scene {
   }
 
   create() {
+    //VARIABLES DE JUEGO
+    this.campoVisionX = 400;
+    this.campoAuditivoX = 700;  
+
+
+
     //Musica
     let music=this.sound.add('music', {loop: true});
     music.play();
@@ -34,23 +40,19 @@ export default class Game extends Phaser.Scene {
       tileWidth: 64,
       tileHeight: 64
     });
+
     const tileset1 = this.map.addTilesetImage('tilemapjuego','tilemapjuego');
     this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
     
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
 
-    this.campoVisionX = 400;
-    this.campoAuditivoX = 700;   
+     
 
     this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);  
 
-    //POLICIA ==> SPRITE ==> moverlo a container
-       this.image = new Sprites(this, 0, 0, 'cop');
-
-    //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.container = new MyContainer(this, 400, 500, 1, 'cop'); 
-    this.container.add(this.image);
-    
+     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
+    this.container = new MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
+       
     
     //va mal? ==> MOVELEFT NO ES UNA FUNCION. HERENCIA PARA QUE MyContainer herede de Person
    // Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
@@ -117,9 +119,10 @@ export default class Game extends Phaser.Scene {
       if(this.physics.overlap(this.player, this.container.campoVision)) { 
 
         // SI POLICIA CHOCA CON PLAYER
-        if (this.physics.overlap(this.player, this.image)){  //MUERTO
+        if (this.physics.overlap(this.player, this.container.sprite)){  //MUERTO
+          //FIN DE JUEGO--------------------------------------------------------------------------------------------------------------------
          
-          console.log ("MUERTO");
+          console.log ("ARRESTADO");
         }
   
         else{ //POLICIA VA A POR PLAYER
