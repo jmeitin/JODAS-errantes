@@ -86,7 +86,7 @@ export default class fase1 extends Phaser.Scene {
 
         botonNext.on("pointerdown", ()=>{
             
-            var theOtherScene = this.scene.start('main');
+            var theOtherScene = this.scene.start('main', {inventario:this.inventario}); //fase 2
 
         });
 

@@ -8,7 +8,15 @@ import Sprites from "./Clases/sprites.js";
 export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
+
+    
   }
+  
+  init (data){
+    this.inventario = data.inventario;
+    console.log (this.inventario);
+  }
+
   preload() {   
     this.load.image('guy', './Imgs/jugador1.png');
     this.load.image('cop', './Imgs/poli.png');
@@ -122,15 +130,14 @@ export default class Game extends Phaser.Scene {
         // SI POLICIA CHOCA CON PLAYER
         if (this.physics.overlap(this.player, this.container.sprite)){  //MUERTO
           //FIN DE JUEGO--------------------------------------------------------------------------------------------------------------------
-         
+          
           console.log ("ARRESTADO");
         }
   
-        else{ //POLICIA VA A POR PLAYER
-                
+        else{ //POLICIA VA A POR PLAYER                
           this.container.calcularDir(this.jugadorX, this.jugadorY);
   
-          this.container.sospechar(true);
+          this.container.sospechar(true);//
   
         }
       }
