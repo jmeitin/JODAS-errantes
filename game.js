@@ -1,7 +1,6 @@
 import Civil from "./Personajes/NPCs/Civil.js";
 import Player from "./Personajes/Player.js";
 import Policia from "./Personajes/NPCs/Policia.js";
-import MyContainer from "./Personajes/NPCs/MyContainer.js";
 import Persona from "./Personajes/Person.js";
 import Sprites from "./Clases/sprites.js";
 
@@ -37,7 +36,7 @@ export default class Game extends Phaser.Scene {
       tileWidth: 96,
       tileHeight: 96
     });
-    const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
+    const tileset1 = this.map.addTilesetImage('tilemapjuego','tilemapjuego');
     this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
 
     //VARIABLES DE JUEGO
@@ -47,7 +46,7 @@ export default class Game extends Phaser.Scene {
     this.campoVisionX = 400;
     this.campoAuditivoX = 700;  
 
-
+    //if (this.inventario.includes(''))
 
     //Musica
     let music=this.sound.add('music', {loop: true});
@@ -61,11 +60,11 @@ export default class Game extends Phaser.Scene {
     this.player = new Player(this, this.playerX, this.playerY, "guy", this.cursorKeys, this.playerSpeed, this.inventario);  
 
      //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.container = new MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
+    this.policia = new Policia(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
        
     
     //va mal? ==> MOVELEFT NO ES UNA FUNCION. HERENCIA PARA QUE MyContainer herede de Person
-   // Object.assign(MyContainer.prototype, Persona); //assign entre clases ==> MyContainer puede utilizar persona
+   
 
     this.cameras.main.startFollow(this.player);
     
@@ -102,21 +101,21 @@ export default class Game extends Phaser.Scene {
 
 
     //this.container.moveLeft(); //NO ES UNA FUNCION
-    this.container.update();
+    this.policia.update();
 
 
 
 
     //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-    if (this.physics.overlap(this.player, this.container.campoAuditivo)){
+    if (this.physics.overlap(this.player, this.policia.campoAuditivo)){
 
       this.civiles.forEach((civil) =>{
 
         //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
         if (this.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA
          
-          this.container.sospechar(true);
-          this.container.calcularDir(this.jugadorX, this.jugadorY);
+          this.policia.sospechar(true);
+          this.policia.calcularDir(this.jugadorX, this.jugadorY);
 
            console.log("UN LADRON!");
         }
@@ -126,10 +125,10 @@ export default class Game extends Phaser.Scene {
 
 
       //PLAYER ESTA DENTRO DEL RANGO DE VISION
-      if(this.physics.overlap(this.player, this.container.campoVision)) { 
+      if(this.physics.overlap(this.player, this.policia.campoVision)) { 
 
         // SI POLICIA CHOCA CON PLAYER
-        if (this.physics.overlap(this.player, this.container.sprite)){  //MUERTO
+        if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
           //FIN DE JUEGO--------------------------------------------------------------------------------------------------------------------
           
           console.log ("Usted queda ARRESTADO");
@@ -139,9 +138,9 @@ export default class Game extends Phaser.Scene {
         }
   
         else{ //POLICIA VA A POR PLAYER                
-          this.container.calcularDir(this.jugadorX, this.jugadorY);
+          this.policia.calcularDir(this.jugadorX, this.jugadorY);
   
-          this.container.sospechar(true);//
+          this.policia.sospechar(true);//
   
         }
       }
