@@ -8,7 +8,15 @@ import Sprites from "./Clases/sprites.js";
 export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
+
+    
   }
+  
+  init (data){
+    this.inventario = data.inventario;
+  
+  }
+
   preload() {   
     this.load.image('guy', './Imgs/jugador1.png');
     this.load.image('cop', './Imgs/poli.png');
@@ -33,6 +41,9 @@ export default class Game extends Phaser.Scene {
     this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
 
     //VARIABLES DE JUEGO
+    this.playerX = 300;
+    this.playerY = 900;
+    this.playerSpeed = 5;
     this.campoVisionX = 400;
     this.campoAuditivoX = 700;  
 
@@ -40,16 +51,14 @@ export default class Game extends Phaser.Scene {
 
     //Musica
     let music=this.sound.add('music', {loop: true});
-    music.play();
-
-    
+    music.play();   
     
     
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
 
      
 
-    this.player = new Player(this, 300, 900, "guy", this.cursorKeys, 10);  
+    this.player = new Player(this, this.playerX, this.playerY, "guy", this.cursorKeys, this.playerSpeed, this.inventario);  
 
      //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.container = new MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
@@ -122,15 +131,17 @@ export default class Game extends Phaser.Scene {
         // SI POLICIA CHOCA CON PLAYER
         if (this.physics.overlap(this.player, this.container.sprite)){  //MUERTO
           //FIN DE JUEGO--------------------------------------------------------------------------------------------------------------------
-         
-          console.log ("ARRESTADO");
+          
+          console.log ("Usted queda ARRESTADO");
+          if (this.player.hasGun()) {
+            console.log ("Pues me SUICIDIO");
+          }
         }
   
-        else{ //POLICIA VA A POR PLAYER
-                
+        else{ //POLICIA VA A POR PLAYER                
           this.container.calcularDir(this.jugadorX, this.jugadorY);
   
-          this.container.sospechar(true);
+          this.container.sospechar(true);//
   
         }
       }

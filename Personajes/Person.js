@@ -37,6 +37,10 @@ export default class Person extends gameObject{
     getY(){
         return this.y;
     }
+
+    multiplyVelocity (percentage){
+        this.speed = this.speed + this.speed*percentage/100;
+    }
 }
 
 

@@ -2,15 +2,23 @@
 import Persona from "./Person.js"
 
 export default class Player extends Persona{
-    constructor(scene, x, y, type, cursorKeys, speed){
+    constructor(scene, x, y, type, cursorKeys, speed, inventario){
         super(scene, x, y, type, speed);
 
         this.cursorkeys = cursorKeys;  
         this.botonpausa = this.scene.input.keyboard.addKey('P');
         this.pausabool = false;
         this.scene.physics.add.existing(this); //
-        //this.body.allowGravity = true;
+
+        this.pistola = false; 
+
+        this.inventario = inventario;  console.log (this.inventario);        
+       
+        //OBJETOS
+        if (this.inventario.includes('zapatos')) this.multiplyVelocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
+        else if (this.inventario.includes('pistola')) this.pistola = true; //lleva pistola
     }
+
     pausa(){
         if(this.botonpausa.isDown && this.pausabool === false) {
             this.pausabool = true;
@@ -22,8 +30,7 @@ export default class Player extends Persona{
         }
     }
     
-    movementManager(){
-        
+    movementManager(){        
         if(this.cursorkeys.right.isDown){
             this.moveRight();
         }
@@ -37,6 +44,10 @@ export default class Player extends Persona{
         else if(this.cursorkeys.down.isDown){
             this.moveDown();
         }
+    }
+
+    hasGun(){ //LLEVA PISTOLA?
+        return this.pistola;
     }
 
 
