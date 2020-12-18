@@ -129,7 +129,7 @@ export default class Game extends Phaser.Scene {
 
         // SI POLICIA CHOCA CON PLAYER
         if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
-          //FIN DE JUEGO--------------------------------------------------------------------------------------------------------------------
+          //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
           
           console.log ("Usted queda ARRESTADO");
           if (this.player.hasGun()) {
