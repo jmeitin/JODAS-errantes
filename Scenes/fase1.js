@@ -42,7 +42,7 @@ export default class fase1 extends Phaser.Scene {
        
 
         this.load.image('botonNext', '../Imgs/Botones/FlechaNext.png');
-    }
+    } 
 
     create(){
 
