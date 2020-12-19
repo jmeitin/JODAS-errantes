@@ -55,7 +55,6 @@ export default class buttonF1 extends Sprites{
         this.inventario.push(this.type);
         pesoAct += this.pesoObj; 
         this.scene.setPesoActual(pesoAct);
-        this.scene.setAlfa(0.5, this.type);
     }
 
     quitaInventario(pesoAct){
