@@ -11,12 +11,18 @@ export default class Player extends Persona{
         this.scene.physics.add.existing(this); //
 
         this.pistola = false; 
+        this.bombaPlus = false;
+        this.bombaMinus = false;
+        
 
         this.inventario = inventario;  console.log (this.inventario);        
        
         //OBJETOS
         if (this.inventario.includes('zapatos')) this.multiplyVelocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
-        else if (this.inventario.includes('pistola')) this.pistola = true; //lleva pistola
+        if (this.inventario.includes('pistola')) this.pistola = true; //lleva pistola
+        if (this.inventario.includes('bombaPlus')) this.bombaPlus = true;
+        if (this.inventario.includes('bombaMinus')) this.bombaMinus = true;
+        
     }
 
     pausa(){
@@ -48,6 +54,12 @@ export default class Player extends Persona{
 
     hasGun(){ //LLEVA PISTOLA?
         return this.pistola;
+    }
+
+    esUnIndividuoSospechoso(){
+        this.maleante = false;
+        if (this.bombaPlus && !this.bombaMinus || this.bombaPlus && this.pistola) this.maleante = true;
+        return this.maleante;
     }
 
 

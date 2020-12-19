@@ -41,6 +41,9 @@ export default class Person extends gameObject{
     multiplyVelocity (percentage){
         this.speed = this.speed + this.speed*percentage/100;
     }
+    setSpeed (speed){
+        this.speed = speed;
+    }
 }
 
 

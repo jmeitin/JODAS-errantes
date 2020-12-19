@@ -45,15 +45,20 @@ export default class Game extends Phaser.Scene {
     this.playerX = 300;
     this.playerY = 900;
     this.playerSpeed = 5;
-    this.campoVisionX = 400; //A DEFINIR
-    this.campoAuditivoX = 800;  //A DEFINIR
+    this.controlPolicialX = 400;
+    this.campoVisionX = 800; //A DEFINIR
+    this.campoAuditivoX = 1200;  //A DEFINIR
 
     // MODIFICAMOS LOS CAMPOS DE VISION EN BASE A LO OBJETOS DEL INVENTARIO
     if (this.inventario.includes('bombaPlus')){ //AUMENTA EL RANGO DE VISION DEL POLICIA
-      this.campoVisionX += this.campoVisionX * 50/100; //--------------------------------------------------A DEFINIR
+      this.campoVisionX += this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MEJOR");
     }
     if (this.inventario.includes('bombaMinus')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
+      this.campoVisionX -= this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
+      console.log("VEO MENOS"); //---
+    }
+    if (this.inventario.includes('capa')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
       this.campoVisionX -= this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MENOS"); //---
     }
@@ -64,20 +69,14 @@ export default class Game extends Phaser.Scene {
     
     
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
-
      
 
     this.player = new Player(this, this.playerX, this.playerY, "guy", this.cursorKeys, this.playerSpeed, this.inventario);  
 
      //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.policia = new Policia(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
-       
-    
-    //va mal? ==> MOVELEFT NO ES UNA FUNCION. HERENCIA PARA QUE MyContainer herede de Person
-   
-
-    this.cameras.main.startFollow(this.player);
-    
+    this.policia = new Policia(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX, this.controlPolicialX); 
+ 
+    this.cameras.main.startFollow(this.player);    
 
     //CIVILES
     this.civiles = [];
@@ -113,6 +112,7 @@ export default class Game extends Phaser.Scene {
     else this.scene.resume(); // no vuelve a cargar la escena
 
 
+  
     //this.container.moveLeft(); //NO ES UNA FUNCION
     this.policia.update();
 
@@ -127,36 +127,63 @@ export default class Game extends Phaser.Scene {
         //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
         if (this.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA
          
-          this.policia.sospechar(true);
-          this.policia.calcularDir(this.jugadorX, this.jugadorY);
+          //this.policia.sospechar(true);    
+          this.policia.calcularDir(this.jugadorX, this.jugadorY);      
 
-           //console.log("UN LADRON!");
+          console.log("Quien anda ahi?!");
         }
 
       })
 
+      if (this.policia.getSospecha()){ //si sospecho, me muevo hacia el
+        this.policia.calcularDir(this.jugadorX, this.jugadorY);
+      }
 
 
       //PLAYER ESTA DENTRO DEL RANGO DE VISION
       if(this.physics.overlap(this.player, this.policia.campoVision)) { 
+        this.policia.sospechar(true);//
 
-        // SI POLICIA CHOCA CON PLAYER
-        if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
-          //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
+        
+
+        //CONTROL POLICIAL
+        if(this.physics.overlap(this.player, this.policia.controlPolicial)){
+
+          // SI POLICIA CHOCA CON PLAYER
+          if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
+                //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
           
-          console.log ("Usted queda ARRESTADO");
-          if (this.player.hasGun()) {
-            console.log ("Pues me SUICIDIO");
+             console.log ("Usted queda ARRESTADO");
+             this.player.setSpeed(0); //el player ya no se puede mover
+             this.policia.setSpeed(0);
+
+             if (this.player.hasGun()) {
+              console.log ("Pues me SUICIDIO");
+             }   
           }
-        }
   
-        else{ //POLICIA VA A POR PLAYER                
-          this.policia.calcularDir(this.jugadorX, this.jugadorY);
+          else{ //ve a player ==> AQUI IMPORTA LA CAPA / SOMBRERO
+            this.policia.calcularDir(this.jugadorX, this.jugadorY); //se mueve a investigar
+           
+          
+            if (this.player.esUnIndividuoSospechoso() && !this.policia.getDescubierto()){ //si le veo malas pintas
+              this.policia.descurbrirAPlayer(true); //le descubri
+              console.log('ES MALA GENTE. A POR EL');
+            }                  
   
-          this.policia.sospechar(true);//
-  
-        }
-      }
+          }
+
+        } //control policial
+
+        
+        
+      } //rango de vision
+
+      //si sospechaba de el, pero no es un individuo sospechoso ==> dejo de sospechar
+      else if (this.policia.getSospecha() == true && !this.player.esUnIndividuoSospechoso()){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
+        this.policia.sospechar(false);
+          //console.log('Prosiga buen señor');
+     } //campo auditivo
   
     
     }
@@ -181,7 +208,6 @@ export default class Game extends Phaser.Scene {
       var colocaMeEn = 0;
 
       for(var i = 0; i < this.inventario.length; i++){
-
         this.contenedorInventario.add(this.add.image(colocaMeEn, 0, 'Inventory'));
         this.contenedorInventario.add(this.add.image(colocaMeEn, 0, this.inventario[i]).setScale(0.3));
         
@@ -193,3 +219,5 @@ export default class Game extends Phaser.Scene {
 
 
 }
+
+

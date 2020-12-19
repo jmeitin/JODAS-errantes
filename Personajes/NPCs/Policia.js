@@ -3,7 +3,7 @@ import Sprites from "../../Clases/sprites.js";
 export default class Policia extends Phaser.GameObjects.Container {
 
     //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
-    constructor(scene, x, y, speed,  image, campoVisionX, campoAuditivoX, children,) {
+    constructor(scene, x, y, speed,  image, campoVisionX, campoAuditivoX, controlPolicialX, children) {
         super(scene, x, y, children);
         // ...
         this.x = x;
@@ -11,6 +11,7 @@ export default class Policia extends Phaser.GameObjects.Container {
         this.speed = speed;
         this.campoVisionX = campoVisionX;
         this.campoAuditivoX = campoAuditivoX;
+        this.controlPolicialX = controlPolicialX;
 
 
        this.scene.add.existing(this);
@@ -20,6 +21,12 @@ export default class Policia extends Phaser.GameObjects.Container {
        this.sprite = new Sprites(this.scene, 0, 0, image);
     
 
+       //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
+       this.controlPolicial = scene.add.zone(0, 0);
+       this.controlPolicial.setSize(this.controlPolicialX, this.controlPolicialX);
+       this.scene.physics.world.enable(this.controlPolicial);
+       this.controlPolicial.body.setAllowGravity(false);
+       this.controlPolicial.body.moves = false;
        
        //POLICIA ==> TRIGGER ==> CAMPO DE VISION
        this.campoVision = scene.add.zone(0, 0);
@@ -36,16 +43,19 @@ export default class Policia extends Phaser.GameObjects.Container {
        this.campoAuditivo.body.moves = false;//no queremos moverlo con el poli
        
 
+       //EL CONTOINER ES PADRE DEN LOS CAMPOS DE DETECCION Y SIMILARES
        this.add(this.sprite);
        this.add(this.campoVision);
        this.add(this.campoAuditivo);
+       this.add(this.controlPolicial);
 
-       this.dirX = this.getRandomInt(-1, 2);
 
+       this.dirX = this.getRandomInt(-1, 2); //DIRECCION RANDOM
        this.dirY = this.getRandomInt(-1, 2);
 
         
 
+        this.descubierto = false; // NI SOSPECHO NI HE DESCUBIERTO A PLAYER
         this.sospecha = false;
     }
    
@@ -100,8 +110,24 @@ export default class Policia extends Phaser.GameObjects.Container {
         this.dirY = Math.sin(this.angle);
     }
 
-    sospechar(sospecha){
-        this.sospecha = sospecha;
+    descurbrirAPlayer(descubierto){
+        this.descubierto = descubierto;
+        if(this.descubierto){
+            this.speed = this.speed*2;
+
+        }
+        
+        console.log('descubierto: ', this.speed); 
+    }
+
+    sospechar(sospechar){
+        this.sospecha = sospechar;
+    }
+    getSospecha (){
+        return this.sospecha;
+    }
+    getDescubierto(){
+        return this.descubierto;
     }
 
     
@@ -133,5 +159,8 @@ export default class Policia extends Phaser.GameObjects.Container {
         this.y+= this.speed;
     }
 
+    setSpeed (speed){
+        this.speed = speed;
+    }
     
 }
