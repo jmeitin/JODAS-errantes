@@ -43,12 +43,20 @@ export default class Game extends Phaser.Scene {
     this.playerX = 300;
     this.playerY = 900;
     this.playerSpeed = 5;
-    this.campoVisionX = 400;
-    this.campoAuditivoX = 700;  
+    this.campoVisionX = 400; //A DEFINIR
+    this.campoAuditivoX = 800;  //A DEFINIR
 
-    //if (this.inventario.includes(''))
+    // MODIFICAMOS LOS CAMPOS DE VISION EN BASE A LO OBJETOS DEL INVENTARIO
+    if (this.inventario.includes('bombaPlus')){ //AUMENTA EL RANGO DE VISION DEL POLICIA
+      this.campoVisionX += this.campoVisionX * 50/100; //--------------------------------------------------A DEFINIR
+      console.log("VEO MEJOR");
+    }
+    if (this.inventario.includes('bombaMinus')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
+      this.campoVisionX -= this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
+      console.log("VEO MEJOR");
+    }
 
-    //Musica
+    //MUSICA
     let music=this.sound.add('music', {loop: true});
     music.play();   
     
@@ -129,7 +137,7 @@ export default class Game extends Phaser.Scene {
 
         // SI POLICIA CHOCA CON PLAYER
         if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
-          //FIN DE JUEGO--------------------------------------------------------------------------------------------------------------------
+          //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
           
           console.log ("Usted queda ARRESTADO");
           if (this.player.hasGun()) {
