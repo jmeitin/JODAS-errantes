@@ -55,7 +55,7 @@ export default class Game extends Phaser.Scene {
     }
     if (this.inventario.includes('bombaMinus')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
       this.campoVisionX -= this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
-      console.log("VEO MEJOR");
+      console.log("VEO MENOS"); //---
     }
 
     //MUSICA
