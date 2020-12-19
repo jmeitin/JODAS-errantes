@@ -20,11 +20,17 @@ export default class fase1 extends Phaser.Scene {
         //añadepesobomba
 
         this.inventario = [];
+
+        this.imgPesoActual;
+
+        this.bombaPlus;
     }
 
     preload(){
+        //cargamos fondo
         this.load.image('fondo', '../Imgs/Planks/plank1.png');
 
+        //cargamos imagenes de objetos
         this.load.image('bombaMinus', '../Imgs/Objetos/bombMinus.png')
         this.load.image('bombaPlus', '../Imgs/Objetos/bomb.png');
         this.load.image('capa', '../Imgs/Objetos/capa.png');
@@ -32,7 +38,7 @@ export default class fase1 extends Phaser.Scene {
         this.load.image('sombrero', '../Imgs/Objetos/sombrero.png');
         this.load.image('zapatos', '../Imgs/Objetos/zapatos.png');
 
-        //this.load.image('textbox', '../Imgs/Objetos/textbox.png');
+        //cargamos imagenes textos de objetos
         this.load.image('textoBomba+', '../Imgs/Objetos/ObjTxt/TextBoxBomb+.png');
         this.load.image('textoBomba-', '../Imgs/Objetos/ObjTxt/TextBoxBomb-.png');
         this.load.image('textoCapa', '../Imgs/Objetos/ObjTxt/TextBoxCape.png');
@@ -40,7 +46,11 @@ export default class fase1 extends Phaser.Scene {
         this.load.image('textoSombrero', '../Imgs/Objetos/ObjTxt/TextBoxHat.png');
         this.load.image('textoZapatos', '../Imgs/Objetos/ObjTxt/TextBoxShoes.png');
        
+        //numeros
+        this.load.spritesheet('nums', '../Imgs/Numeros/Numberssheet.png', { frameWidth: 23, frameHeight: 35});
+        this.load.image('slash', '../Imgs/Numeros/Slash.png');
 
+        //boton para continuar
         this.load.image('botonNext', '../Imgs/Botones/FlechaNext.png');
     }
 
@@ -51,6 +61,8 @@ export default class fase1 extends Phaser.Scene {
         //dividimos entre fondoScale para compensar el tamaño incrementado de los tiles que usamos de fondo y que ocupe el tamaño de la ventana
         var fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/fondoScale), (this.game.renderer.height/fondoScale), 'fondo').setScale(fondoScale);
         fondo.setOrigin(0,0);
+
+        this.creaNumeros();
 
         this.creaTextos();        
 
@@ -71,7 +83,7 @@ export default class fase1 extends Phaser.Scene {
 
         botonNext.on("pointerdown", ()=>{
             
-            var theOtherScene = this.scene.start('main', {inventario:this.inventario}); //fase 2
+            this.scene.start('main', {inventario:this.inventario}); //fase 2
 
         });
 
@@ -104,15 +116,7 @@ export default class fase1 extends Phaser.Scene {
     }
 
     colocaBotones(){
-        
-        // for(i = 0; i < this.numImgs; i++){
 
-        // }
-        //para tener a las imagenes con posiciones relativas
-        //var container = this.add.container(this.game.renderer.width/2, this.game.renderer.height/2);
-        //var boo = new button(this, 200, 200, 'textbox', 1, 'textbox');
-        //this.scene.add.Image(300, 300, )
-        
         var bombaPlus = new button(this, 200, 200, 'bombaPlus', 1, this.TbombaPlus, this.inventario, this.pesoMax, this.pesoBombPlus);
 
         var bombaMinus = new button(this, 700, 200, 'bombaMinus', 0.6, this.TbombaMinus, this.inventario, this.pesoMax, this.pesoBombMinus).setScale(0.6);
@@ -124,13 +128,18 @@ export default class fase1 extends Phaser.Scene {
         var zapatos = new button(this, 700, 600, 'zapatos', 1, this.Tzapatos, this.inventario, this.pesoMax, this.pesoShoes);
 
         var capa = new button(this, 1200, 600, 'capa', 1, this.Tcapa, this.inventario, this.pesoMax, this.pesoCape);
+    }
 
-        // container.add(bomba);
-        // container.add(capa);
-        // container.add(sombrero);
-        // container.add(pistola);
-        // container.add(zapatos);    
-        //var botonBomba = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bomba");
+    creaNumeros(){
+        var contenedorNums = this.add.container(1150, 50);
+
+        this.imgPesoActual = this.add.sprite(-20, 0, 'nums', this.pesoActual);
+        this.slash = this.add.image(0, 0, 'slash');
+        this.imgPesoMax = this.add.sprite(20, 0, 'nums', this.pesoMax);
+        
+        contenedorNums.add(this.imgPesoActual);
+        contenedorNums.add(this.slash);
+        contenedorNums.add(this.imgPesoMax);
     }
 
     devuelvePesoActual(){
@@ -140,6 +149,12 @@ export default class fase1 extends Phaser.Scene {
     setPesoActual(pesoNuevo){
         this.pesoActual = pesoNuevo;
         console.log(this.pesoActual);
+        this.imgPesoActual.setFrame(this.pesoActual);
+        // = this.add.sprite(1150, 50, 'nums', this.pesoActual);
         console.log(this.inventario);
+    }
+
+    setAlfa(gradient, thing){
+        this.thing.alfa = gradient;
     }
 }
