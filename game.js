@@ -8,7 +8,7 @@ export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
 
-    
+    this.contenedorInventario;
   }
   
   init (data){
@@ -22,12 +22,14 @@ export default class Game extends Phaser.Scene {
     this.load.image('civil', './Imgs/viandante0.png');
     this.load.tilemapTiledJSON('mapajuego','./Mapas/mapajuego.json');
     this.load.image('tilemapjuego', './Mapas/tilemapjuego.png');
-    this.load.audio('music', ['./music/game.mp3', './music/game.ogg'])
+    this.load.audio('music', ['./music/game.mp3', './music/game.ogg']);
+    this.load.image('Inventory', './Imgs/Inventario/InventorySlot.png');
     // this.load.spritesheet('golem', './Imgs/golem.png',
     // {
     //   frameHeight: 32,
     //   frameWidth:32
     // });
+    
   }
 
   create() {
@@ -94,6 +96,9 @@ export default class Game extends Phaser.Scene {
       }
     }
 
+    //CREAMOS INVENTARIO
+    this.creaInventario();
+
   }
 
   update(time, delta) {
@@ -125,7 +130,7 @@ export default class Game extends Phaser.Scene {
           this.policia.sospechar(true);
           this.policia.calcularDir(this.jugadorX, this.jugadorY);
 
-           console.log("UN LADRON!");
+           //console.log("UN LADRON!");
         }
 
       })
@@ -164,8 +169,26 @@ export default class Game extends Phaser.Scene {
       civil.update();
     }) 
 
+    //modificamos posicion de inventario
+    this.contenedorInventario.x = this.player.x - 600;
+    this.contenedorInventario.y = this.player.y - 300;
     
-    
+  }
+
+  creaInventario(){
+      this.contenedorInventario = this.add.container(this.player.x - 600, this.player.y - 300);
+      console.log(this.inventario.length);
+      var colocaMeEn = 0;
+
+      for(var i = 0; i < this.inventario.length; i++){
+
+        this.contenedorInventario.add(this.add.image(colocaMeEn, 0, 'Inventory'));
+        this.contenedorInventario.add(this.add.image(colocaMeEn, 0, this.inventario[i]).setScale(0.3));
+        
+        colocaMeEn += 100;
+
+      }
+
   }
 
 

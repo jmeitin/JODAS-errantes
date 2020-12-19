@@ -7,7 +7,7 @@ export default class fase1 extends Phaser.Scene {
             key: 'fase1'
         })
         this.numImgs = 5;
-        this.pesoMax = 6;
+        this.pesoMax = 5;
         this.pesoActual = 0;
 
         //pesos de objetos
@@ -152,9 +152,5 @@ export default class fase1 extends Phaser.Scene {
         this.imgPesoActual.setFrame(this.pesoActual);
         // = this.add.sprite(1150, 50, 'nums', this.pesoActual);
         console.log(this.inventario);
-    }
-
-    setAlfa(gradient, thing){
-        this.thing.alfa = gradient;
     }
 }
