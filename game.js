@@ -36,7 +36,7 @@ export default class Game extends Phaser.Scene {
       tileWidth: 96,
       tileHeight: 96
     });
-    const tileset1 = this.map.addTilesetImage('tilemapjuego','tilemapjuego');
+    const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
     this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
 
     //VARIABLES DE JUEGO
