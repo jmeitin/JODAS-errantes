@@ -1,7 +1,6 @@
-//import Game from "../Game.js";
-import Persona from "./Person.js"
+import Persona from "./person.js"
 
-export default class Player extends Persona{
+export default class player extends Persona{
     constructor(scene, x, y, type, cursorKeys, speed, inventario){
         super(scene, x, y, type, speed);
 
