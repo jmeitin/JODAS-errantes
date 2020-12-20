@@ -114,7 +114,6 @@ export default class Policia extends Phaser.GameObjects.Container {
         this.descubierto = descubierto;
         if(this.descubierto){
             this.speed = this.speed*2;
-
         }
         
         console.log('descubierto: ', this.speed); 
