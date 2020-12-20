@@ -1,8 +1,7 @@
 import Civil from "./Personajes/NPCs/Civil.js";
 import Player from "./Personajes/Player.js";
 import Policia from "./Personajes/NPCs/Policia.js";
-import Persona from "./Personajes/Person.js";
-import Sprites from "./Clases/sprites.js";
+
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -18,13 +17,13 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {   
-    this.load.image('guy', './Imgs/jugador1.png');
-    this.load.image('cop', './Imgs/poli.png');
-    this.load.image('civil', './Imgs/viandante0.png');
-    this.load.tilemapTiledJSON('mapajuego','./Mapas/mapajuego.json');
-    this.load.image('tilemapjuego', './Mapas/tilemapjuego.png');
-    this.load.audio('music', ['./music/game.mp3', './music/game.ogg']);
-    this.load.image('Inventory', './Imgs/Inventario/InventorySlot.png');
+    this.load.image('guy', '/Imgs/jugador1.png');
+    this.load.image('cop', '/Imgs/poli.png');
+    this.load.image('civil', '/Imgs/viandante0.png');
+    this.load.tilemapTiledJSON('mapajuego','/Mapas/mapajuego.json');
+    this.load.image('tilemapjuego', '/Mapas/tilemapjuego.png');
+    this.load.audio('music', ['/music/game.mp3', '/music/game.ogg']);
+    this.load.image('Inventory', '/Imgs/Inventario/InventorySlot.png');
     // this.load.spritesheet('golem', './Imgs/golem.png',
     // {
     //   frameHeight: 32,
