@@ -6,6 +6,7 @@ export default class Player extends Persona{
         super(scene, x, y, type, speed);
 
         this.cursorkeys = cursorKeys;  
+
         this.botonpausa = this.scene.input.keyboard.addKey('P');
         this.pausabool = false;
         this.scene.physics.add.existing(this); //
@@ -15,7 +16,7 @@ export default class Player extends Persona{
         this.bombaMinus = false;
         
 
-        this.inventario = inventario;  console.log (this.inventario);        
+        this.inventario = inventario;
        
         //OBJETOS
         if (this.inventario.includes('zapatos')) this.multiplyVelocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
@@ -50,6 +51,7 @@ export default class Player extends Persona{
         else if(this.cursorkeys.down.isDown){
             this.moveDown();
         }
+        
     }
 
     hasGun(){ //LLEVA PISTOLA?

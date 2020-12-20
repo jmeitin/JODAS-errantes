@@ -24,11 +24,6 @@ export default class Game extends Phaser.Scene {
     this.load.image('tilemapjuego', '/Mapas/tilemapjuego.png');
     this.load.audio('music', ['/music/game.mp3', '/music/game.ogg']);
     this.load.image('Inventory', '/Imgs/Inventario/InventorySlot.png');
-    // this.load.spritesheet('golem', './Imgs/golem.png',
-    // {
-    //   frameHeight: 32,
-    //   frameWidth:32
-    // });
     
   }
 
@@ -78,13 +73,15 @@ export default class Game extends Phaser.Scene {
     let music=this.sound.add('music', {loop: true});
     music.play();   
     
-    
+    //Keyboard inputs
     this.cursorKeys = this.input.keyboard.createCursorKeys();    
-     
+
+    this.funcionBotones();
+    
 
     this.player = new Player(this, this.playerX, this.playerY, "guy", this.cursorKeys, this.playerSpeed, this.inventario);  
 
-     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
+    //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.policia = new Policia(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX, this.controlPolicialX); 
  
     this.cameras.main.startFollow(this.player);    
@@ -112,7 +109,7 @@ export default class Game extends Phaser.Scene {
   }
 
   update(time, delta) {
-    console.debug(this.civiles.length);
+    //console.debug(this.civiles.length);
 
     this.player.movementManager();
 
@@ -228,6 +225,47 @@ export default class Game extends Phaser.Scene {
 
   }
 
+  funcionBotones(){
+    let lugarInventario;//el hueco del inventario que hemos pulado
+
+    window.addEventListener('keypress', (event)=>{
+      if(event.key === '1'){
+        lugarInventario = 0;//debido a la posicion de las teclas debe ser 1 menos en todos menos el 0, que sera pos 9
+      }
+      else if(event.key === '2'){
+        lugarInventario = 1;
+      }
+      else if(event.key === '3'){
+        lugarInventario = 2;
+      }
+      else if(event.key === '4'){
+        lugarInventario = 3;
+      }
+      else if(event.key === '5'){
+        lugarInventario = 4;
+      }
+      else if(event.key === '6'){
+        lugarInventario = 5;
+      }
+      else if(event.key === '7'){
+        lugarInventario = 6;
+      }
+      else if(event.key === '8'){
+        lugarInventario = 7;
+      }
+      else if(event.key === '9'){
+        lugarInventario = 8;
+      }
+      else if(event.key === '0'){
+        lugarInventario = 9;
+      }
+
+      if(this.activosInventario[lugarInventario] == true){
+        //accion de objeto...
+        console.log("activo");
+      }
+    });
+  }
 
 }
 
