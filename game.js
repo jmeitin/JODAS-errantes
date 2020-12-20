@@ -191,7 +191,7 @@ export default class Game extends Phaser.Scene {
       } //rango de vision
 
       //si sospechaba de el, pero no es un individuo sospechoso ==> dejo de sospechar
-      else if (this.policia.getSospecha() == true && !this.player.esUnIndividuoSospechoso()){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
+      else if (this.policia.getSospecha() == true){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
         this.policia.sospechar(false);
           //console.log('Prosiga buen señor');
      } //campo auditivo

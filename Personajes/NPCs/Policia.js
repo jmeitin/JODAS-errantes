@@ -1,4 +1,5 @@
 import Sprites from "../../Clases/Sprites.js";
+//"../../Clases/Sprites.js"
 
 export default class Policia extends Phaser.GameObjects.Container {
 

@@ -58,7 +58,8 @@ export default class Player extends Persona{
 
     esUnIndividuoSospechoso(){
         this.maleante = false;
-        if (this.bombaPlus && !this.bombaMinus || this.bombaPlus && this.pistola) this.maleante = true;
+        if (this.bombaPlus && !this.bombaMinus || this.bombaPlus && this.pistola) this.maleante = true; // solo sombrero
+        //capa ----------------------------------------------------------------------------------------------------
         return this.maleante;
     }
 
