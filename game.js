@@ -1,5 +1,5 @@
 import Civil from "./Personajes/NPCs/Civil.js";
-import Player from "./Personajes/player.js";
+import Player from "./Personajes/Player.js";
 import Policia from "./Personajes/NPCs/Policia.js";
 
 

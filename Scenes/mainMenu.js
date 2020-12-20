@@ -14,7 +14,8 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     create(){
-        
+        // this.cameras.main.setBounds(0, 0, 4000, 4000);
+        // this.physics.world.setBounds(0, 0, 4000, 4000); 
         this.add.image(700, 400, 'fondoMenu').setScale(2);
 
         var botonComenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"botComenzar");
