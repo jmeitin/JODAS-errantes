@@ -34,8 +34,8 @@ export default class Game extends Phaser.Scene {
       tileHeight: 96
     });
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
-    this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
-    this.colisionLayer = this.map.createStaticLayer('Colision',tileset1);
+    this.backgroundLayer = this.map.createStaticLayer('capa1', tileset1);
+    this.colisionLayer = this.map.createStaticLayer('colision',tileset1);
 
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(var i = 0; i < this.inventario.length; i++){

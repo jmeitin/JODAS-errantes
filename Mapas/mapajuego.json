@@ -15,7 +15,7 @@
          "encoding":"base64",
          "height":100,
          "id":1,
-         "name":"Capa de patrones 1",
+         "name":"capa1",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -29,7 +29,7 @@
          "encoding":"base64",
          "height":100,
          "id":2,
-         "name":"Colision",
+         "name":"colision",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -79,7 +79,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
