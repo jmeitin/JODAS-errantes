@@ -35,6 +35,7 @@ export default class Game extends Phaser.Scene {
     });
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
     this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
+    this.colisionLayer = this.map.createStaticLayer('Colision',tileset1);
 
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(var i = 0; i < this.inventario.length; i++){
@@ -80,7 +81,8 @@ export default class Game extends Phaser.Scene {
     
 
     this.player = new Player(this, this.playerX, this.playerY, "guy", this.cursorKeys, this.playerSpeed, this.inventario);  
-
+    this.physics.add.collider(this.player, this.colisionLayer);
+    this.colisionLayer.setCollisionBetween(0,9999);
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.policia = new Policia(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX, this.controlPolicialX); 
  
