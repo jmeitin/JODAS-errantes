@@ -55,6 +55,75 @@
          "spacing":0,
          "tilecount":100,
          "tileheight":96,
+         "tiles":[
+                {
+                 "id":42,
+                 "properties":[
+                        {
+                         "name":"colision",
+                         "type":"bool",
+                         "value":false
+                        }]
+                }, 
+                {
+                 "id":53,
+                 "properties":[
+                        {
+                         "name":"colision",
+                         "type":"bool",
+                         "value":false
+                        }]
+                }, 
+                {
+                 "id":64,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":96,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":95.1945080091533,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
+                 "properties":[
+                        {
+                         "name":"colision",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":72,
+                 "properties":[
+                        {
+                         "name":"colision",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":97,
+                 "properties":[
+                        {
+                         "name":"colision",
+                         "type":"bool",
+                         "value":false
+                        }]
+                }],
          "tilewidth":96
         }],
  "tilewidth":96,

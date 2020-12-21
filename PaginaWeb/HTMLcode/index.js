@@ -1,4 +1,4 @@
-canvas.height = innerHeight //canvas no esta definido
+//canvas.height = innerHeight //canvas no esta definido
 class Player {
   constructor(x,y,radius,color){
     this.x = x

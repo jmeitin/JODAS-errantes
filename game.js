@@ -81,8 +81,7 @@ export default class Game extends Phaser.Scene {
     
 
     this.player = new Player(this, this.playerX, this.playerY, "guy", this.cursorKeys, this.playerSpeed, this.inventario);  
-    this.physics.add.collider(this.player, this.colisionLayer);
-    this.colisionLayer.setCollisionBetween(0,9999);
+    this.colisionLayer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.policia = new Policia(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX, this.controlPolicialX); 
  
