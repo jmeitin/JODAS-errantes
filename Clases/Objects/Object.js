@@ -1,6 +1,6 @@
-import gameObject from "../gameObject.js";
+import gameobject from "../gameobject.js";
 
-export default class Object extends gameObject{
+export default class object extends gameobject{
     constructor(scene, x, y, type, peso){
         super(scene, x, y, type);
 		this.x = x;

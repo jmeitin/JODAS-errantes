@@ -1,6 +1,6 @@
-import gameObject from "../Clases/gameObject.js";
+import gameobject from "../Clases/gameobject.js";
 
-export default class Person extends gameObject{
+export default class person extends gameobject{
 
     constructor(scene, x, y, type, speed){
 
@@ -14,34 +14,34 @@ export default class Person extends gameObject{
 	}
 
     //function
-    moveLeft(){
+    move_left(){
         this.x -= this.speed;
     }
 
-    moveRight(){
+    move_right(){
         this.x+= this.speed;
     }
 
-    moveUp(){
+    move_up(){
         this.y-= this.speed;
     }
 
-    moveDown(){
+    move_down(){
         this.y+= this.speed;
     }
 
-    getX(){
+    get_x(){
         return this.x;
     }
 
-    getY(){
+    get_y(){
         return this.y;
     }
 
-    multiplyVelocity (percentage){
+    multiply_velocity (percentage){
         this.speed = this.speed + this.speed*percentage/100;
     }
-    setSpeed (speed){
+    set_speed (speed){
         this.speed = speed;
     }
 }

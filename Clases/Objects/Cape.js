@@ -1,6 +1,6 @@
-import Object from './Object.js';
+import object from './object.js';
 
-export default class Cape extends Object{
+export default class cape extends object{
     constructor(scene, x, y, type, peso){
         super(scene, x, y, type, peso);
     }

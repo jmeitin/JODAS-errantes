@@ -1,6 +1,6 @@
-import Sprites from "./sprites.js";
+import sprites from "./sprites.js";
 
-export default class gameObject extends Sprites{
+export default class gameobject extends sprites{
     constructor(scene, x, y, type){
 
         super(scene, x, y, type);

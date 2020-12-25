@@ -1,4 +1,4 @@
-export default class Sprites extends Phaser.GameObjects.Sprite{
+export default class sprites extends Phaser.GameObjects.Sprite{
 	constructor(scene, x, y, type){
 		super(scene, x, y, type);
 		scene.add.existing(this);

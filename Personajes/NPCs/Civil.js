@@ -1,6 +1,6 @@
-import Persona from "../Person.js"
+import person from "../person.js"
 
-export default class Civil extends Persona{
+export default class civil extends person{
     constructor(scene, x, y, type, speed){
         super(scene, x, y, type, speed);       
     }

@@ -1,14 +1,14 @@
-import Civil from "./Personajes/NPCs/Civil.js";
-import Player from "./Personajes/Player.js";
-import Policia from "./Personajes/NPCs/Policia.js";
+import Civil from "./Personajes/npcs/civil.js";
+import player from "./Personajes/player.js";
+import policia from "./Personajes/npcs/policia.js";
 
 
 export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
 
-    this.contenedorInventario;//para tener todas las imagenes del inventario en un container
-    this.activosInventario = [];//guarda que objetos del inventario son activos y cuales pasivos
+    this.contenedor_inventario;//para tener todas las imagenes del inventario en un container
+    this.activos_inventario = [];//guarda que objetos del inventario son activos y cuales pasivos
   }
   
   init (data){
@@ -20,10 +20,10 @@ export default class Game extends Phaser.Scene {
     this.load.image('guy', '/Imgs/jugador1.png');
     this.load.image('cop', '/Imgs/poli.png');
     this.load.image('civil', '/Imgs/viandante0.png');
-    this.load.tilemapTiledJSON('mapajuego','/Mapas/mapajuego.json');
-    this.load.image('tilemapjuego', '/Mapas/tilemapjuego.png');
+    this.load.tilemapTiledJSON('mapajuego','/mapas/mapajuego.json');
+    this.load.image('tilemapjuego', '/mapas/tilemapjuego.png');
     this.load.audio('music', ['/music/game.mp3', '/music/game.ogg']);
-    this.load.image('Inventory', '/Imgs/Inventario/InventorySlot.png');
+    this.load.image('inventory', '/Imgs/inventario/inventory_slot.png');
     
   }
 
@@ -34,39 +34,39 @@ export default class Game extends Phaser.Scene {
       tileHeight: 96
     });
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
-    this.backgroundLayer = this.map.createStaticLayer('capa1', tileset1);
-    this.colisionLayer = this.map.createStaticLayer('colision',tileset1);
+    this.background_layer = this.map.createStaticLayer('capa1', tileset1);
+    this.colision_layer = this.map.createStaticLayer('colision',tileset1);
 
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(var i = 0; i < this.inventario.length; i++){
-      if(this.inventario[i] == 'bombaPlus' || this.inventario[i] == 'bombaMinus' || this.inventario[i] == 'capa' || this.inventario[i] == 'zapatos')//pasivos
+      if(this.inventario[i] == 'bomba_plus' || this.inventario[i] == 'bomba_minus' || this.inventario[i] == 'capa' || this.inventario[i] == 'zapatos')//pasivos
       {
-        this.activosInventario.push(false);
+        this.activos_inventario.push(false);
       }
       else if(this.inventario[i] == 'sombrero' || this.inventario[i] == 'pistola'){
-        this.activosInventario.push(true);
+        this.activos_inventario.push(true);
       }
     }
 
     //VARIABLES DE JUEGO
-    this.playerX = 300;
-    this.playerY = 900;
-    this.playerSpeed = 5;
-    this.controlPolicialX = 400;
-    this.campoVisionX = 800; //A DEFINIR
-    this.campoAuditivoX = 1200;  //A DEFINIR
+    this.player_x = 300;
+    this.player_y = 900;
+    this.player_speed = 5;
+    this.control_policial_x = 400;
+    this.campo_vision_x = 800; //A DEFINIR
+    this.campo_auditivo_x = 1200;  //A DEFINIR
 
     // MODIFICAMOS LOS CAMPOS DE VISION EN BASE A LO OBJETOS DEL INVENTARIO
-    if (this.inventario.includes('bombaPlus')){ //AUMENTA EL RANGO DE VISION DEL POLICIA
-      this.campoVisionX += this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
+    if (this.inventario.includes('bomba_plus')){ //AUMENTA EL RANGO DE VISION DEL POLICIA
+      this.campo_vision_x += this.campo_vision_x * 5/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MEJOR");
     }
-    if (this.inventario.includes('bombaMinus')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
-      this.campoVisionX -= this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
+    if (this.inventario.includes('bomba_minus')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
+      this.campo_vision_x -= this.campo_vision_x * 5/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MENOS"); //---
     }
     if (this.inventario.includes('capa')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
-      this.campoVisionX -= this.campoVisionX * 5/100; //--------------------------------------------------A DEFINIR
+      this.campo_vision_x -= this.campo_vision_x * 5/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MENOS"); //---
     }
 
@@ -84,15 +84,15 @@ export default class Game extends Phaser.Scene {
     music.play();   
     
     //Keyboard inputs
-    this.cursorKeys = this.input.keyboard.createCursorKeys();    
+    this.cursor_keys = this.input.keyboard.createCursorKeys();    
 
-    this.funcionBotones();
+    this.funcion_botones();
     
 
-    this.player = new Player(this, this.playerX, this.playerY, "guy", this.cursorKeys, this.playerSpeed, this.inventario);  
-    this.colisionLayer.setCollisionByProperty({colision: true});
+    this.player = new player(this, this.player_x, this.player_y, "guy", this.cursor_keys, this.player_speed, this.inventario);  
+    this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.policia = new Policia(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX, this.controlPolicialX); 
+    this.policia = new policia(this, 400, 500, 1, 'cop', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
  
     this.cameras.main.startFollow(this.player);    
 
@@ -114,17 +114,17 @@ export default class Game extends Phaser.Scene {
     }
 
     //CREAMOS INVENTARIO
-    this.creaInventario();
+    this.crea_inventario();
 
   }
 
   update(time, delta) {
     //console.debug(this.civiles.length);
 
-    this.player.movementManager();
+    this.player.movement_manager();
 
-    this.jugadorX = this.player.getX(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
-    this.jugadorY = this.player.getY();
+    this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
+    this.jugador_y = this.player.get_y();
 
     if(this.player.pausa()) this.scene.pause();
     else this.scene.resume(); // no vuelve a cargar la escena
@@ -138,7 +138,7 @@ export default class Game extends Phaser.Scene {
 
 
     //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-    if (this.physics.overlap(this.player, this.policia.campoAuditivo)){
+    if (this.physics.overlap(this.player, this.policia.campo_auditivo_x)){
 
       this.civiles.forEach((civil) =>{
 
@@ -146,26 +146,26 @@ export default class Game extends Phaser.Scene {
         if (this.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA
          
           //this.policia.sospechar(true);    
-          this.policia.calcularDir(this.jugadorX, this.jugadorY);      
+          this.policia.calcularDir(this.jugador_x, this.jugador_y);      
 
           console.log("Quien anda ahi?!");
         }
 
       })
 
-      if (this.policia.getSospecha()){ //si sospecho, me muevo hacia el
-        this.policia.calcularDir(this.jugadorX, this.jugadorY);
+      if (this.policia.get_sospecha()){ //si sospecho, me muevo hacia el
+        this.policia.calcular_dir(this.jugador_x, this.jugador_y);
       }
 
 
       //PLAYER ESTA DENTRO DEL RANGO DE VISION
-      if(this.physics.overlap(this.player, this.policia.campoVision)) { 
+      if(this.physics.overlap(this.player, this.policia.campo_vision)) { 
         this.policia.sospechar(true);//
 
         
 
         //CONTROL POLICIAL
-        if(this.physics.overlap(this.player, this.policia.controlPolicial)){
+        if(this.physics.overlap(this.player,  this.policia.control_policial)){
 
           // SI POLICIA CHOCA CON PLAYER
           if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
@@ -175,17 +175,17 @@ export default class Game extends Phaser.Scene {
              this.player.setSpeed(0); //el player ya no se puede mover
              this.policia.setSpeed(0);
 
-             if (this.player.hasGun()) {
+             if (this.player.has_gun()) {
               console.log ("Pues me SUICIDIO");
              }   
           }
   
           else{ //ve a player ==> AQUI IMPORTA LA CAPA / SOMBRERO
-            this.policia.calcularDir(this.jugadorX, this.jugadorY); //se mueve a investigar
+            this.policia.calcular_dir(this.jugador_x, this.jugador_y); //se mueve a investigar
            
           
-            if (this.player.esUnIndividuoSospechoso() && !this.policia.getDescubierto()){ //si le veo malas pintas
-              this.policia.descurbrirAPlayer(true); //le descubri
+            if (this.player.es_un_individuo_sospechoso() && !this.policia.get_descubierto()){ //si le veo malas pintas
+              this.policia.descurbrir_player(true); //le descubri
               console.log('ES MALA GENTE. A POR EL');
             }                  
   
@@ -198,7 +198,7 @@ export default class Game extends Phaser.Scene {
       } //rango de vision
 
       //si sospechaba de el, pero no es un individuo sospechoso ==> dejo de sospechar
-      else if (this.policia.getSospecha() == true){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
+      else if (this.policia.get_sospecha() == true){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
         this.policia.sospechar(false);
           //console.log('Prosiga buen señor');
      } //campo auditivo
@@ -220,57 +220,57 @@ export default class Game extends Phaser.Scene {
     
   }
 
-  creaInventario(){
+  crea_inventario(){
       this.contenedorInventario = this.add.container(this.player.x - 600, this.player.y - 300);
       console.log(this.inventario.length);
-      var colocaMeEn = 0;
+      this.coloca_me_en = 0;
 
       for(var i = 0; i < this.inventario.length; i++){
-        this.contenedorInventario.add(this.add.image(colocaMeEn, 0, 'Inventory'));
-        this.contenedorInventario.add(this.add.image(colocaMeEn, 0, this.inventario[i]).setScale(0.3));
+        this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, 'Inventory'));
+        this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, this.inventario[i]).setScale(0.3));
         
-        colocaMeEn += 100;
+        this.coloca_me_en += 100;
 
       }
 
   }
 
-  funcionBotones(){
-    let lugarInventario;//el hueco del inventario que hemos pulado
+  funcion_botones(){
+    this.lugar_inventario;//el hueco del inventario que hemos pulado
 
     window.addEventListener('keypress', (event)=>{
       if(event.key === '1'){
-        lugarInventario = 0;//debido a la posicion de las teclas debe ser 1 menos en todos menos el 0, que sera pos 9
+        this.lugar_inventario = 0;//debido a la posicion de las teclas debe ser 1 menos en todos menos el 0, que sera pos 9
       }
       else if(event.key === '2'){
-        lugarInventario = 1;
+        this.lugar_inventario = 1;
       }
       else if(event.key === '3'){
-        lugarInventario = 2;
+        this.lugar_inventario = 2;
       }
       else if(event.key === '4'){
-        lugarInventario = 3;
+        this.lugar_inventario = 3;
       }
       else if(event.key === '5'){
-        lugarInventario = 4;
+        this.lugar_inventario = 4;
       }
       else if(event.key === '6'){
-        lugarInventario = 5;
+        this.lugar_inventario = 5;
       }
       else if(event.key === '7'){
-        lugarInventario = 6;
+        this.lugar_inventario = 6;
       }
       else if(event.key === '8'){
-        lugarInventario = 7;
+        this.lugar_inventario = 7;
       }
       else if(event.key === '9'){
-        lugarInventario = 8;
+        this.lugar_inventario = 8;
       }
       else if(event.key === '0'){
-        lugarInventario = 9;
+        this.lugar_inventario = 9;
       }
 
-      if(this.activosInventario[lugarInventario] == true){
+      if(this.activos_inventario[this.lugar_inventario] == true){
         //accion de objeto...
         console.log("activo");
       }

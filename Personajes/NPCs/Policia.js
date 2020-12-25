@@ -1,58 +1,58 @@
-import Sprites from "../../Clases/Sprites.js";
+import sprites from "../../Clases/sprites.js";
 //"../../Clases/Sprites.js"
 
-export default class Policia extends Phaser.GameObjects.Container {
+export default class policia extends Phaser.GameObjects.Container {
 
     //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
-    constructor(scene, x, y, speed,  image, campoVisionX, campoAuditivoX, controlPolicialX, children) {
+    constructor(scene, x, y, speed,  image, campo_vision_x, campo_auditivo_x, control_policial_x, children) {
         super(scene, x, y, children);
         // ...
         this.x = x;
         this.y = y;
         this.speed = speed;
-        this.campoVisionX = campoVisionX;
-        this.campoAuditivoX = campoAuditivoX;
-        this.controlPolicialX = controlPolicialX;
+        this.campo_vision_x = campo_vision_x;
+        this.campo_auditivo_x = campo_auditivo_x;
+        this.control_policial_x = control_policial_x;
 
 
        this.scene.add.existing(this);
        this.scene.physics.add.existing(this); 
 
        //POLICIA ==> SPRITE
-       this.sprite = new Sprites(this.scene, 0, 0, image);
+       this.sprite = new sprites(this.scene, 0, 0, image);
     
 
        //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
-       this.controlPolicial = scene.add.zone(0, 0);
-       this.controlPolicial.setSize(this.controlPolicialX, this.controlPolicialX);
-       this.scene.physics.world.enable(this.controlPolicial);
-       this.controlPolicial.body.setAllowGravity(false);
-       this.controlPolicial.body.moves = false;
+       this.control_policial = scene.add.zone(0, 0);
+       this.control_policial.setSize( this.control_policial_x,  this.control_policial_x);
+       this.scene.physics.world.enable( this.control_policial);
+       this.control_policial.body.setAllowGravity(false);
+       this.control_policial.body.moves = false;
        
        //POLICIA ==> TRIGGER ==> CAMPO DE VISION
-       this.campoVision = scene.add.zone(0, 0);
-       this.campoVision.setSize(this.campoVisionX, this.campoVisionX);
-       this.scene.physics.world.enable(this.campoVision);
-       this.campoVision.body.setAllowGravity(false);
-       this.campoVision.body.moves = false;//no queremos moverlo con el poli
+       this.campo_vision = scene.add.zone(0, 0);
+       this.campo_vision.setSize(this.campo_vision_x, this.campo_vision_x);
+       this.scene.physics.world.enable(this.campo_vision);
+       this.campo_vision.body.setAllowGravity(false);
+       this.campo_vision.body.moves = false;//no queremos moverlo con el poli
 
        //POLICIA ==> TRIGGER ==> CAMPO AUDITIVO
-       this.campoAuditivo = scene.add.zone(0, 0);
-       this.campoAuditivo.setSize(this.campoAuditivoX, this.campoAuditivoX);
-       this.scene.physics.world.enable(this.campoAuditivo);
-       this.campoAuditivo.body.setAllowGravity(false);
-       this.campoAuditivo.body.moves = false;//no queremos moverlo con el poli
+       this.campo_auditivo = scene.add.zone(0, 0);
+       this.campo_auditivo.setSize(this.campo_auditivo_x, this.campo_auditivo_x);
+       this.scene.physics.world.enable(this.campo_auditivo);
+       this.campo_auditivo.body.setAllowGravity(false);
+       this.campo_auditivo.body.moves = false;//no queremos moverlo con el poli
        
 
        //EL CONTOINER ES PADRE DEN LOS CAMPOS DE DETECCION Y SIMILARES
        this.add(this.sprite);
-       this.add(this.campoVision);
-       this.add(this.campoAuditivo);
-       this.add(this.controlPolicial);
+       this.add(this.campo_vision);
+       this.add(this.campo_auditivo);
+       this.add( this.control_policial);
 
 
-       this.dirX = this.getRandomInt(-1, 2); //DIRECCION RANDOM
-       this.dirY = this.getRandomInt(-1, 2);
+       this.dir_x = this.get_random_int(-1, 2); //DIRECCION RANDOM
+       this.dir_y = this.get_random_int(-1, 2);
 
         
 
@@ -73,45 +73,45 @@ export default class Policia extends Phaser.GameObjects.Container {
     }   
 
     move(){
-       if (this.dirX != 0 && this.dirY !=0){ //DIAGONAL
-           this.moveX();
-           this.moveY();
+       if (this.dir_x != 0 && this.dir_y !=0){ //DIAGONAL
+           this.move_x();
+           this.mover_y();
        }
 
-       else if (this.dirX == 0 && this.dirY !=0){ //VERTICAL
-           this.moveY();
+       else if (this.dir_x == 0 && this.dir_y !=0){ //VERTICAL
+           this.move_y();
        }
        
-       else if (this.dirX != 0 && this.dirY == 0){ //HORIZONTAL
-           this.moveX();
+       else if (this.dir_x != 0 && this.dir_y == 0){ //HORIZONTAL
+           this.move_x();
        }
        else{ //quieto
 
        }//
     }
 
-    moveX(){
-        this.x += this.dirX * this.speed;
+    move_x(){
+        this.x += this.dir_x * this.speed;
     }
 
-    moveY(){
-        this.y += this.dirY * this.speed;
+    move_y(){
+        this.y += this.dir_y * this.speed;
     }
 
 
     //CALCULA LA DIR EN LA QUE TIENE QUE SEGUIR AL JUGADOR
-    calcularDir(jugadorX, jugadorY){
-        this.jugadorX = jugadorX;
-        this.jugadorY = jugadorY;    
+    calcular_dir(jugador_x, jugador_y){
+        this.jugador_x = jugador_x;
+        this.jugador_y = jugador_y;    
   
         //get angle
-        this.angle = Math.atan2(this.jugadorY - this.y, this.jugadorX - this.x); //CALCULA EL ANGULO
+        this.angle = Math.atan2(this.jugador_y - this.y, this.jugador_x - this.x); //CALCULA EL ANGULO
 
-        this.dirX = Math.cos(this.angle);
-        this.dirY = Math.sin(this.angle);
+        this.dir_x = Math.cos(this.angle);
+        this.dir_y = Math.sin(this.angle);
     }
 
-    descurbrirAPlayer(descubierto){
+    descurbrir_player(descubierto){
         this.descubierto = descubierto;
         if(this.descubierto){
             this.speed = this.speed*2;
@@ -123,10 +123,10 @@ export default class Policia extends Phaser.GameObjects.Container {
     sospechar(sospechar){
         this.sospecha = sospechar;
     }
-    getSospecha (){
+    get_sospecha (){
         return this.sospecha;
     }
-    getDescubierto(){
+    get_descubierto(){
         return this.descubierto;
     }
 
@@ -134,7 +134,7 @@ export default class Policia extends Phaser.GameObjects.Container {
 
 
     // Retorna un entero aleatorio entre min (incluido) y max (excluido)
-    getRandomInt(min, max) {
+    get_random_int(min, max) {
       return Math.floor(Math.random() * (max - min)) + min;
     }
 
@@ -143,23 +143,23 @@ export default class Policia extends Phaser.GameObjects.Container {
 
 
     //persona
-    moveLeft(){
+    move_left(){
         this.x += this.speed;
     }
 
-    moveRight(){
+    move_right(){
         this.x+= this.speed;
     }
 
-    moveUp(){
+    move_up(){
         this.y-= this.speed;
     }
 
-    moveDown(){
+    move_down(){
         this.y+= this.speed;
     }
 
-    setSpeed (speed){
+    set_speed (speed){
         this.speed = speed;
     }
     

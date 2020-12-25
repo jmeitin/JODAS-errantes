@@ -1,7 +1,7 @@
 //import Game from "../Game.js";
-import Persona from "./Person.js"
+import person from "./person.js"
 
-export default class Player extends Persona{
+export default class player extends person{
     constructor(scene, x, y, type, cursorKeys, speed, inventario){
         super(scene, x, y, type, speed);
 
@@ -12,17 +12,17 @@ export default class Player extends Persona{
         this.scene.physics.add.existing(this); //
 
         this.pistola = false; 
-        this.bombaPlus = false;
-        this.bombaMinus = false;
+        this.bomba_plus = false;
+        this.bomba_minus = false;
         
 
         this.inventario = inventario;
        
         //OBJETOS
-        if (this.inventario.includes('zapatos')) this.multiplyVelocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
+        if (this.inventario.includes('zapatos')) this.multiply_velocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
         if (this.inventario.includes('pistola')) this.pistola = true; //lleva pistola
-        if (this.inventario.includes('bombaPlus')) this.bombaPlus = true;
-        if (this.inventario.includes('bombaMinus')) this.bombaMinus = true;
+        if (this.inventario.includes('bomba_plus')) this.bomba_plus = true;
+        if (this.inventario.includes('bomba_minus')) this.bomba_minus = true;
         
     }
 
@@ -37,30 +37,30 @@ export default class Player extends Persona{
         }
     }
     
-    movementManager(){        
+    movement_manager(){        
         if(this.cursorkeys.right.isDown){
-            this.moveRight();
+            this.move_right();
         }
         else if(this.cursorkeys.left.isDown){
-            this.moveLeft();
+            this.move_left();
         }
         
         if(this.cursorkeys.up.isDown){
-            this.moveUp();
+            this.move_up();
         }
         else if(this.cursorkeys.down.isDown){
-            this.moveDown();
+            this.move_down();
         }
         
     }
 
-    hasGun(){ //LLEVA PISTOLA?
+    has_gun(){ //LLEVA PISTOLA?
         return this.pistola;
     }
 
-    esUnIndividuoSospechoso(){
+    es_un_un_individuo_sospechoso(){
         this.maleante = false;
-        if (this.bombaPlus && !this.bombaMinus || this.bombaPlus && this.pistola) this.maleante = true; // solo sombrero
+        if (this.bomba_plus && !this.bomba_minus || this.bomba_plus && this.pistola) this.maleante = true; // solo sombrero
         //capa ----------------------------------------------------------------------------------------------------
         return this.maleante;
     }

@@ -1,5 +1,5 @@
 //canvas.height = innerHeight //canvas no esta definido
-class Player {
+class player {
   constructor(x,y,radius,color){
     this.x = x
     this.y = y
@@ -14,5 +14,5 @@ class Player {
     c.fill()
   }
 }
-const player = new Player(100,100,30, 'blue')
+const player = new player(100,100,30, 'blue')
 //player.draw()
