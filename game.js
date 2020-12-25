@@ -71,7 +71,16 @@ export default class Game extends Phaser.Scene {
     }
 
     //MUSICA
-    let music=this.sound.add('music', {loop: true});
+    const config = {
+      mute: false,
+      volume: 0.2,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0
+  }; 
+    let music=this.sound.add('music', config);
     music.play();   
     
     //Keyboard inputs

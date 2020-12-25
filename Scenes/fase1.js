@@ -52,10 +52,24 @@ export default class fase1 extends Phaser.Scene {
 
         //boton para continuar
         this.load.image('botonNext', '../Imgs/Botones/FlechaNext.png');
+        this.load.audio('soundbutton', '../sounds/seleccion.mp3');
+        this.load.audio('soundbutton2', '../sounds/maxobjetos.mp3');
+        this.load.audio('soundbutton3', '../sounds/continue.mp3');
     } 
 
     create(){
-
+        const config = {
+            mute: false,
+            volume: 0.2,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false,
+            delay: 0
+        }; 
+          let sound1=this.sound.add('soundbutton', config);
+          let sound2=this.sound.add('soundbutton2', config);
+          let sound3=this.sound.add('soundbutton3', config);
         var fondoScale = 7;//tamaño de los tiles de madera de fondo
 
         //dividimos entre fondoScale para compensar el tamaño incrementado de los tiles que usamos de fondo y que ocupe el tamaño de la ventana
@@ -82,7 +96,7 @@ export default class fase1 extends Phaser.Scene {
         });
 
         botonNext.on("pointerdown", ()=>{
-            
+            sound3.play();
             this.scene.start('main', {inventario:this.inventario}); //fase 2
 
         });
