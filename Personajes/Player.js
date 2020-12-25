@@ -1,11 +1,10 @@
-//import Game from "../Game.js";
 import person from "./person.js"
 
 export default class player extends person{
-    constructor(scene, x, y, type, cursorKeys, speed, inventario){
+    constructor(scene, x, y, type, cursorkeys, speed, inventario){
         super(scene, x, y, type, speed);
 
-        this.cursorkeys = cursorKeys;  
+        this.cursorkeys = cursorkeys;  
 
         this.botonpausa = this.scene.input.keyboard.addKey('P');
         this.pausabool = false;
@@ -58,7 +57,7 @@ export default class player extends person{
         return this.pistola;
     }
 
-    es_un_un_individuo_sospechoso(){
+    es_un_individuo_sospechoso(){
         this.maleante = false;
         if (this.bomba_plus && !this.bomba_minus || this.bomba_plus && this.pistola) this.maleante = true; // solo sombrero
         //capa ----------------------------------------------------------------------------------------------------

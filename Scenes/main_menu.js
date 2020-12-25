@@ -1,16 +1,16 @@
 export default class main_menu extends Phaser.Scene {
     constructor(){
         super({
-            key: 'MainMenu'
+            key: 'main_menu'
         })
     }
 
     preload(){
 
-        this.load.image('botComenzar', '../imgs/botones/comenzar.png');
-        this.load.image('botCreditos', '../imgs/botones/creditos.png');
-        this.load.image('botSonido', '../imgs/botones/sonido.png');
-        this.load.image('fondoMenu', '../imgs/fondos/fondoMenuPpal.png');
+        this.load.image('bot_comenzar', '../imgs/botones/comenzar.png');
+        this.load.image('bot_creditos', '../imgs/botones/creditos.png');
+        this.load.image('bot_sonido', '../imgs/botones/sonido.png');
+        this.load.image('fondo_menu', '../imgs/fondos/fondo_menu_ppal.png');
         this.load.audio('sound', '../music/fase1.mp3');
         this.load.audio('soundbutton', '../sounds/continue.mp3');
     }
@@ -30,11 +30,11 @@ export default class main_menu extends Phaser.Scene {
           music.play();
         // this.cameras.main.setBounds(0, 0, 4000, 4000);
         // this.physics.world.setBounds(0, 0, 4000, 4000); 
-        this.add.image(700, 400, 'fondoMenu').setScale(2);
+        this.add.image(700, 400, 'fondo_menu').setScale(2);
 
-        var boton_comenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"botComenzar");
-        var boton_sonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"botSonido").setScale(0.8);
-        var boton_creditos = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 200,"botCreditos").setScale(0.8);
+        var boton_comenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bot_comenzar");
+        var boton_sonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"bot_sonido").setScale(0.8);
+        var boton_creditos = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 200,"bot_creditos").setScale(0.8);
         
         boton_comenzar.setInteractive();
         boton_sonido.setInteractive();
@@ -51,7 +51,7 @@ export default class main_menu extends Phaser.Scene {
 
         boton_comenzar.on("pointerdown", ()=>{
             sound.play();
-            var theOtherScene=this.scene.start('fase1');
+            var the_other_scene=this.scene.start('fase1');
             music.pause();
         });
 

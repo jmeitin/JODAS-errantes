@@ -1,6 +1,6 @@
-import Civil from "./Personajes/npcs/civil.js";
-import player from "./Personajes/player.js";
-import policia from "./Personajes/npcs/policia.js";
+import Civil from "./personajes/npcs/civil.js";
+import player from "./personajes/player.js";
+import policia from "./personajes/npcs/policia.js";
 
 
 export default class Game extends Phaser.Scene {
@@ -17,13 +17,13 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {   
-    this.load.image('guy', '/Imgs/jugador1.png');
-    this.load.image('cop', '/Imgs/poli.png');
-    this.load.image('civil', '/Imgs/viandante0.png');
+    this.load.image('guy', '/imgs/jugador1.png');
+    this.load.image('cop', '/imgs/poli.png');
+    this.load.image('civil', '/imgs/viandante0.png');
     this.load.tilemapTiledJSON('mapajuego','/mapas/mapajuego.json');
     this.load.image('tilemapjuego', '/mapas/tilemapjuego.png');
     this.load.audio('music', ['/music/game.mp3', '/music/game.ogg']);
-    this.load.image('inventory', '/Imgs/inventario/inventory_slot.png');
+    this.load.image('inventory', '/imgs/inventario/inventory_slot.png');
     
   }
 
@@ -146,7 +146,7 @@ export default class Game extends Phaser.Scene {
         if (this.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA
          
           //this.policia.sospechar(true);    
-          this.policia.calcularDir(this.jugador_x, this.jugador_y);      
+          this.policia.calcular_dir(this.jugador_x, this.jugador_y);      
 
           console.log("Quien anda ahi?!");
         }
@@ -215,18 +215,18 @@ export default class Game extends Phaser.Scene {
     }) 
 
     //modificamos posicion de inventario
-    this.contenedorInventario.x = this.player.x - 600;
-    this.contenedorInventario.y = this.player.y - 300;
+    this.contenedor_inventario.x = this.player.x - 600;
+    this.contenedor_inventario.y = this.player.y - 300;
     
   }
 
   crea_inventario(){
-      this.contenedorInventario = this.add.container(this.player.x - 600, this.player.y - 300);
+      this.contenedor_inventario = this.add.container(this.player.x - 600, this.player.y - 300);
       console.log(this.inventario.length);
       this.coloca_me_en = 0;
 
       for(var i = 0; i < this.inventario.length; i++){
-        this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, 'Inventory'));
+        this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, 'inventory'));
         this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, this.inventario[i]).setScale(0.3));
         
         this.coloca_me_en += 100;

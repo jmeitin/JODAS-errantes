@@ -1,4 +1,4 @@
-import gameobject from "../Clases/gameobject.js";
+import gameobject from "../clases/gameobject.js";
 
 export default class person extends gameobject{
 
@@ -8,9 +8,6 @@ export default class person extends gameobject{
 		this.x = x;
         this.y = y;
         this.speed = speed;
-
-      //hola
-
 	}
 
     //function

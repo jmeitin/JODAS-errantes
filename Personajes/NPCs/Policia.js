@@ -1,5 +1,4 @@
-import sprites from "../../Clases/sprites.js";
-//"../../Clases/Sprites.js"
+import sprites from "../../clases/sprites.js";
 
 export default class policia extends Phaser.GameObjects.Container {
 
@@ -48,7 +47,7 @@ export default class policia extends Phaser.GameObjects.Container {
        this.add(this.sprite);
        this.add(this.campo_vision);
        this.add(this.campo_auditivo);
-       this.add( this.control_policial);
+       this.add(this.control_policial);
 
 
        this.dir_x = this.get_random_int(-1, 2); //DIRECCION RANDOM
@@ -75,7 +74,7 @@ export default class policia extends Phaser.GameObjects.Container {
     move(){
        if (this.dir_x != 0 && this.dir_y !=0){ //DIAGONAL
            this.move_x();
-           this.mover_y();
+           this.move_y();
        }
 
        else if (this.dir_x == 0 && this.dir_y !=0){ //VERTICAL

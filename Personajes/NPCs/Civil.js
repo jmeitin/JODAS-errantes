@@ -6,6 +6,6 @@ export default class civil extends person{
     }
 
     update(){
-        this.moveUp();
+        this.move_up();
     }
 }

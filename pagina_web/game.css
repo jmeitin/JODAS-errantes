@@ -28,7 +28,7 @@ h3 {
   color:whitesmoke;
 }
 body {
-	background-image: url("HTMLimgs/Fondo.png");
+	background-image: url("html_imgs/fondo.png");
 	background-size: 105%;
 	background-repeat: no-repeat;
 	background-position: 100% 30%;
@@ -97,75 +97,75 @@ ul#rrss li{
 #menu0{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/juego.png");
+	background-image: url("html_imgs/juego.png");
 }
 #menu0:hover{
-	background-image: url("HTMLimgs/juegoh.png");
+	background-image: url("html_imgs/juegoh.png");
 }
 #menu1{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/historia.png");
+	background-image: url("html_imgs/historia.png");
 }
 #menu10{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/narrativa.png");
+	background-image: url("html_imgs/narrativa.png");
 }
 #menu10:hover{
-	background-image: url("HTMLimgs/narrativah.png");
+	background-image: url("html_imgs/narrativah.png");
 }
 #menu11{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/personajes.png");
+	background-image: url("html_imgs/personajes.png");
 }
 #menu11:hover{
-	background-image: url("HTMLimgs/personajesh.png");
+	background-image: url("html_imgs/personajesh.png");
 }
 #menu12{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/esptie.png");
+	background-image: url("html_imgs/esptie.png");
 }
 #menu12:hover{
-	background-image: url("HTMLimgs/esptieh.png");
+	background-image: url("html_imgs/esptieh.png");
 }
 #menu2{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/acerca.png");
+	background-image: url("html_imgs/acerca.png");
 }
 #menu20{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/ajuego.png");
+	background-image: url("html_imgs/ajuego.png");
 }
 #menu20:hover{
-	background-image: url("HTMLimgs/ajuegoh.png");
+	background-image: url("html_imgs/ajuegoh.png");
 }
 #menu21{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/jodas.png");
+	background-image: url("html_imgs/jodas.png");
 }
 #menu21:hover{
-	background-image: url("HTMLimgs/jodash.png");
+	background-image: url("html_imgs/jodash.png");
 }
 #menu22{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/trabajo.png");
+	background-image: url("html_imgs/trabajo.png");
 }
 #menu22:hover{
-	background-image: url("HTMLimgs/trabajoh.png");
+	background-image: url("html_imgs/trabajoh.png");
 }
 #menu3{
 	width: 300px;
 	height: 90px;
-	background-image: url("HTMLimgs/redes.png");
+	background-image: url("html_imgs/redes.png");
 }
 #menu3:hover{
-	background-image: url("HTMLimgs/redesh.png");
+	background-image: url("html_imgs/redesh.png");
 }
 

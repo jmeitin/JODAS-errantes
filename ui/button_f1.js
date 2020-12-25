@@ -1,12 +1,12 @@
-import Sprites from "../Clases/Sprites.js";
+import sprites from "../clases/sprites.js";
 
-export default class buttonF1 extends Sprites{
-    constructor(scene, x, y, type, scale, txtbox, inventario, pesoMaximo, pesoObj){
+export default class buttonf1 extends sprites{
+    constructor(scene, x, y, type, scale, txtbox, inventario, peso_maximo, peso_obj){
         super(scene, x, y, type);         
 
         //pesos
-        this.pesoMaximo = pesoMaximo;
-        this.pesoObj = pesoObj;
+        this.peso_maximo = peso_maximo;
+        this.peso_obj = peso_obj;
 
         //otras cosas
         this.clicked = false;
@@ -20,7 +20,7 @@ export default class buttonF1 extends Sprites{
         
         this.on('pointerover', () => { 
             this.setScale(scale * 1.1);     
-            this.showTxtbox();
+            this.show_txtbox();
         });
         
         this.on('pointerout', () => { 
@@ -30,38 +30,38 @@ export default class buttonF1 extends Sprites{
         });
 
         this.on("pointerdown", ()=>{
-            var pesoAct = this.scene.devuelvePesoActual();
+            var peso_act = this.scene.devuelve_peso_actual();
 
             if(this.clicked){ 
                 this.clicked = false;
-                this.quitaInventario(pesoAct);
+                this.quita_inventario(pesoAct);
             }
             else if(!this.clicked){
-                if(pesoAct + this.pesoObj <= this.pesoMaximo){
+                if(peso_act + this.peso_obj <= this.peso_maximo){
                     this.clicked = true;                   
-                    this.añadeInventario(pesoAct);                   
+                    this.añade_inventario(peso_act);                   
                 }                
             }
             
         }) 
     }
 
-    showTxtbox(){//mismo error q añadeinventario posiblemente
+    show_txtbox(){//mismo error q añadeinventario posiblemente
         //this.scene.add.image(this.x + 100, this.y + 100, this.textbox);
         this.textbox.setVisible(true);
     }
 
-    añadeInventario(pesoAct){
+    añade_inventario(pesoact){
         this.inventario.push(this.type);
-        pesoAct += this.pesoObj; 
-        this.scene.setPesoActual(pesoAct);
+        peso_act += this.pesoObj; 
+        this.scene.setpeso_actual(peso_act);
     }
 
-    quitaInventario(pesoAct){
+    quita_inventario(pesoact){
         let pos = this.inventario.indexOf(this.type);
         this.inventario.splice(pos, 1);
-        pesoAct -= this.pesoObj;
-        this.scene.setPesoActual(pesoAct);
+        peso_act -= this.peso_Obj;
+        this.scene.setpeso_actual(peso_act);
     }
    
 }
