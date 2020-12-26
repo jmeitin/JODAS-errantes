@@ -1,9 +1,9 @@
-import Civil from "./personajes/npcs/civil.js";
+import civil from "./personajes/npcs/civil.js";
 import player from "./personajes/player.js";
 import policia from "./personajes/npcs/policia.js";
 
 
-export default class Game extends Phaser.Scene {
+export default class game extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
 
@@ -102,12 +102,12 @@ export default class Game extends Phaser.Scene {
       for(let j = 0; j < 10; j++){
         if(((i < 3 || i > 6) || (j < 3 || j > 6))){
           if(i < 2 || i > 7){
-            let civil = new Civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", Math.random() + 0.5).setScale(3);
-            this.civiles.push(civil);
+            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", Math.random() + 0.5).setScale(3);
+            this.civiles.push(civil_1);
           }
           else{
-            let civil = new Civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 1).setScale(3);
-            this.civiles.push(civil);
+            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 1).setScale(3);
+            this.civiles.push(civil_1);
           }
         }
       }
