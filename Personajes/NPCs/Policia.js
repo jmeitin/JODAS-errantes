@@ -1,4 +1,4 @@
-import sprites from "../../clases/sprites.js";
+import gameobject from "../../clases/gameobject.js";
 
 export default class policia extends Phaser.GameObjects.Container {
 
@@ -18,7 +18,7 @@ export default class policia extends Phaser.GameObjects.Container {
        this.scene.physics.add.existing(this); 
 
        //POLICIA ==> SPRITE
-       this.sprite = new sprites(this.scene, 0, 0, image);
+       this.gameobject = new gameobject(this.scene, 0, 0, image);
     
 
        //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
@@ -44,7 +44,7 @@ export default class policia extends Phaser.GameObjects.Container {
        
 
        //EL CONTOINER ES PADRE DEN LOS CAMPOS DE DETECCION Y SIMILARES
-       this.add(this.sprite);
+       this.add(this.gameobject);
        this.add(this.campo_vision);
        this.add(this.campo_auditivo);
        this.add(this.control_policial);

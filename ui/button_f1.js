@@ -1,6 +1,6 @@
-import sprites from "../clases/sprites.js";
+import gameobject from "../clases/gameobject.js";
 
-export default class buttonf1 extends sprites{
+export default class buttonf1 extends gameobject{
     constructor(scene, x, y, type, scale, txtbox, inventario, peso_maximo, peso_obj){
         super(scene, x, y, type);         
 
@@ -35,7 +35,7 @@ export default class buttonf1 extends sprites{
 
             if(this.clicked){ 
                 this.clicked = false;
-                this.quita_inventario(pesoAct);
+                this.quita_inventario(peso_act);
             }
             else if(!this.clicked){
                 if(peso_act + this.peso_obj <= this.peso_maximo){
