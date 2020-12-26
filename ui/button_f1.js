@@ -62,7 +62,7 @@ export default class buttonf1 extends gameobject{
         let pos = this.inventario.indexOf(this.type);
         this.inventario.splice(pos, 1);
         this.peso_act -= this.peso_Obj;
-        this.scene.setpeso_actual(peso_act);
+        this.scene.setpeso_actual(peso_act); //----
     }
    
 }
