@@ -8,6 +8,7 @@ export default class player extends person{
 
         this.botonpausa = this.scene.input.keyboard.addKey('P');
         this.pausabool = false;
+
         this.scene.physics.add.existing(this); //
 
         this.pistola = false; 
