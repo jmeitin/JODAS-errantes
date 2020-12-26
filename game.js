@@ -138,7 +138,7 @@ export default class game extends Phaser.Scene {
 
 
     //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-    if (this.physics.overlap(this.player, this.policia.campo_auditivo_x)){
+    if (this.physics.overlap(this.player, this.policia.campo_auditivo)){
 
       this.civiles.forEach((civil) =>{
 
