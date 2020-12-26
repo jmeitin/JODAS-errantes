@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="pagina_web/html_imgs/favicon.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=2.0" />
+    <link rel="stylesheet" href="pagina_web/game.css" />
+    <script src="clases/phaser.js"></script>
+    <style>
+      body{
+      margin: 0;
+      }
+      </style>
+      <script src = "./pagina_web/html_code/index.js">
+      </script>
+    <title>Brull</title>
+  </head>
+
+
+  <body>
+    <div id="banner"><a href="https://jmeitin.github.io/JODAS-errantes/"><img src="pagina_web/html_imgs/banner.jpg" width=936 height=150></a></div>
+	<div id="header">
+			<ul class="nav">
+				<li><a href="index.html"><div id="menu0"></div></a></li>
+				<li><a href=""><div id="menu1"></div></a>
+					<ul>
+						<li><a href="pagina_web/html_code/narrativa.html"><div id="menu10"></div></a></li>
+						<li><a href="pagina_web/html_code/personajes.html"><div id="menu11"></div></a></li>
+						<li><a href="pagina_web/html_code/espaciotiempo.html"><div id="menu12"></div></a></li>
+					</ul>
+				</li>
+				<li><a href=""><div id="menu2"></div></a>
+					<ul>
+						<li><a href="pagina_web/html_code/acercajuego.html"><div id="menu20"></div></a></li>
+						<li><a href="pagina_web/html_code/acercajodas.html"><div id="menu21"></div></a></li>
+						<li><a href="pagina_web/html_code/acercatrabajo.html"><div id="menu22"></div></a></li>
+					</ul>
+				</li>
+				<li><a href="pagina_web/html_code/redessociales.html"><div id="menu3"></div></a></li>
+			</ul>
+		</div>
+    <br><br>
+    
+    <script type="module">
+
+      import game from "./game.js";
+      import main_menu from "./scenes/main_menu.js";
+      import fase1 from "./scenes/fase1.js";
+
+      var config = {
+        type: Phaser.AUTO,
+        width: 1400,
+        height: 800,
+        pixelArt: true,
+        input: {
+          gamepad: true,
+        },
+        scale: {
+          mode: Phaser.Scale.FIT,
+          autoCenter: Phaser.Scale.CENTER_BOTH,
+        },//la primera escena de la lista de abajo es la que se muestra nada mas empezar
+        scene: [main_menu, game, fase1],
+        //scene: [Game, fase1],
+        physics: {
+          default: "arcade",
+          arcade: { gravity: { y: 0 }, debug: true}, //vemos los colliders
+        },
+      };
+      new Phaser.Game(config);
+    </script>
+    <!-- <script src="./Player.js"></script> -->
+  </body>
+</html>
