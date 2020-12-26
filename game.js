@@ -38,12 +38,12 @@ export default class game extends Phaser.Scene {
     this.colision_layer = this.map.createStaticLayer('colision',tileset1);
 
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
-    for(var i = 0; i < this.inventario.length; i++){
-      if(this.inventario[i] == 'bomba_plus' || this.inventario[i] == 'bomba_minus' || this.inventario[i] == 'capa' || this.inventario[i] == 'zapatos')//pasivos
+    for(this.i = 0; this.i < this.inventario.length; this.i++){
+      if(this.inventario[this.i] == 'bomba_plus' || this.inventario[this.i] == 'bomba_minus' || this.inventario[this.i] == 'capa' || this.inventario[this.i] == 'zapatos')//pasivos
       {
         this.activos_inventario.push(false);
       }
-      else if(this.inventario[i] == 'sombrero' || this.inventario[i] == 'pistola'){
+      else if(this.inventario[this.i] == 'sombrero' || this.inventario[this.i] == 'pistola'){
         this.activos_inventario.push(true);
       }
     }
@@ -225,9 +225,9 @@ export default class game extends Phaser.Scene {
       console.log(this.inventario.length);
       this.coloca_me_en = 0;
 
-      for(var i = 0; i < this.inventario.length; i++){
+      for(this.i = 0; this.i < this.inventario.length; this.i++){
         this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, 'inventory'));
-        this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, this.inventario[i]).setScale(0.3));
+        this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, this.inventario[this.i]).setScale(0.3));
         
         this.coloca_me_en += 100;
 

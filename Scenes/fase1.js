@@ -6,7 +6,6 @@ export default class fase1 extends Phaser.Scene {
         super({
             key: 'fase1'
         })
-        this.num_imgs = 5;
         this.peso_max = 5;
         this.peso_actual = 0;
 
@@ -17,7 +16,6 @@ export default class fase1 extends Phaser.Scene {
         this.peso_hat = 3; 
         this.peso_bomb_plus = 1; 
         this.peso_bomb_minus = 1;
-        //añadepesobomba
 
         this.inventario = [];
 
@@ -70,11 +68,11 @@ export default class fase1 extends Phaser.Scene {
           let sound1=this.sound.add('soundbutton', config);
           let sound2=this.sound.add('soundbutton2', config);
           let sound3=this.sound.add('soundbutton3', config);
-        var fondo_scale = 7;//tamaño de los tiles de madera de fondo
+        this.fondo_scale = 7;//tamaño de los tiles de madera de fondo
 
         //dividimos entre fondoScale para compensar el tamaño incrementado de los tiles que usamos de fondo y que ocupe el tamaño de la ventana
-        var fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/fondo_scale), (this.game.renderer.height/fondo_scale), 'fondo').setScale(fondo_scale);
-        fondo.setOrigin(0,0);
+        this.fondo = this.add.tileSprite(0, 0, (this.game.renderer.width/this.fondo_scale), (this.game.renderer.height/this.fondo_scale), 'fondo').setScale(this.fondo_scale);
+        this.fondo.setOrigin(0,0);
 
         this.crea_numeros();
 
@@ -83,19 +81,19 @@ export default class fase1 extends Phaser.Scene {
         this.coloca_botones();
 
         //boton para pasar de fase
-        var boton_next = this.add.image(this.game.renderer.width - 150, this.game.renderer.height - 150, 'boton_next');
-        boton_next.setInteractive();
+        this.boton_next = this.add.image(this.game.renderer.width - 150, this.game.renderer.height - 150, 'boton_next');
+        this.boton_next.setInteractive();
 
         //funcionalidad botonNext
-        boton_next.on('pointerover', () => { 
-            boton_next.setScale(1.1);            
+        this.boton_next.on('pointerover', () => { 
+            this.boton_next.setScale(1.1);            
         });
         
-        boton_next.on('pointerout', () => {
-            boton_next.setScale(1);
+        this.boton_next.on('pointerout', () => {
+            this.boton_next.setScale(1);
         });
 
-        boton_next.on("pointerdown", ()=>{
+        this.boton_next.on("pointerdown", ()=>{
             sound3.play();
             this.scene.start('main', {inventario:this.inventario}); //fase 2
 
@@ -131,29 +129,29 @@ export default class fase1 extends Phaser.Scene {
 
     coloca_botones(){
 
-        var bomba_plus = new button(this, 200, 200, 'bomba_plus', 1, this.tbomba_plus, this.inventario, this.peso_max,  this.peso_bomb_plus);
+        this.bomba_plus = new button(this, 200, 200, 'bomba_plus', 1, this.tbomba_plus, this.inventario, this.peso_max,  this.peso_bomb_plus);
 
-        var bomba_minus = new button(this, 700, 200, 'bomba_minus', 0.6, this.tbomba_minus, this.inventario, this.peso_max,  this.peso_bomb_minus).setScale(0.6);
+        this.bomba_minus = new button(this, 700, 200, 'bomba_minus', 0.6, this.tbomba_minus, this.inventario, this.peso_max,  this.peso_bomb_minus).setScale(0.6);
 
-        var sombrero = new button(this, 1200, 200, 'sombrero', 1, this.tsombrero, this.inventario, this.peso_max, this.peso_shoes);
+        this.sombrero = new button(this, 1200, 200, 'sombrero', 1, this.tsombrero, this.inventario, this.peso_max, this.peso_hat);
 
-        var pistola = new button(this, 200, 600, 'pistola', 1, this.tpistola, this.inventario, this.peso_max, this.peso_gun);
+        this.pistola = new button(this, 200, 600, 'pistola', 1, this.tpistola, this.inventario, this.peso_max, this.peso_gun);
 
-        var zapatos = new button(this, 700, 600, 'zapatos', 1, this.tzapatos, this.inventario, this.peso_max, this.peso_shoes);
+        this.zapatos = new button(this, 700, 600, 'zapatos', 1, this.tzapatos, this.inventario, this.peso_max, this.peso_shoes);
 
-        var capa = new button(this, 1200, 600, 'capa', 1, this.tcapa, this.inventario, this.peso_max, this.peso_cape );
+        this.capa = new button(this, 1200, 600, 'capa', 1, this.tcapa, this.inventario, this.peso_max, this.peso_cape );
     }
 
     crea_numeros(){
-        var contenedorNums = this.add.container(1150, 50);
+        this.contenedor_nums = this.add.container(1150, 50);
 
         this.img_peso_actual = this.add.sprite(-20, 0, 'nums',  this.peso_actual);
         this.slash = this.add.image(0, 0, 'slash');
         this.img_peso_max = this.add.sprite(20, 0, 'nums', this.peso_max);
         
-        contenedorNums.add(this.img_peso_actual);
-        contenedorNums.add(this.slash);
-        contenedorNums.add(this.img_peso_max);
+        this.contenedor_nums.add(this.img_peso_actual);
+        this.contenedor_nums.add(this.slash);
+        this.contenedor_nums.add(this.img_peso_max);
     }
 
     devuelve_peso_actual(){

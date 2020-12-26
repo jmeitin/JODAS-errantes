@@ -32,54 +32,54 @@ export default class main_menu extends Phaser.Scene {
         // this.physics.world.setBounds(0, 0, 4000, 4000); 
         this.add.image(700, 400, 'fondo_menu').setScale(2);
 
-        var boton_comenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bot_comenzar");
-        var boton_sonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"bot_sonido").setScale(0.8);
-        var boton_creditos = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 200,"bot_creditos").setScale(0.8);
+        this.boton_comenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bot_comenzar");
+        this.boton_sonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"bot_sonido").setScale(0.8);
+        this.boton_creditos = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 200,"bot_creditos").setScale(0.8);
         
-        boton_comenzar.setInteractive();
-        boton_sonido.setInteractive();
-        boton_creditos.setInteractive();
+        this.boton_comenzar.setInteractive();
+        this.boton_sonido.setInteractive();
+        this.boton_creditos.setInteractive();
 
         //funcionalidad boton comenzar
-        boton_comenzar.on('pointerover', () => { 
-            boton_comenzar.setScale(1.1);            
+        this.boton_comenzar.on('pointerover', () => { 
+            this.boton_comenzar.setScale(1.1);            
         });
         
-        boton_comenzar.on('pointerout', () => {
-            boton_comenzar.setScale(1);
+        this.boton_comenzar.on('pointerout', () => {
+            this.boton_comenzar.setScale(1);
         });
 
-        boton_comenzar.on("pointerdown", ()=>{
+        this.boton_comenzar.on("pointerdown", ()=>{
             sound.play();
-            var the_other_scene=this.scene.start('fase1');
+            this.scene.start('fase1');
             music.pause();
         });
 
         //funcionalidad boton sonido
-        boton_sonido.on('pointerover', () => { 
-            boton_sonido.setScale(0.9);            
+        this.boton_sonido.on('pointerover', () => { 
+            this.boton_sonido.setScale(0.9);            
         });
         
-        boton_sonido.on('pointerout', () => {
-            boton_sonido.setScale(0.8);
+        this.boton_sonido.on('pointerout', () => {
+            this.boton_sonido.setScale(0.8);
         });
 
-        boton_sonido.on("pointerdown", ()=>{
+        this.boton_sonido.on("pointerdown", ()=>{
             sound.play();
             console.log('joder!');
             music.pause();
         })
 
         //funcionalidad boton creditos
-        boton_creditos.on('pointerover', () => { 
-            boton_creditos.setScale(0.9);            
+        this.boton_creditos.on('pointerover', () => { 
+            this.boton_creditos.setScale(0.9);            
         });
         
-        boton_creditos.on('pointerout', () => {
-            boton_creditos.setScale(0.8);
+        this.boton_creditos.on('pointerout', () => {
+            this.boton_creditos.setScale(0.8);
         });
 
-        boton_creditos.on("pointerdown", ()=>{
+        this.boton_creditos.on("pointerdown", ()=>{
             sound.play();
             console.log('joder!');
             music.pause();

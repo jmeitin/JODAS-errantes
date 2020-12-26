@@ -31,16 +31,16 @@ export default class buttonf1 extends gameobject{
         });
 
         this.on("pointerdown", ()=>{
-            var peso_act = this.scene.devuelve_peso_actual();
+            this.peso_act = this.scene.devuelve_peso_actual();
 
             if(this.clicked){ 
                 this.clicked = false;
-                this.quita_inventario(peso_act);
+                this.quita_inventario(this.peso_act);
             }
             else if(!this.clicked){
-                if(peso_act + this.peso_obj <= this.peso_maximo){
+                if(this.peso_act + this.peso_obj <= this.peso_maximo){
                     this.clicked = true;                   
-                    this.añade_inventario(peso_act);                   
+                    this.añade_inventario(this.peso_act);                   
                 }                
             }
             
@@ -52,17 +52,19 @@ export default class buttonf1 extends gameobject{
         this.textbox.setVisible(true);
     }
 
-    añade_inventario(pesoact){
+    añade_inventario(){
         this.inventario.push(this.type);
         this.peso_act += this.peso_obj; 
         this.scene.set_peso_actual(this.peso_act);
     }
 
-    quita_inventario(pesoact){
+    quita_inventario(){
         let pos = this.inventario.indexOf(this.type);
         this.inventario.splice(pos, 1);
-        this.peso_act -= this.peso_Obj;
-        this.scene.setpeso_actual(peso_act); //----
+
+        this.peso_act -= this.peso_obj;
+        
+        this.scene.set_peso_actual(this.peso_act); 
     }
    
 }
