@@ -224,7 +224,7 @@ export default class game extends Phaser.Scene {
       this.contenedor_inventario = this.add.container(this.player.x - 600, this.player.y - 300);
       console.log(this.inventario.length);
       this.coloca_me_en = 0;
-
+      
       for(this.i = 0; this.i < this.inventario.length; this.i++){
         this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, 'inventory'));
         this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, this.inventario[this.i]).setScale(0.3));
