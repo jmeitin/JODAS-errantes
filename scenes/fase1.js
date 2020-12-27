@@ -26,33 +26,33 @@ export default class fase1 extends Phaser.Scene {
 
     preload(){
         //cargamos fondo
-        this.load.image('fondo', '../imgs/planks/plank1.png');
+        this.load.image('fondo', 'imgs/planks/plank1.png');
 
         //cargamos imagenes de objetos
-        this.load.image('bomba_minus', '../imgs/objetos/bomb_minus.png')
-        this.load.image('bomba_plus', '../imgs/objetos/bomb.png');
-        this.load.image('capa', '../imgs/objetos/capa.png');
-        this.load.image('pistola', '../imgs/objetos/shotgun1.png');
-        this.load.image('sombrero', '../imgs/objetos/sombrero.png');
-        this.load.image('zapatos', '../imgs/objetos/zapatos.png');
+        this.load.image('bomba_minus', 'imgs/objetos/bomb_minus.png')
+        this.load.image('bomba_plus', 'imgs/objetos/bomb.png');
+        this.load.image('capa', 'imgs/objetos/capa.png');
+        this.load.image('pistola', 'imgs/objetos/shotgun1.png');
+        this.load.image('sombrero', 'imgs/objetos/sombrero.png');
+        this.load.image('zapatos', 'imgs/objetos/zapatos.png');
 
         //cargamos imagenes textos de objetos
-        this.load.image('texto_bomba+', '../imgs/objetos/obj_txt/text_box_bomb+.png');
-        this.load.image('texto_bomba-', '../imgs/objetos/obj_txt/text_box_bomb-.png');
-        this.load.image('texto_capa', '../imgs/objetos/obj_txt/text_box_cape.png');
-        this.load.image('texto_pistola', '../imgs/objetos/obj_txt/text_box_gun.png');
-        this.load.image('texto_sombrero', '../imgs/objetos/obj_txt/text_box_hat.png');
-        this.load.image('texto_zapatos', '../imgs/objetos/obj_txt/text_box_shoes.png');
+        this.load.image('texto_bomba+', 'imgs/objetos/obj_txt/text_box_bomb+.png');
+        this.load.image('texto_bomba-', 'imgs/objetos/obj_txt/text_box_bomb-.png');
+        this.load.image('texto_capa', 'imgs/objetos/obj_txt/text_box_cape.png');
+        this.load.image('texto_pistola', 'imgs/objetos/obj_txt/text_box_gun.png');
+        this.load.image('texto_sombrero', 'imgs/objetos/obj_txt/text_box_hat.png');
+        this.load.image('texto_zapatos', 'imgs/objetos/obj_txt/text_box_shoes.png');
        
         //numeros
-        this.load.spritesheet('nums', '../imgs/numeros/numberssheet.png', { frameWidth: 23, frameHeight: 35});
-        this.load.image('slash', '../imgs/numeros/slash.png');
+        this.load.spritesheet('nums', 'imgs/numeros/numberssheet.png', { frameWidth: 23, frameHeight: 35});
+        this.load.image('slash', 'imgs/numeros/slash.png');
 
         //boton para continuar
-        this.load.image('boton_next', '../imgs/botones/flecha_next.png');
-        this.load.audio('soundbutton', '../sounds/seleccion.mp3');
-        this.load.audio('soundbutton2', '../sounds/maxobjetos.mp3');
-        this.load.audio('soundbutton3', '../sounds/continue.mp3');
+        this.load.image('boton_next', 'imgs/botones/flecha_next.png');
+        this.load.audio('soundbutton', 'sounds/seleccion.mp3');
+        this.load.audio('soundbutton2', 'sounds/maxobjetos.mp3');
+        this.load.audio('soundbutton3', 'sounds/continue.mp3');
     } 
 
     create(){
