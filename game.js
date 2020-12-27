@@ -17,13 +17,13 @@ export default class game extends Phaser.Scene {
   }
 
   preload() {   
-    this.load.image('guy', '/imgs/jugador1.png');
-    this.load.image('cop', '/imgs/poli.png');
-    this.load.image('civil', '/imgs/viandante0.png');
-    this.load.tilemapTiledJSON('mapajuego','/mapas/mapajuego.json');
-    this.load.image('tilemapjuego', '/mapas/tilemapjuego.png');
-    this.load.audio('music', ['/music/game.mp3', '/music/game.ogg']);
-    this.load.image('inventory', '/imgs/inventario/inventory_slot.png');
+    this.load.image('guy', 'imgs/jugador1.png');
+    this.load.image('cop', 'imgs/poli.png');
+    this.load.image('civil', 'imgs/viandante0.png');
+    this.load.tilemapTiledJSON('mapajuego','mapas/mapajuego.json');
+    this.load.image('tilemapjuego', 'mapas/tilemapjuego.png');
+    this.load.audio('music', ['music/game.mp3', 'music/game.ogg']);
+    this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
     
   }
 
