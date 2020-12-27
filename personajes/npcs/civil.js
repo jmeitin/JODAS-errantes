@@ -5,7 +5,11 @@ export default class civil extends person{
         super(scene, x, y, type, speed);       
     }
 
-    update(){
+    preUpdate(){
         this.move_up();
+    }
+
+    update(){
+        
     }
 }

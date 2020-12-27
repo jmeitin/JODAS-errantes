@@ -61,14 +61,11 @@ export default class policia extends Phaser.GameObjects.Container {
    
 
     // preUpdate(time, delta) {}
-
-    update(){
+    preUpdate(time, delta){
         this.move();
         console.log('Container');
 
         //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-    
-       
     }   
 
     move(){

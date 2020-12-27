@@ -119,7 +119,6 @@ export default class game extends Phaser.Scene {
   }
 
   update(time, delta) {
-    //console.debug(this.civiles.length);
 
     this.player.movement_manager();
 
@@ -128,13 +127,6 @@ export default class game extends Phaser.Scene {
 
     if(this.player.pausa()) this.scene.pause();
     else this.scene.resume(); // no vuelve a cargar la escena
-
-
-  
-    //this.container.moveLeft(); //NO ES UNA FUNCION
-    this.policia.update();
-
-
 
 
     //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
@@ -205,14 +197,6 @@ export default class game extends Phaser.Scene {
   
     
     }
-
-    
-
-    
-    //CIVILES
-    this.civiles.forEach((civil) =>{     
-      civil.update();
-    }) 
 
     //modificamos posicion de inventario
     this.contenedor_inventario.x = this.player.x - 600;
