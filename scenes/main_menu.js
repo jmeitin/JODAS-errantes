@@ -8,11 +8,11 @@ export default class main_menu extends Phaser.Scene {
     preload(){
 
         this.load.image('bot_comenzar', 'imgs/botones/comenzar.png');
-        this.load.image('bot_creditos', '../imgs/botones/creditos.png');
-        this.load.image('bot_sonido', '../imgs/botones/sonido.png');
-        this.load.image('fondo_menu', '../imgs/fondos/fondo_menu_ppal.png');
-        this.load.audio('sound', '../music/fase1.mp3');
-        this.load.audio('soundbutton', '../sounds/continue.mp3');
+        this.load.image('bot_creditos', 'imgs/botones/creditos.png');
+        this.load.image('bot_sonido', 'imgs/botones/sonido.png');
+        this.load.image('fondo_menu', 'imgs/fondos/fondo_menu_ppal.png');
+        this.load.audio('sound', 'music/fase1.mp3');
+        this.load.audio('soundbutton', 'sounds/continue.mp3');
     }
 
     create(){
