@@ -5,6 +5,7 @@ export default class gameobject extends Phaser.GameObjects.Sprite{
 		scene.add.existing(this);
 		scene.physics.world.enable(this);
         this.body.setCollideWorldBounds(false);
+        this.body.enable = true;
         
 		this.x = x;
         this.y = y;

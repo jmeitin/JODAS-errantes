@@ -8,24 +8,38 @@ export default class person extends gameobject{
 		this.x = x;
         this.y = y;
         this.speed = speed;
+
+        // las mayus aqui son necesarias que es cosa de phaser
+        this.body.maxVelocity.x = speed;
+        this.body.maxVelocity.y = speed;
 	}
 
     //function
     move_left(){
-        this.x -= this.speed;
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+        this.body.velocity.x -= this.speed;
     }
 
     move_right(){
-        this.x+= this.speed;
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+        this.body.velocity.x += this.speed;
     }
 
     move_up(){
-        this.y-= this.speed;
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+        this.body.velocity.y -= this.speed;
     }
 
     move_down(){
-        this.y+= this.speed;
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+        this.body.velocity.y += this.speed;
     }
+
+    stop(){this.body.velocity.x = 0; this.body.velocity.y = 0;}
 
     get_x(){
         return this.x;

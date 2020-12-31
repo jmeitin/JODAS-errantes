@@ -51,7 +51,7 @@ export default class game extends Phaser.Scene {
     //VARIABLES DE JUEGO
     this.player_x = 300;
     this.player_y = 900;
-    this.player_speed = 5;
+    this.player_speed = 100;
     this.control_policial_x = 400;
     this.campo_vision_x = 800; //A DEFINIR
     this.campo_auditivo_x = 1200;  //A DEFINIR
@@ -102,11 +102,11 @@ export default class game extends Phaser.Scene {
       for(let j = 0; j < 10; j++){
         if(((i < 3 || i > 6) || (j < 3 || j > 6))){
           if(i < 2 || i > 7){
-            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", Math.random() + 0.5).setScale(3);
+            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", 100).setScale(3);
             this.civiles.push(civil_1);
           }
           else{
-            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 1).setScale(3);
+            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 100).setScale(3);
             this.civiles.push(civil_1);
           }
         }

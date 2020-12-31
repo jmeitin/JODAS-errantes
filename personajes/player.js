@@ -8,9 +8,7 @@ export default class player extends person{
 
         this.botonpausa = this.scene.input.keyboard.addKey('P');
         this.pausabool = false;
-
-        this.scene.physics.add.existing(this); //
-
+        
         this.pistola = false; 
         this.bomba_plus = false;
         this.bomba_minus = false;
@@ -37,21 +35,20 @@ export default class player extends person{
         }
     }
     
-    movement_manager(){        
+    movement_manager(){      
         if(this.cursorkeys.right.isDown){
             this.move_right();
         }
         else if(this.cursorkeys.left.isDown){
             this.move_left();
         }
-        
         if(this.cursorkeys.up.isDown){
             this.move_up();
         }
         else if(this.cursorkeys.down.isDown){
             this.move_down();
         }
-        
+        if(this.cursorkeys.space.isDown) this.stop();
     }
 
     has_gun(){ //LLEVA PISTOLA?
