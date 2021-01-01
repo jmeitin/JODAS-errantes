@@ -17,13 +17,14 @@ export default class game extends Phaser.Scene {
   }
 
   preload() {   
-    this.load.image('guy', 'imgs/jugador1.png');
     this.load.image('cop', 'imgs/poli.png');
     this.load.image('civil', 'imgs/viandante0.png');
     this.load.tilemapTiledJSON('mapajuego','mapas/mapajuego.json');
     this.load.image('tilemapjuego', 'mapas/tilemapjuego.png');
     this.load.audio('music', ['music/game.mp3', 'music/game.ogg']);
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
+
+    this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 30, frameHeight: 30 });
     
   }
 
@@ -33,6 +34,7 @@ export default class game extends Phaser.Scene {
       tileWidth: 96,
       tileHeight: 96
     });
+
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
     this.background_layer = this.map.createStaticLayer('capa1', tileset1);
     this.colision_layer = this.map.createStaticLayer('colision',tileset1);
@@ -51,7 +53,7 @@ export default class game extends Phaser.Scene {
     //VARIABLES DE JUEGO
     this.player_x = 300;
     this.player_y = 900;
-    this.player_speed = 100;
+    this.player_speed = 200;
     this.control_policial_x = 400;
     this.campo_vision_x = 800; //A DEFINIR
     this.campo_auditivo_x = 1200;  //A DEFINIR
@@ -89,10 +91,11 @@ export default class game extends Phaser.Scene {
     this.funcion_botones();
     
 
-    this.player = new player(this, this.player_x, this.player_y, "guy", this.cursor_keys, this.player_speed, this.inventario);  
+    this.player = new player(this, this.player_x, this.player_y, 'player', this.cursor_keys, this.player_speed, this.inventario);  
     this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.policia = new policia(this, 400, 500, 1, 'cop', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
+    
  
     this.cameras.main.startFollow(this.player);    
 
@@ -140,7 +143,7 @@ export default class game extends Phaser.Scene {
           //this.policia.sospechar(true);    
           this.policia.calcular_dir(this.jugador_x, this.jugador_y);      
 
-          console.log("Quien anda ahi?!");
+         // console.log("Quien anda ahi?!");
         }
 
       })
@@ -158,14 +161,15 @@ export default class game extends Phaser.Scene {
 
         //CONTROL POLICIAL
         if(this.physics.overlap(this.player,  this.policia.control_policial)){
+          console.log('CONTROL POLICIAL');
 
           // SI POLICIA CHOCA CON PLAYER
-          if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
+          if (this.physics.overlap(this.player, this.policia)){  //MUERTO
                 //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
           
              console.log ("Usted queda ARRESTADO");
-             this.player.setSpeed(0); //el player ya no se puede mover
-             this.policia.setSpeed(0);
+             this.player.set_speed(0); //el player ya no se puede mover
+             this.policia.set_speed(0);
 
              if (this.player.has_gun()) {
               console.log ("Pues me SUICIDIO");

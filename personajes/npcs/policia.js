@@ -19,6 +19,12 @@ export default class policia extends Phaser.GameObjects.Container {
 
        //POLICIA ==> SPRITE
        this.gameobject = new gameobject(this.scene, 0, 0, image);
+
+       //this.image = image;
+
+       //this.add.sprite(0, 0, this.image);
+       //this.animations.add('down', [0,1,2], 2, true); //esta en loop
+       //this.animations.play('down');
     
 
        //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL

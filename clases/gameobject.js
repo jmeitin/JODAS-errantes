@@ -10,5 +10,7 @@ export default class gameobject extends Phaser.GameObjects.Sprite{
 		this.x = x;
         this.y = y;
 
-	}
+    }
+    
+    
 }
