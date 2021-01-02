@@ -63,6 +63,24 @@ export default class policia extends Phaser.GameObjects.Container {
 
         this.descubierto = false; // NI SOSPECHO NI HE DESCUBIERTO A PLAYER
         this.sospecha = false;
+
+
+        //ANIMACIONES
+        this.frame_rate = 4;
+        this.scene.anims.create({
+            key: 'polidown',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 21, end: 34 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
+
+          
+          this.scene.anims.create({
+            key: 'poliup',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 0, end: 18 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
     }
    
 
@@ -70,6 +88,15 @@ export default class policia extends Phaser.GameObjects.Container {
     preUpdate(time, delta){
         this.move();
         console.log('Container');
+        if (this.dir_y > 0){
+            //this.anims.play('poliup', true);//----------------------------------------------------------------------------------------------------------------------------
+
+           // this.scene.anims.play('poliup', true);
+        }
+        else{
+            //this.anims.play('polidown', true);
+        }
+        
 
         //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
     }   
