@@ -25,6 +25,7 @@ export default class game extends Phaser.Scene {
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
 
     this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
+    this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('police', 'imgs/police.png', { frameWidth: 110, frameHeight: 160 });
     
   }
@@ -39,6 +40,9 @@ export default class game extends Phaser.Scene {
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
     this.background_layer = this.map.createStaticLayer('capa1', tileset1);
     this.colision_layer = this.map.createStaticLayer('colision',tileset1);
+
+    this.sprite_player ='player';
+    if (this.inventario.includes('zapatos')) this.sprite_player = 'zapatillas';
 
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(this.i = 0; this.i < this.inventario.length; this.i++){
@@ -92,7 +96,7 @@ export default class game extends Phaser.Scene {
     this.funcion_botones();
     
 
-    this.player = new player(this, this.player_x, this.player_y, 'player', this.cursor_keys, this.player_speed, this.inventario);  
+    this.player = new player(this, this.player_x, this.player_y,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario);  
     this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.policia = new policia(this, 400, 500, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
