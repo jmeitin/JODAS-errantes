@@ -26,7 +26,7 @@ export default class player extends person{
 
 
         //ANIMACIONES
-        this.frame_rate = 3;
+        this.frame_rate = 4;
         this.scene.anims.create({
             key: 'down',
             frames: this.scene.anims.generateFrameNumbers(type, { start: 0, end: 2 }),

@@ -24,7 +24,7 @@ export default class game extends Phaser.Scene {
     this.load.audio('music', ['music/game.mp3', 'music/game.ogg']);
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
 
-    this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 30, frameHeight: 30 });
+    this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     
   }
 
