@@ -7,7 +7,6 @@ export default class player extends person{
         this.cursorkeys = cursorkeys;  
 
         this.botonpausa = this.scene.input.keyboard.addKey('P');
-        this.pausabool = false;
         
         this.pistola = false; 
         this.bomba_plus = false;
@@ -25,13 +24,9 @@ export default class player extends person{
     }
 
     pausa(){
-        if(this.botonpausa.isDown && this.pausabool === false) {
-            this.pausabool = true;
+        if(this.botonpausa.isDown) {
+            this.botonpausa.reset();
             return true;
-        }
-        else {
-            this.pausabool = false;
-            return false;
         }
     }
     

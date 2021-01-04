@@ -121,13 +121,13 @@ export default class game extends Phaser.Scene {
   update(time, delta) {
 
     this.player.movement_manager();
+    if(this.player.pausa()) {
+      this.scene.run('game_menu');
+      this.scene.pause();
+    }
 
     this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
     this.jugador_y = this.player.get_y();
-
-    if(this.player.pausa()) this.scene.pause();
-    else this.scene.resume(); // no vuelve a cargar la escena
-
 
     //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
     if (this.physics.overlap(this.player, this.policia.campo_auditivo)){
