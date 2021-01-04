@@ -30,7 +30,7 @@ export default class main_menu extends Phaser.Scene {
           music.play();
         // this.cameras.main.setBounds(0, 0, 4000, 4000);
         // this.physics.world.setBounds(0, 0, 4000, 4000); 
-        this.add.image(700, 400, 'fondo_menu').setScale(2);
+        this.add.image(710, 400, 'fondo_menu').setScale(2);
 
         this.boton_comenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bot_comenzar");
         this.boton_sonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"bot_sonido").setScale(0.8);

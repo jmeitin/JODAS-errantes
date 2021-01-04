@@ -52,6 +52,7 @@ export default class person extends gameobject{
     multiply_velocity (percentage){
         this.speed = this.speed + this.speed*percentage/100;
     }
+    
     set_speed (speed){
         this.speed = speed;
     }

@@ -48,6 +48,9 @@ export default class fase1 extends Phaser.Scene {
         this.load.spritesheet('nums', 'imgs/numeros/numberssheet.png', { frameWidth: 23, frameHeight: 35});
         this.load.image('slash', 'imgs/numeros/slash.png');
 
+        //foto de tutorial
+        this.load.image('tutorialf1', 'imgs/tutoriales/tutorialf1.png');
+
         //boton para continuar
         this.load.image('boton_next', 'imgs/botones/flecha_next.png');
         this.load.audio('soundbutton', 'sounds/seleccion.mp3');
@@ -99,6 +102,14 @@ export default class fase1 extends Phaser.Scene {
 
         });
 
+        //texto de tutorial cuando abres la pagina
+        this.tutorialText = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,'tutorialf1').setScale(2);
+        this.tutorialText.setInteractive();
+
+        this.tutorialText.on('pointerdown', () => {
+            this.tutorialText.setVisible(false);
+        });
+
         
         
     }
@@ -108,42 +119,45 @@ export default class fase1 extends Phaser.Scene {
     }
 
     crea_textos(){
-        this.tbomba_plus = this.add.image(200, 400, 'texto_bomba+').setVisible(false);
+
+        this.txtposX = 650;
+        this.txtposY = 650;
+        this.tbomba_plus = this.add.image(this.txtposX, this.txtposY, 'texto_bomba+').setVisible(false);
         this.tbomba_plus.depth = 1;
 
-        this.tbomba_minus = this.add.image(700, 400, 'texto_bomba-').setVisible(false);
+        this.tbomba_minus = this.add.image(this.txtposX, this.txtposY, 'texto_bomba-').setVisible(false);
         this.tbomba_minus.depth = 1;
 
-        this.tsombrero = this.add.image(1200, 400, 'texto_sombrero').setVisible(false);
+        this.tsombrero = this.add.image(this.txtposX, this.txtposY, 'texto_sombrero').setVisible(false);
         this.tsombrero.depth = 1;       
 
-        this.tpistola = this.add.image(200, 400, 'texto_pistola').setVisible(false);
+        this.tpistola = this.add.image(this.txtposX, this.txtposY, 'texto_pistola').setVisible(false);
         this.tpistola.depth = 1;
 
-        this.tzapatos = this.add.image(700, 400, 'texto_zapatos').setVisible(false);
+        this.tzapatos = this.add.image(this.txtposX, this.txtposY, 'texto_zapatos').setVisible(false);
         this.tzapatos.depth = 1;
 
-        this.tcapa = this.add.image(1200, 400, 'texto_capa').setVisible(false);
+        this.tcapa = this.add.image(this.txtposX, this.txtposY, 'texto_capa').setVisible(false);
         this.tcapa.depth = 1;
     }
 
     coloca_botones(){
 
-        this.bomba_plus = new button(this, 200, 200, 'bomba_plus', 1, this.tbomba_plus, this.inventario, this.peso_max,  this.peso_bomb_plus);
+        this.bomba_plus = new button(this, 400, 350, 'bomba_plus', 1, this.tbomba_plus, this.inventario, this.peso_max,  this.peso_bomb_plus);
 
-        this.bomba_minus = new button(this, 700, 200, 'bomba_minus', 0.6, this.tbomba_minus, this.inventario, this.peso_max,  this.peso_bomb_minus).setScale(0.6);
+        this.bomba_minus = new button(this, 850, 150, 'bomba_minus', 0.6, this.tbomba_minus, this.inventario, this.peso_max,  this.peso_bomb_minus).setScale(0.6);
 
-        this.sombrero = new button(this, 1200, 200, 'sombrero', 1, this.tsombrero, this.inventario, this.peso_max, this.peso_hat);
+        this.sombrero = new button(this, 600, 150, 'sombrero', 1, this.tsombrero, this.inventario, this.peso_max, this.peso_hat);
 
-        this.pistola = new button(this, 200, 600, 'pistola', 1, this.tpistola, this.inventario, this.peso_max, this.peso_gun);
+        this.pistola = new button(this, 300, 150, 'pistola', 1, this.tpistola, this.inventario, this.peso_max, this.peso_gun);
 
-        this.zapatos = new button(this, 700, 600, 'zapatos', 1, this.tzapatos, this.inventario, this.peso_max, this.peso_shoes);
+        this.zapatos = new button(this, 750, 400, 'zapatos', 1, this.tzapatos, this.inventario, this.peso_max, this.peso_shoes);
 
-        this.capa = new button(this, 1200, 600, 'capa', 1, this.tcapa, this.inventario, this.peso_max, this.peso_cape );
+        this.capa = new button(this, 1100, 250, 'capa', 1, this.tcapa, this.inventario, this.peso_max, this.peso_cape );
     }
 
     crea_numeros(){
-        this.contenedor_nums = this.add.container(1150, 50);
+        this.contenedor_nums = this.add.container(1150, 50).setScale(2);
 
         this.img_peso_actual = this.add.sprite(-20, 0, 'nums',  this.peso_actual);
         this.slash = this.add.image(0, 0, 'slash');

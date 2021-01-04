@@ -14,7 +14,6 @@ export default class buttonf1 extends gameobject{
         this.inventario = inventario;
         this.type = type;
         this.setInteractive();
-        //this.setOrigin(0,0);
         this.setScale(scale);
 
         this.textbox = txtbox;
@@ -36,19 +35,20 @@ export default class buttonf1 extends gameobject{
             if(this.clicked){ 
                 this.clicked = false;
                 this.quita_inventario(this.peso_act);
+                this.alpha = 1;
             }
             else if(!this.clicked){
                 if(this.peso_act + this.peso_obj <= this.peso_maximo){
                     this.clicked = true;                   
-                    this.añade_inventario(this.peso_act);                   
+                    this.añade_inventario(this.peso_act);    
+                    this.alpha = 0.7;               
                 }                
             }
             
         }) 
     }
 
-    show_txtbox(){//mismo error q añadeinventario posiblemente
-        //this.scene.add.image(this.x + 100, this.y + 100, this.textbox);
+    show_txtbox(){
         this.textbox.setVisible(true);
     }
 
