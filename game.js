@@ -80,8 +80,8 @@ export default class game extends Phaser.Scene {
       loop: true,
       delay: 0
   }; 
-    let music=this.sound.add('music', config);
-    music.play();   
+    this.music=this.sound.add('music', config);
+    this.music.play();   
     
     //Keyboard inputs
     this.cursor_keys = this.input.keyboard.createCursorKeys();    
@@ -261,6 +261,14 @@ export default class game extends Phaser.Scene {
     });
   }
 
+  modificar_volumen(cantidad){
+    if(this.music.volume + cantidad <= 0) this.music.volume = 0; 
+    else this.music.volume += cantidad;
+  }
+
+  parar_musica(){
+    this.music.loop = false;
+  }
 }
 
 
