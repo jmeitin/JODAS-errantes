@@ -26,7 +26,7 @@ export default class game extends Phaser.Scene {
 
     this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
-    this.load.spritesheet('police', 'imgs/police.png', { frameWidth: 110, frameHeight: 160 });
+    this.load.spritesheet('police', 'imgs/policeman.png', { frameWidth: 85, frameHeight: 135 });
     
   }
 

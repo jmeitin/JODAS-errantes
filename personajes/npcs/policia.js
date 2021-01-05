@@ -72,16 +72,16 @@ export default class policia extends gameobject {
         //ANIMACIONES
         this.frame_rate = 4;
         this.scene.anims.create({
-            key: 'polidown',
-            frames: this.scene.anims.generateFrameNumbers(image, { start: 0, end: 18 }),
+            key: 'poliup',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 0, end: 3 }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
 
          
           this.scene.anims.create({
-            key: 'poliup',
-            frames: this.scene.anims.generateFrameNumbers(image, { start: 20, end: 30 }),
+            key: 'polidown',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 12, end: 15 }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
