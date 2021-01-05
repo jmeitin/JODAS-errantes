@@ -81,10 +81,13 @@ export default class policia extends gameobject {
          
           this.scene.anims.create({
             key: 'poliup',
-            frames: this.scene.anims.generateFrameNumbers(image, { start: 21, end: 35 }),
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 20, end: 30 }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
+
+         
+  
   
 
 
@@ -93,12 +96,13 @@ export default class policia extends gameobject {
 
     // preUpdate(time, delta) {}
     preUpdate(time, delta){
+        super.preUpdate(time, delta);
         this.move();
        // console.log('Container');
         if (this.dir_y > 0){
            this.anims.play('poliup', true);//----------------------------------------------------------------------------------------------------------------------------
 
-           //this.scene.anims.play('poliup', true);
+           //this.anims.play('right', true);
         }
         else{
            this.anims.play('polidown', true);
