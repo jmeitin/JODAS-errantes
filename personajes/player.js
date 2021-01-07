@@ -13,8 +13,12 @@ export default class player extends person{
         this.bomba_plus = false;
         this.bomba_minus = false;
         
-
         this.inventario = inventario;
+
+        this.keyW = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.keyS = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
        
         //OBJETOS
         if (this.inventario.includes('zapatos')) this.multiply_velocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
@@ -36,16 +40,17 @@ export default class player extends person{
     }
     
     movement_manager(){      
-        if(this.cursorkeys.right.isDown){
+        
+        if(this.cursorkeys.right.isDown || this.keyD.isDown){
             this.move_right();
         }
-        else if(this.cursorkeys.left.isDown){
+        else if(this.cursorkeys.left.isDown || this.keyA.isDown){
             this.move_left();
         }
-        if(this.cursorkeys.up.isDown){
+        if(this.cursorkeys.up.isDown || this.keyW.isDown){
             this.move_up();
         }
-        else if(this.cursorkeys.down.isDown){
+        else if(this.cursorkeys.down.isDown || this.keyS.isDown){
             this.move_down();
         }
         if(this.cursorkeys.space.isDown) this.stop();
