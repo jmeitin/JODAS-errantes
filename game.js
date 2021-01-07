@@ -160,20 +160,29 @@ export default class game extends Phaser.Scene {
       //   this.policia.calcular_dir(this.jugador_x, this.jugador_y);
       // }
 
-
+      
       //PLAYER ESTA DENTRO DEL RANGO DE VISION
       if(this.physics.overlap(this.player, this.policia.campo_vision)) { 
+
+        this.policia.calcular_dir(this.jugador_x, this.jugador_y); 
         //this.policia.sospechar(true);
 
-        //si te conoce va rapido, si no lento
-        this.policia.calcular_dir(this.jugador_x, this.jugador_y); 
-
+        //si le he visto con la bomba previamente(ha entrado en radio pequeño), empiezo a perseguirle rapido
+        if(this.policia.get_descubierto() && !this.policia.get_persiguiendo()){
+          this.policia.set_persiguiendo(true);
+        }
         
 
         //CONTROL POLICIAL
         if(this.physics.overlap(this.player,  this.policia.control_policial)){
+          if(!this.policia.get_persiguiendo()){
+            //el policia descubre que eres terrorista
+            this.policia.set_persiguiendo(true);
+            this.policia.set_descubierto(true);
+          }
+          
           console.log('CONTROL POLICIAL');
-          //el policia descubre que eres terrorista
+          
 
           // SI POLICIA CHOCA CON PLAYER
           if (this.physics.overlap(this.player, this.policia)){  //MUERTO
@@ -185,6 +194,8 @@ export default class game extends Phaser.Scene {
 
              if (this.player.has_gun()) {
               console.log ("Pues me SUICIDIO");
+              //FALTA ANIMACION-------------------------------------------------------------------------------------------------------------------
+
              }   
           }
   
@@ -204,6 +215,11 @@ export default class game extends Phaser.Scene {
         
         
       } //rango de vision
+      else{
+        if(this.policia.get_persiguiendo()){
+          this.policia.set_persiguiendo(false);
+        }
+      }
 
       //si sospechaba de el, pero no es un individuo sospechoso ==> dejo de sospechar
     //   else if (this.policia.get_sospecha() == true){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
@@ -248,7 +264,12 @@ export default class game extends Phaser.Scene {
 
           if (this.inventario[this.i] =='sombrero'){ 
             //this.player.poner_sombrero();
-            console.log("Te has puesto el sombrero");
+            
+            if(!this.physics.overlap(this.player, this.policia.campo_vision)){
+              console.log("Te has puesto el sombrero");
+              this.policia.set_descubierto(false);
+
+            }
           }
           else if (this.inventario[this.i] =='pistola'){ 
             //ANIMACION - CAMBIO ESCENA
@@ -264,7 +285,12 @@ export default class game extends Phaser.Scene {
 
           if (this.inventario[this.i] =='sombrero'){ 
             //this.player.poner_sombrero();
-            console.log("Te has quitado el sombrero");
+            if(!this.physics.overlap(this.player, this.policia.campo_vision)){
+              console.log("Te has quitado el sombrero");
+              this.policia.set_descubierto(false);
+
+            }
+            
           }
           
 

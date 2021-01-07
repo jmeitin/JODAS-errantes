@@ -14,6 +14,8 @@ export default class policia extends gameobject {
         this.campo_vision_x = campo_vision_x;
         this.campo_auditivo_x = campo_auditivo_x;
         this.control_policial_x = control_policial_x;
+        
+        this.persiguiendo = false;
 
 
       // this.scene.add.existing(this);
@@ -176,11 +178,9 @@ export default class policia extends gameobject {
         this.dir_y = Math.sin(this.angle);
     }
 
-    descurbrir_player(descubierto){
+    set_descubierto(descubierto){
         this.descubierto = descubierto;
-        if(this.descubierto){
-            this.speed = this.speed*2;
-        }
+        
         
         console.log('descubierto: ', this.speed); 
     }
@@ -195,6 +195,20 @@ export default class policia extends gameobject {
         return this.descubierto;
     }
 
+    get_persiguiendo(){
+        return this.persiguiendo;
+    }
+
+    set_persiguiendo(persigue){
+        this.persiguiendo = persigue;
+        if(this.persiguiendo){
+            this.multiply_speed(2);
+        }
+        else{
+            this.multiply_speed(0.5);
+        }
+    }
+
     
 
 
@@ -204,7 +218,10 @@ export default class policia extends gameobject {
     }
 
 
-
+    multiply_speed(multiplier){
+        this.set_speed(this.speed * multiplier);
+        console.log('multiplico vel----------------');
+    }
 
 
     //persona
@@ -227,5 +244,8 @@ export default class policia extends gameobject {
     set_speed (speed){
         this.speed = speed;
     }
+
+
+
     
 }
