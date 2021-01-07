@@ -8,7 +8,9 @@ export default class game extends Phaser.Scene {
     super({ key: "main" });
 
     this.contenedor_inventario;//para tener todas las imagenes del inventario en un container
-    this.activos_inventario = [];//guarda que objetos del inventario son activos y cuales pasivos
+    this.indices_objetos_activos = []; //guarda que objetos del inventario son activos y cuales pasivos
+    this.objetos_activados = []; //true si el objeto esta activado en ese momento
+
   }
   
   init (data){
@@ -26,7 +28,7 @@ export default class game extends Phaser.Scene {
 
     this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
-    this.load.spritesheet('police', 'imgs/policeman.png', { frameWidth: 85, frameHeight: 135 });
+    this.load.spritesheet('police', 'imgs/policeman.png', {frameWidth: 85, frameHeight: 135 });
     
   }
 
@@ -48,10 +50,11 @@ export default class game extends Phaser.Scene {
     for(this.i = 0; this.i < this.inventario.length; this.i++){
       if(this.inventario[this.i] == 'bomba_plus' || this.inventario[this.i] == 'bomba_minus' || this.inventario[this.i] == 'capa' || this.inventario[this.i] == 'zapatos')//pasivos
       {
-        this.activos_inventario.push(false);
+        this.objetos_activados.push(true); //son pasivos
       }
       else if(this.inventario[this.i] == 'sombrero' || this.inventario[this.i] == 'pistola'){
-        this.activos_inventario.push(true);
+        this.indices_objetos_activos.push(this.i); // sombreo bomba plus  pistola ==> 0, 2
+        this.objetos_activados.push(false);
       }
     }
 
@@ -100,8 +103,7 @@ export default class game extends Phaser.Scene {
     this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.policia = new policia(this, 400, 500, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
-    
- 
+
     this.cameras.main.startFollow(this.player);    
 
     //CIVILES
@@ -229,44 +231,46 @@ export default class game extends Phaser.Scene {
   }
 
   funcion_botones(){
-    this.lugar_inventario;//el hueco del inventario que hemos pulado
-
     window.addEventListener('keypress', (event)=>{
-      if(event.key === '1'){
-        this.lugar_inventario = 0;//debido a la posicion de las teclas debe ser 1 menos en todos menos el 0, que sera pos 9
-      }
-      else if(event.key === '2'){
-        this.lugar_inventario = 1;
-      }
-      else if(event.key === '3'){
-        this.lugar_inventario = 2;
-      }
-      else if(event.key === '4'){
-        this.lugar_inventario = 3;
-      }
-      else if(event.key === '5'){
-        this.lugar_inventario = 4;
-      }
-      else if(event.key === '6'){
-        this.lugar_inventario = 5;
-      }
-      else if(event.key === '7'){
-        this.lugar_inventario = 6;
-      }
-      else if(event.key === '8'){
-        this.lugar_inventario = 7;
-      }
-      else if(event.key === '9'){
-        this.lugar_inventario = 8;
-      }
-      else if(event.key === '0'){
-        this.lugar_inventario = 9;
-      }
 
-      if(this.activos_inventario[this.lugar_inventario] == true){
-        //accion de objeto...
-        console.log("activo");
+      this.i = 0; // 0, 2
+      while (this.i < this.indices_objetos_activos.length && event.key != this.indices_objetos_activos[this.i] + 1 ) this.i++;
+
+      if (this.i < this.indices_objetos_activos.length){ // ES ACTIVO ==> activar o descativar
+        if (this.objetos_activados[this.i] == false){
+          this.objetos_activados[this.i] = true;
+          console.log("true");
+
+          if (this.inventario[this.i] =='sombrero'){ 
+            //this.player.poner_sombrero();
+            console.log("Te has puesto el sombrero");
+          }
+          else if (this.inventario[this.i] =='pistola'){ 
+            //ANIMACION - CAMBIO ESCENA
+            //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            console.log("ME PEGO UN TIRO");
+          }
+          
+        }
+        else{
+          this.objetos_activados[this.i] = false;
+          console.log("false");
+        
+
+          if (this.inventario[this.i] =='sombrero'){ 
+            //this.player.poner_sombrero();
+            console.log("Te has quitado el sombrero");
+          }
+          
+
+
+        }
+        console.log (this.inventario[this.i]);
+    
+
       }
+      
+
     });
   }
 
