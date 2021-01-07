@@ -78,6 +78,20 @@ export default class policia extends gameobject {
             repeat: -1 //en loop
           });
 
+          this.scene.anims.create({
+          key: 'polileft',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 4, end: 7 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
+
+          this.scene.anims.create({
+          key: 'poliright',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 8, end: 11 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
+
          
           this.scene.anims.create({
             key: 'polidown',
@@ -99,15 +113,22 @@ export default class policia extends gameobject {
         super.preUpdate(time, delta);
         this.move();
        // console.log('Container');
-        if (this.dir_y > 0){
+        if (this.dir_y > 0.5){
            this.anims.play('poliup', true);//----------------------------------------------------------------------------------------------------------------------------
 
            //this.anims.play('right', true);
         }
-        else{
+        else if (this.dir_y < -0.5){
            this.anims.play('polidown', true);
            // console.log("ANIM");
         }
+        else if (this.dir_x < 0){
+            this.anims.play('polileft', true);
+            // console.log("ANIM");
+         }
+         else if (this.dir_x > 0){
+            this.anims.play('poliright', true);
+         }
         
        // this.anims.play('polidown', true);
 
