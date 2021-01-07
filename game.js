@@ -89,7 +89,8 @@ export default class game extends Phaser.Scene {
       seek: 0,
       loop: true,
       delay: 0
-  }; 
+    };
+
     this.music=this.sound.add('music', config);
     this.music.play();   
     
@@ -155,20 +156,24 @@ export default class game extends Phaser.Scene {
 
       })
 
-      if (this.policia.get_sospecha()){ //si sospecho, me muevo hacia el
-        this.policia.calcular_dir(this.jugador_x, this.jugador_y);
-      }
+      // if (this.policia.get_sospecha()){ //si sospecho, me muevo hacia el
+      //   this.policia.calcular_dir(this.jugador_x, this.jugador_y);
+      // }
 
 
       //PLAYER ESTA DENTRO DEL RANGO DE VISION
       if(this.physics.overlap(this.player, this.policia.campo_vision)) { 
-        this.policia.sospechar(true);//
+        //this.policia.sospechar(true);
+
+        //si te conoce va rapido, si no lento
+        this.policia.calcular_dir(this.jugador_x, this.jugador_y); 
 
         
 
         //CONTROL POLICIAL
         if(this.physics.overlap(this.player,  this.policia.control_policial)){
           console.log('CONTROL POLICIAL');
+          //el policia descubre que eres terrorista
 
           // SI POLICIA CHOCA CON PLAYER
           if (this.physics.overlap(this.player, this.policia)){  //MUERTO
@@ -183,16 +188,16 @@ export default class game extends Phaser.Scene {
              }   
           }
   
-          else{ //ve a player ==> AQUI IMPORTA LA CAPA / SOMBRERO
-            this.policia.calcular_dir(this.jugador_x, this.jugador_y); //se mueve a investigar
+          // else{ //ve a player ==> AQUI IMPORTA LA CAPA / SOMBRERO
+          //   this.policia.calcular_dir(this.jugador_x, this.jugador_y); //se mueve a investigar
            
           
-            if (this.player.es_un_individuo_sospechoso() && !this.policia.get_descubierto()){ //si le veo malas pintas
-              this.policia.descurbrir_player(true); //le descubri
-              console.log('ES MALA GENTE. A POR EL');
-            }                  
+          //   if (this.player.es_un_individuo_sospechoso() && !this.policia.get_descubierto()){ //si le veo malas pintas
+          //     this.policia.descurbrir_player(true); //le descubri
+          //     console.log('ES MALA GENTE. A POR EL');
+          //   }                  
   
-          }
+          // }
 
         } //control policial
 
@@ -201,10 +206,10 @@ export default class game extends Phaser.Scene {
       } //rango de vision
 
       //si sospechaba de el, pero no es un individuo sospechoso ==> dejo de sospechar
-      else if (this.policia.get_sospecha() == true){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
-        this.policia.sospechar(false);
-          //console.log('Prosiga buen señor');
-     } //campo auditivo
+    //   else if (this.policia.get_sospecha() == true){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
+    //     this.policia.sospechar(false);
+    //       //console.log('Prosiga buen señor');
+    //  } //campo auditivo
   
     
     }

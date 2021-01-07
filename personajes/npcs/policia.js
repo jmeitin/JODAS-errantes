@@ -66,7 +66,7 @@ export default class policia extends gameobject {
         
 
         this.descubierto = false; // NI SOSPECHO NI HE DESCUBIERTO A PLAYER
-        this.sospecha = false;
+        //this.sospecha = false;
 
 
         //ANIMACIONES
@@ -164,13 +164,13 @@ export default class policia extends gameobject {
         console.log('descubierto: ', this.speed); 
     }
 
-    sospechar(sospechar){
-        this.sospecha = sospechar;
-    }
-    get_sospecha (){
-        return this.sospecha;
-    }
-    get_descubierto(){
+    // sospechar(sospechar){
+    //     this.sospecha = sospechar;
+    // }
+    // get_sospecha (){
+    //     return this.sospecha;
+    // }
+      get_descubierto(){
         return this.descubierto;
     }
 
