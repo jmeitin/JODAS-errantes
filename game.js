@@ -17,13 +17,16 @@ export default class game extends Phaser.Scene {
   }
 
   preload() {   
-    this.load.image('guy', 'imgs/jugador1.png');
     this.load.image('cop', 'imgs/poli.png');
     this.load.image('civil', 'imgs/viandante0.png');
     this.load.tilemapTiledJSON('mapajuego','mapas/mapajuego.json');
     this.load.image('tilemapjuego', 'mapas/tilemapjuego.png');
     this.load.audio('music', ['music/game.mp3', 'music/game.ogg']);
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
+
+    this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
+    this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
+    this.load.spritesheet('police', 'imgs/policeman.png', { frameWidth: 85, frameHeight: 135 });
     
   }
 
@@ -33,9 +36,13 @@ export default class game extends Phaser.Scene {
       tileWidth: 96,
       tileHeight: 96
     });
+
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
     this.background_layer = this.map.createStaticLayer('capa1', tileset1);
     this.colision_layer = this.map.createStaticLayer('colision',tileset1);
+
+    this.sprite_player ='player';
+    if (this.inventario.includes('zapatos')) this.sprite_player = 'zapatillas';
 
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(this.i = 0; this.i < this.inventario.length; this.i++){
@@ -51,7 +58,7 @@ export default class game extends Phaser.Scene {
     //VARIABLES DE JUEGO
     this.player_x = 300;
     this.player_y = 900;
-    this.player_speed = 100;
+    this.player_speed = 200;
     this.control_policial_x = 400;
     this.campo_vision_x = 800; //A DEFINIR
     this.campo_auditivo_x = 1200;  //A DEFINIR
@@ -80,8 +87,8 @@ export default class game extends Phaser.Scene {
       loop: true,
       delay: 0
   }; 
-    let music=this.sound.add('music', config);
-    music.play();   
+    this.music=this.sound.add('music', config);
+    this.music.play();   
     
     //Keyboard inputs
     this.cursor_keys = this.input.keyboard.createCursorKeys();    
@@ -89,10 +96,11 @@ export default class game extends Phaser.Scene {
     this.funcion_botones();
     
 
-    this.player = new player(this, this.player_x, this.player_y, "guy", this.cursor_keys, this.player_speed, this.inventario);  
+    this.player = new player(this, this.player_x, this.player_y,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario);  
     this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.policia = new policia(this, 400, 500, 1, 'cop', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
+    this.policia = new policia(this, 400, 500, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
+    
  
     this.cameras.main.startFollow(this.player);    
 
@@ -102,11 +110,11 @@ export default class game extends Phaser.Scene {
       for(let j = 0; j < 10; j++){
         if(((i < 3 || i > 6) || (j < 3 || j > 6))){
           if(i < 2 || i > 7){
-            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", 100).setScale(3);
+            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", 100);
             this.civiles.push(civil_1);
           }
           else{
-            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 100).setScale(3);
+            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 100);
             this.civiles.push(civil_1);
           }
         }
@@ -121,13 +129,13 @@ export default class game extends Phaser.Scene {
   update(time, delta) {
 
     this.player.movement_manager();
+    if(this.player.pausa()) {
+      this.scene.run('game_menu');
+      this.scene.pause();
+    }
 
     this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
     this.jugador_y = this.player.get_y();
-
-    if(this.player.pausa()) this.scene.pause();
-    else this.scene.resume(); // no vuelve a cargar la escena
-
 
     //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
     if (this.physics.overlap(this.player, this.policia.campo_auditivo)){
@@ -140,7 +148,7 @@ export default class game extends Phaser.Scene {
           //this.policia.sospechar(true);    
           this.policia.calcular_dir(this.jugador_x, this.jugador_y);      
 
-          console.log("Quien anda ahi?!");
+         // console.log("Quien anda ahi?!");
         }
 
       })
@@ -158,14 +166,15 @@ export default class game extends Phaser.Scene {
 
         //CONTROL POLICIAL
         if(this.physics.overlap(this.player,  this.policia.control_policial)){
+          console.log('CONTROL POLICIAL');
 
           // SI POLICIA CHOCA CON PLAYER
-          if (this.physics.overlap(this.player, this.policia.sprite)){  //MUERTO
+          if (this.physics.overlap(this.player, this.policia)){  //MUERTO
                 //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
           
              console.log ("Usted queda ARRESTADO");
-             this.player.setSpeed(0); //el player ya no se puede mover
-             this.policia.setSpeed(0);
+             this.player.set_speed(0); //el player ya no se puede mover
+             this.policia.set_speed(0);
 
              if (this.player.has_gun()) {
               console.log ("Pues me SUICIDIO");
@@ -261,6 +270,14 @@ export default class game extends Phaser.Scene {
     });
   }
 
+  modificar_volumen(cantidad){
+    if(this.music.volume + cantidad <= 0) this.music.volume = 0; 
+    else this.music.volume += cantidad;
+  }
+
+  parar_musica(){
+    this.music.loop = false;
+  }
 }
 
 

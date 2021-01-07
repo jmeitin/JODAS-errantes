@@ -1,10 +1,12 @@
 import gameobject from "../../clases/gameobject.js";
+import person from "../person.js";
 
-export default class policia extends Phaser.GameObjects.Container {
+export default class policia extends gameobject {
 
     //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
     constructor(scene, x, y, speed,  image, campo_vision_x, campo_auditivo_x, control_policial_x, children) {
-        super(scene, x, y, children);
+        super(scene, x, y, image);
+        //super(scene, x, y, image, speed);
         // ...
         this.x = x;
         this.y = y;
@@ -14,11 +16,19 @@ export default class policia extends Phaser.GameObjects.Container {
         this.control_policial_x = control_policial_x;
 
 
-       this.scene.add.existing(this);
-       this.scene.physics.add.existing(this); 
+      // this.scene.add.existing(this);
+       //this.scene.physics.add.existing(this); 
+
+       this.container = scene.add.container(this.x, this.y);
 
        //POLICIA ==> SPRITE
-       this.gameobject = new gameobject(this.scene, 0, 0, image);
+       //this.gameobject = new gameobject(this.scene, 0, 0, image);
+
+       //this.image = image;
+
+       //this.add.sprite(0, 0, this.image);
+       //this.animations.add('down', [0,1,2], 2, true); //esta en loop
+       //this.animations.play('down');
     
 
        //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
@@ -44,10 +54,10 @@ export default class policia extends Phaser.GameObjects.Container {
        
 
        //EL CONTOINER ES PADRE DEN LOS CAMPOS DE DETECCION Y SIMILARES
-       this.add(this.gameobject);
-       this.add(this.campo_vision);
-       this.add(this.campo_auditivo);
-       this.add(this.control_policial);
+       //this.container.add(this.gameobject);
+       this.container.add(this.campo_vision);
+       this.container.add(this.campo_auditivo);
+       this.container.add(this.control_policial);
 
 
        this.dir_x = this.get_random_int(-1, 2); //DIRECCION RANDOM
@@ -57,13 +67,49 @@ export default class policia extends Phaser.GameObjects.Container {
 
         this.descubierto = false; // NI SOSPECHO NI HE DESCUBIERTO A PLAYER
         this.sospecha = false;
+
+
+        //ANIMACIONES
+        this.frame_rate = 4;
+        this.scene.anims.create({
+            key: 'poliup',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 0, end: 3 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
+
+         
+          this.scene.anims.create({
+            key: 'polidown',
+            frames: this.scene.anims.generateFrameNumbers(image, { start: 12, end: 15 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
+
+         
+  
+  
+
+
     }
    
 
     // preUpdate(time, delta) {}
     preUpdate(time, delta){
+        super.preUpdate(time, delta);
         this.move();
-        console.log('Container');
+       // console.log('Container');
+        if (this.dir_y > 0){
+           this.anims.play('poliup', true);//----------------------------------------------------------------------------------------------------------------------------
+
+           //this.anims.play('right', true);
+        }
+        else{
+           this.anims.play('polidown', true);
+           // console.log("ANIM");
+        }
+        
+       // this.anims.play('polidown', true);
 
         //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
     }   
@@ -88,10 +134,12 @@ export default class policia extends Phaser.GameObjects.Container {
 
     move_x(){
         this.x += this.dir_x * this.speed;
+        this.container.x += this.dir_x * this.speed;
     }
 
     move_y(){
         this.y += this.dir_y * this.speed;
+        this.container.y += this.dir_y * this.speed;
     }
 
 

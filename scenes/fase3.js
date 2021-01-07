@@ -34,17 +34,17 @@ export default class fase3 extends Phaser.Scene {
         this.pointer = this.input.activePointer;
         let music=this.sound.add('music', {loop: true});
         music.play();
-        this.carroza = new Civil(this, 870, 820, "carroza", 1);
+        this.carroza = new Civil(this, 870, 820, "carroza", 10);
         this.civiles = [];
         for(let i = 0; i < 10; i++){
            for(let j = 0; j < 10; j++){
                 if(((i < 3 || i > 6) || (j < 3 || j > 6))){
                     if(i < 2 || i > 7){
-                        let civil = new Civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", Math.random() + 0.5);
+                        let civil = new Civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", (Math.random() + 0.5) * 10);
                         this.civiles.push(civil);
                     }
                     else{
-                        let civil = new Civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 1);
+                        let civil = new Civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 10);
                         this.civiles.push(civil);
                     }
                 }
@@ -82,7 +82,7 @@ export default class fase3 extends Phaser.Scene {
                 civil.destroy(true);
                 this.score += 10;
             }   
-            civil.update();
+            //civil.update();
         })
         if(this.lanzada === true && this.physics.overlap(this.bomba, this.carroza)){
             this.carroza.destroy(true);
