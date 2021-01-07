@@ -26,7 +26,7 @@ export default class game extends Phaser.Scene {
     this.load.audio('music', ['music/game.mp3', 'music/game.ogg']);
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
 
-    this.load.spritesheet('player', 'imgs/jugador_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
+    this.load.spritesheet('player', 'imgs/jugador_spritesheet_ampliado.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('police', 'imgs/policeman.png', {frameWidth: 85, frameHeight: 135 });
     
@@ -263,7 +263,7 @@ export default class game extends Phaser.Scene {
           console.log("true");
 
           if (this.inventario[this.i] =='sombrero'){ 
-            //this.player.poner_sombrero();
+            this.player.set_sombrero(true);
             
             if(!this.physics.overlap(this.player, this.policia.campo_vision)){
               console.log("Te has puesto el sombrero");
@@ -284,7 +284,8 @@ export default class game extends Phaser.Scene {
         
 
           if (this.inventario[this.i] =='sombrero'){ 
-            //this.player.poner_sombrero();
+            this.player.set_sombrero(false);
+
             if(!this.physics.overlap(this.player, this.policia.campo_vision)){
               console.log("Te has quitado el sombrero");
               this.policia.set_descubierto(false);
