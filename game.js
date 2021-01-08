@@ -42,6 +42,7 @@ export default class game extends Phaser.Scene {
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
     this.background_layer = this.map.createStaticLayer('capa1', tileset1);
     this.colision_layer = this.map.createStaticLayer('colision',tileset1);
+    
 
     this.sprite_player ='player';
     if (this.inventario.includes('zapatos')) this.sprite_player = 'zapatillas';
@@ -98,9 +99,10 @@ export default class game extends Phaser.Scene {
     this.cursor_keys = this.input.keyboard.createCursorKeys();    
 
     this.funcion_botones();
-    
+    const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnpoint");
 
-    this.player = new player(this, this.player_x, this.player_y,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario);  
+    this.player = new player(this, spawnpoint.x, spawnpoint.y,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario);  
+    this.physics.add.collider(this.player, this.colision_layer);
     this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     this.policia = new policia(this, 400, 500, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
