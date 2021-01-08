@@ -4,32 +4,19 @@ import person from "../person.js";
 export default class policia extends gameobject {
 
     //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
-    constructor(scene, x, y, speed,  image, campo_vision_x, campo_auditivo_x, control_policial_x, children) {
+    constructor(scene, x, y, speed,  image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles) {
         super(scene, x, y, image);
-        //super(scene, x, y, image, speed);
-        // ...
+        
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.campo_vision_x = campo_vision_x;
         this.campo_auditivo_x = campo_auditivo_x;
         this.control_policial_x = control_policial_x;
+        this.player = player;
+        this.civiles = civiles;
 
-
-      // this.scene.add.existing(this);
-       //this.scene.physics.add.existing(this); 
-
-       this.container = scene.add.container(this.x, this.y);
-
-       //POLICIA ==> SPRITE
-       //this.gameobject = new gameobject(this.scene, 0, 0, image);
-
-       //this.image = image;
-
-       //this.add.sprite(0, 0, this.image);
-       //this.animations.add('down', [0,1,2], 2, true); //esta en loop
-       //this.animations.play('down');
-    
+       this.container = scene.add.container(this.x, this.y);   
 
        //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
        this.control_policial = scene.add.zone(0, 0);
@@ -136,7 +123,74 @@ export default class policia extends gameobject {
         
        // this.anims.play('polidown', true);
 
+        
+
+
+        ///////////////////////////////////////////////ZONA DE RADIOS POLICIA///////////////////////////////////////////////////
+
+        this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
+        this.jugador_y = this.player.get_y();
+
         //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
+        if (this.scene.physics.overlap(this.player, this.campo_auditivo)){
+
+            this.civiles.forEach((civil) =>{
+                //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
+                if (this.scene.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA               
+                    this.calcular_dir(this.jugador_x, this.jugador_y);      
+                    // console.log("Quien anda ahi?!");
+                }
+            })
+
+        
+            //PLAYER ESTA DENTRO DEL RANGO DE VISION
+            if(this.scene.physics.overlap(this.player, this.campo_vision)) { 
+                console.log(this.get_reconoce_sin_sombrero());
+                this.calcular_dir(this.jugador_x, this.jugador_y); 
+
+                //si le he visto con la bomba previamente(ha entrado en radio pequeño), empiezo a perseguirle rapido
+                if(this.get_descubierto() && !this.get_persiguiendo()){
+                    this.set_persiguiendo(true, this.player.get_sombrero());
+                }
+                
+
+                //CONTROL POLICIAL
+                if(this.scene.physics.overlap(this.player,  this.control_policial)){
+                    if(!this.get_persiguiendo()){
+                        //el policia descubre que eres terrorista
+                        this.set_persiguiendo(true, this.player.get_sombrero());
+                        this.set_descubierto(true);
+                    }
+                    
+                    console.log('CONTROL POLICIAL');
+                    
+
+                    // SI POLICIA CHOCA CON PLAYER
+                    if (this.scene.physics.overlap(this.player, this)){  //MUERTO
+                            //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
+                    
+                        console.log ("Usted queda ARRESTADO");
+                        this.player.set_speed(0); //el player ya no se puede mover
+                        this.set_speed(0);
+
+                        if (this.player.has_gun()) {
+                            console.log ("Pues me SUICIDIO");
+                            //FALTA ANIMACION-------------------------------------------------------------------------------------------------------------------
+                        }   
+                    }
+
+                } //control policial
+
+                
+                
+            } //rango de vision
+
+            else{
+                if(this.get_persiguiendo()){
+                    this.set_persiguiendo(false, this.player.get_sombrero());
+                }
+            }        
+        }//  //campo auditivo
     }   
 
     move(){
@@ -187,13 +241,7 @@ export default class policia extends gameobject {
         console.log('descubierto: ', this.speed); 
     }
 
-    // sospechar(sospechar){
-    //     this.sospecha = sospechar;
-    // }
-    // get_sospecha (){
-    //     return this.sospecha;
-    // }
-      get_descubierto(){
+    get_descubierto(){
         return this.descubierto;
     }
 
@@ -245,7 +293,6 @@ export default class policia extends gameobject {
 
     multiply_speed(multiplier){
         this.set_speed(this.speed * multiplier);
-        console.log('multiplico vel----------------');
     }
 
 

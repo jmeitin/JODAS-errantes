@@ -106,10 +106,8 @@ export default class game extends Phaser.Scene {
     this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
     this.physics.add.collider(this.player, this.colision_layer);
     this.colision_layer.setCollisionByProperty({colision: true});
-    //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.policia = new policia(this, spawnpoint.x, spawnpoint.y, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
 
-    this.cameras.main.startFollow(this.player);    
+
 
     //CIVILES
     this.civiles = [];
@@ -128,6 +126,13 @@ export default class game extends Phaser.Scene {
       }
     }
 
+    //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
+    this.policia = new policia(this, spawnpoint.x, spawnpoint.y, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles); 
+
+    this.cameras.main.startFollow(this.player);    
+
+    
+
     //CREAMOS INVENTARIO
     this.crea_inventario();
 
@@ -139,99 +144,6 @@ export default class game extends Phaser.Scene {
     if(this.player.pausa()) {
       this.scene.run('game_menu');
       this.scene.pause();
-    }
-
-    this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
-    this.jugador_y = this.player.get_y();
-
-    //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-    if (this.physics.overlap(this.player, this.policia.campo_auditivo)){
-
-      this.civiles.forEach((civil) =>{
-
-        //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
-        if (this.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA
-         
-          //this.policia.sospechar(true);    
-          this.policia.calcular_dir(this.jugador_x, this.jugador_y);      
-
-         // console.log("Quien anda ahi?!");
-        }
-
-      })
-
-      // if (this.policia.get_sospecha()){ //si sospecho, me muevo hacia el
-      //   this.policia.calcular_dir(this.jugador_x, this.jugador_y);
-      // }
-
-      
-      //PLAYER ESTA DENTRO DEL RANGO DE VISION
-      if(this.physics.overlap(this.player, this.policia.campo_vision)) { 
-        console.log(this.policia.get_reconoce_sin_sombrero());
-        this.policia.calcular_dir(this.jugador_x, this.jugador_y); 
-        //this.policia.sospechar(true);
-
-        //si le he visto con la bomba previamente(ha entrado en radio pequeño), empiezo a perseguirle rapido
-        if(this.policia.get_descubierto() && !this.policia.get_persiguiendo()){
-          this.policia.set_persiguiendo(true, this.player.get_sombrero());
-        }
-        
-
-        //CONTROL POLICIAL
-        if(this.physics.overlap(this.player,  this.policia.control_policial)){
-          if(!this.policia.get_persiguiendo()){
-            //el policia descubre que eres terrorista
-            this.policia.set_persiguiendo(true, this.player.get_sombrero());
-            this.policia.set_descubierto(true);
-          }
-          
-          console.log('CONTROL POLICIAL');
-          
-
-          // SI POLICIA CHOCA CON PLAYER
-          if (this.physics.overlap(this.player, this.policia)){  //MUERTO
-                //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
-          
-             console.log ("Usted queda ARRESTADO");
-             this.player.set_speed(0); //el player ya no se puede mover
-             this.policia.set_speed(0);
-
-             if (this.player.has_gun()) {
-              console.log ("Pues me SUICIDIO");
-              //FALTA ANIMACION-------------------------------------------------------------------------------------------------------------------
-
-             }   
-          }
-  
-          // else{ //ve a player ==> AQUI IMPORTA LA CAPA / SOMBRERO
-          //   this.policia.calcular_dir(this.jugador_x, this.jugador_y); //se mueve a investigar
-           
-          
-          //   if (this.player.es_un_individuo_sospechoso() && !this.policia.get_descubierto()){ //si le veo malas pintas
-          //     this.policia.descurbrir_player(true); //le descubri
-          //     console.log('ES MALA GENTE. A POR EL');
-          //   }                  
-  
-          // }
-
-        } //control policial
-
-        
-        
-      } //rango de vision
-      else{
-        if(this.policia.get_persiguiendo()){
-          this.policia.set_persiguiendo(false, this.player.get_sombrero());
-        }
-      }
-
-      //si sospechaba de el, pero no es un individuo sospechoso ==> dejo de sospechar
-    //   else if (this.policia.get_sospecha() == true){ //SI ME SALGO QUE ME DEJE DE PERSEGUIR?---------------------
-    //     this.policia.sospechar(false);
-    //       //console.log('Prosiga buen señor');
-    //  } //campo auditivo
-  
-    
     }
 
     //modificamos posicion de inventario
@@ -300,14 +212,9 @@ export default class game extends Phaser.Scene {
               if(!this.policia.get_reconoce_sin_sombrero()){
                 this.policia.set_descubierto(false);
               }
-              
 
             }
-            
           }
-          
-
-
         }
         console.log (this.inventario[this.i]);
     

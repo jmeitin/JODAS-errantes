@@ -14,8 +14,6 @@ export default class player extends person{
         this.botonpausa = this.scene.input.keyboard.addKey('P');
         
         this.pistola = false; 
-        this.bomba_plus = false;
-        this.bomba_minus = false;
         this.sombrero = false;
         
         this.inventario = inventario;
@@ -28,8 +26,6 @@ export default class player extends person{
         //OBJETOS
         if (this.inventario.includes('zapatos')) this.multiply_velocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
         if (this.inventario.includes('pistola')) this.pistola = true; //lleva pistola
-        if (this.inventario.includes('bomba_plus')) this.bomba_plus = true;
-        if (this.inventario.includes('bomba_minus')) this.bomba_minus = true;
 
 
         //ANIMACIONES
@@ -136,13 +132,6 @@ export default class player extends person{
 
     has_gun(){ //LLEVA PISTOLA?
         return this.pistola;
-    }
-
-    es_un_individuo_sospechoso(){
-        this.maleante = false;
-        if (this.bomba_plus && !this.bomba_minus || this.bomba_plus && this.pistola) this.maleante = true; // solo sombrero
-        //capa ----------------------------------------------------------------------------------------------------
-        return this.maleante;
     }
 
     set_sombrero(somb){
