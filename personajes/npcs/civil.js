@@ -14,4 +14,8 @@ export default class civil extends person{
     update(){
         
     }
+
+    setSpeed(sp){
+        this.speed = sp;
+    }
 }
