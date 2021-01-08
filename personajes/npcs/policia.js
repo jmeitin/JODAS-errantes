@@ -14,8 +14,6 @@ export default class policia extends gameobject {
         this.campo_vision_x = campo_vision_x;
         this.campo_auditivo_x = campo_auditivo_x;
         this.control_policial_x = control_policial_x;
-        
-        this.persiguiendo = false;
 
 
       // this.scene.add.existing(this);
@@ -68,7 +66,11 @@ export default class policia extends gameobject {
         
 
         this.descubierto = false; // NI SOSPECHO NI HE DESCUBIERTO A PLAYER
-        //this.sospecha = false;
+        this.persiguiendo = false;
+        
+        this.reconoce_sombrero = false;
+        this.reconoce_sin_sombrero = false;
+        
 
 
         //ANIMACIONES
@@ -199,14 +201,37 @@ export default class policia extends gameobject {
         return this.persiguiendo;
     }
 
-    set_persiguiendo(persigue){
+    set_persiguiendo(persigue, lleva_sombrero){
         this.persiguiendo = persigue;
+        if(lleva_sombrero){
+            this.reconoce_sombrero = true;
+        }
+        else{
+            this.reconoce_sin_sombrero = true;
+        }
+
         if(this.persiguiendo){
             this.multiply_speed(2);
         }
         else{
             this.multiply_speed(0.5);
         }
+    }
+
+    get_reconoce_sombrero(){
+        return this.reconoce_sombrero;
+    }
+
+    get_reconoce_sin_sombrero(){
+        return this.reconoce_sin_sombrero;
+    }
+    
+    set_reconoce_sombrero(){
+        this.reconoce_sombrero = true;
+    }
+
+    set_reconoce_sin_sombrero(){
+        this.reconoce_sin_sombrero = true;
     }
 
     

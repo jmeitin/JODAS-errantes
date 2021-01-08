@@ -103,11 +103,11 @@ export default class game extends Phaser.Scene {
     const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnpoint");
 
     this.flecha = 'flecha';
-    this.player = new player(this, spawnpoint.x, spawnpoint.y,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
+    this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
     this.physics.add.collider(this.player, this.colision_layer);
     this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.policia = new policia(this, 400, 500, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
+    this.policia = new policia(this, spawnpoint.x, spawnpoint.y, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x); 
 
     this.cameras.main.startFollow(this.player);    
 
@@ -167,13 +167,13 @@ export default class game extends Phaser.Scene {
       
       //PLAYER ESTA DENTRO DEL RANGO DE VISION
       if(this.physics.overlap(this.player, this.policia.campo_vision)) { 
-
+        console.log(this.policia.get_reconoce_sin_sombrero());
         this.policia.calcular_dir(this.jugador_x, this.jugador_y); 
         //this.policia.sospechar(true);
 
         //si le he visto con la bomba previamente(ha entrado en radio pequeño), empiezo a perseguirle rapido
         if(this.policia.get_descubierto() && !this.policia.get_persiguiendo()){
-          this.policia.set_persiguiendo(true);
+          this.policia.set_persiguiendo(true, this.player.get_sombrero());
         }
         
 
@@ -181,7 +181,7 @@ export default class game extends Phaser.Scene {
         if(this.physics.overlap(this.player,  this.policia.control_policial)){
           if(!this.policia.get_persiguiendo()){
             //el policia descubre que eres terrorista
-            this.policia.set_persiguiendo(true);
+            this.policia.set_persiguiendo(true, this.player.get_sombrero());
             this.policia.set_descubierto(true);
           }
           
@@ -221,7 +221,7 @@ export default class game extends Phaser.Scene {
       } //rango de vision
       else{
         if(this.policia.get_persiguiendo()){
-          this.policia.set_persiguiendo(false);
+          this.policia.set_persiguiendo(false, this.player.get_sombrero());
         }
       }
 
@@ -271,7 +271,11 @@ export default class game extends Phaser.Scene {
             
             if(!this.physics.overlap(this.player, this.policia.campo_vision)){
               console.log("Te has puesto el sombrero");
-              this.policia.set_descubierto(false);
+
+              if(!this.policia.get_reconoce_sombrero()){
+                this.policia.set_descubierto(false);
+                //this.policia.
+              }
 
             }
           }
@@ -292,7 +296,11 @@ export default class game extends Phaser.Scene {
 
             if(!this.physics.overlap(this.player, this.policia.campo_vision)){
               console.log("Te has quitado el sombrero");
-              this.policia.set_descubierto(false);
+
+              if(!this.policia.get_reconoce_sin_sombrero()){
+                this.policia.set_descubierto(false);
+              }
+              
 
             }
             

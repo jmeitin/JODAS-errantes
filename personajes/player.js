@@ -146,8 +146,12 @@ export default class player extends person{
     }
 
     set_sombrero(somb){
-        this.sombrero = somb;
+      this.sombrero = somb;
 
+    }
+
+    get_sombrero(){
+      return this.sombrero;
     }
 
 
