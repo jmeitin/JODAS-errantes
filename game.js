@@ -25,6 +25,7 @@ export default class game extends Phaser.Scene {
     this.load.image('tilemapjuego', 'mapas/tilemapjuego.png');
     this.load.audio('music', ['music/game.mp3', 'music/game.ogg']);
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
+    this.load.image('flecha','imgs/flecha_direccion.png');
 
     this.load.spritesheet('player', 'imgs/jugador_spritesheet_ampliado.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
@@ -101,7 +102,8 @@ export default class game extends Phaser.Scene {
     this.funcion_botones();
     const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnpoint");
 
-    this.player = new player(this, spawnpoint.x, spawnpoint.y,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario);  
+    this.flecha = 'flecha';
+    this.player = new player(this, spawnpoint.x, spawnpoint.y,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
     this.physics.add.collider(this.player, this.colision_layer);
     this.colision_layer.setCollisionByProperty({colision: true});
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE

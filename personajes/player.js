@@ -1,10 +1,13 @@
 import person from "./person.js"
 
 export default class player extends person{
-    constructor(scene, x, y, type, cursorkeys, speed, inventario){
+    constructor(scene, x, y, type, cursorkeys, speed, inventario, flecha_img){
         super(scene, x, y, type, speed);
       
-
+        this.flecha_p = this.scene.add.image(x, y, flecha_img);
+        // cambiar estas coordenadas por las que sean con el mapa terminado
+        this.coor_fin_x = 0;
+        this.coor_fin_y = 0; 
         
         this.cursorkeys = cursorkeys;  
 
@@ -17,10 +20,10 @@ export default class player extends person{
         
         this.inventario = inventario;
 
-        this.keyW = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        this.keyA = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        this.keyS = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        this.keyD = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.key_w = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.key_a = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.key_s = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.key_d = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
        
         //OBJETOS
         if (this.inventario.includes('zapatos')) this.multiply_velocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
@@ -99,27 +102,36 @@ export default class player extends person{
     
 
     movement_manager(){              
-        if(this.cursorkeys.right.isDown || this.keyD.isDown){
+        if(this.cursorkeys.right.isDown || this.key_d.isDown){
             this.move_right();
             if (this.sombrero) this.anims.play('sombreroright', true);
             else this.anims.play('right', true);
         }
-        else if(this.cursorkeys.left.isDown || this.keyA.isDown){
+        else if(this.cursorkeys.left.isDown || this.key_a.isDown){
             this.move_left();
             if (this.sombrero) this.anims.play('sombreroleft', true);
             else this.anims.play('left', true);
         }
-        if(this.cursorkeys.up.isDown || this.keyW.isDown){
+        if(this.cursorkeys.up.isDown || this.key_w.isDown){
             this.move_up();
             if (this.sombrero) this.anims.play('sombreroup', true);
             else this.anims.play('up', true);
         }
-        else if(this.cursorkeys.down.isDown || this.keyS.isDown){
+        else if(this.cursorkeys.down.isDown || this.key_s.isDown){
             this.move_down();
             if (this.sombrero) this.anims.play('sombrerodown', true);
             else this.anims.play('down', true);
         }
         if(this.cursorkeys.space.isDown) this.stop();
+        this.update_flecha();
+    }
+
+    update_flecha(){
+      let coor_x = this.coor_fin_x - this.x;
+      let coor_y = this.coor_fin_y - this.y;
+      let vector = new Phaser.Math.Vector2(coor_x,coor_y);
+      this.flecha_p.setPosition(this.x, this.y - 350);
+      this.flecha_p.setRotation(vector.angle())
     }
 
     has_gun(){ //LLEVA PISTOLA?
