@@ -231,7 +231,7 @@ export default class game extends Phaser.Scene {
   }
 
   parar_musica(){
-    this.music.loop = false;
+    this.music.stop();
   }
 }
 

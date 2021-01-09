@@ -168,7 +168,7 @@ export default class policia extends gameobject {
                     // SI POLICIA CHOCA CON PLAYER
                     if (this.scene.physics.overlap(this.player, this)){  //MUERTO
                             //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
-                    
+                        
                         console.log ("Usted queda ARRESTADO");
                         this.player.set_speed(0); //el player ya no se puede mover
                         this.set_speed(0);
@@ -176,7 +176,12 @@ export default class policia extends gameobject {
                         if (this.player.has_gun()) {
                             console.log ("Pues me SUICIDIO");
                             //FALTA ANIMACION-------------------------------------------------------------------------------------------------------------------
-                        }   
+                        }
+                        // imagen fin partida
+                        // meter tambien un timer o algo
+                        this.scene.parar_musica();
+                        let bool_victoria = false;
+                        this.scene.scene.start('end_menu',{data:bool_victoria});
                     }
 
                 } //control policial
