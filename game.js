@@ -27,6 +27,7 @@ export default class game extends Phaser.Scene {
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
     this.load.image('flecha','imgs/flecha_direccion.png');
 
+    this.load.spritesheet('cape', 'imgs/capa_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('player', 'imgs/jugador_spritesheet_ampliado.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('police', 'imgs/policeman.png', {frameWidth: 85, frameHeight: 135 });
@@ -47,6 +48,7 @@ export default class game extends Phaser.Scene {
 
     this.sprite_player ='player';
     if (this.inventario.includes('zapatos')) this.sprite_player = 'zapatillas';
+    if (this.inventario.includes('capa')) this.sprite_player = 'cape';
 
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(this.i = 0; this.i < this.inventario.length; this.i++){
