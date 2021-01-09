@@ -2,10 +2,12 @@ export default class end_menu extends Phaser.Scene{
     constructor(){
         super({key:"end_menu"});
         this.bool_victoria;
+        this.score;
     }
 
     init(data){
-        this.bool_victoria = data.bool_victoria;
+        this.bool_victoria = data.vic;
+        this.score = data.score;
     }
 
     preload(){
@@ -21,6 +23,7 @@ export default class end_menu extends Phaser.Scene{
     create(){
         this.add.image(710,400,'fondo_menu_final').setScale(1.5);
 
+        this.add.text(500,650,"Puntuacion: " + this.score).setFontSize(50);
         this.boton_continuar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2 + 200,"continue").setScale(3);
         this.boton_continuar.setInteractive();
         this.boton_continuar.on("pointerover",()=>{

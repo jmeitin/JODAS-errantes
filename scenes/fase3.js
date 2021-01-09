@@ -34,7 +34,7 @@ export default class fase3 extends Phaser.Scene {
         this.fixed = false;
         this.scale = 1;
         this.pointer = this.input.activePointer;
-        let music=this.sound.add('music', {loop: true});
+        this.music=this.sound.add('music', {loop: true});
         music.play();
         this.carroza = new Civil(this, 870, 1020, "carroza", 10);
         this.civiles = [];
@@ -96,13 +96,9 @@ export default class fase3 extends Phaser.Scene {
             this.carroza.setSpeed(0);
         }
 
-        if(this.lanzada && this.carroza.active == false){
-            this.add.image(this.game.renderer.width/2,400,'victoria');
-            this.text2 = this.add.text(250, 500,  'Puntuación: ' + this.score).setFontSize(100);
-        }
-        else if(this.lanzada){
-            this.add.image(this.game.renderer.width/2,400,'derrota');
-            this.text2 = this.add.text(250, 500,  'Puntuación: ' + this.score).setFontSize(100);
+        if(this.lanzada){
+            this.music.stop();
+            this.scene.start('end_menu', {vic:this.carroza.active === true, score:this.score});
         }
         
     }

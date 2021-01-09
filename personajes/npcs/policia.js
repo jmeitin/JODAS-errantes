@@ -180,8 +180,7 @@ export default class policia extends gameobject {
                         // imagen fin partida
                         // meter tambien un timer o algo
                         this.scene.parar_musica();
-                        let bool_victoria = false;
-                        this.scene.scene.start('end_menu',{data:bool_victoria});
+                        this.scene.scene.start('end_menu',{vic:false,score:0});
                     }
 
                 } //control policial
