@@ -51,6 +51,7 @@ export default class game_menu extends Phaser.Scene{
             this.boton_salir.setScale(2);
         });
         this.boton_salir.on("pointerdown", ()=>{
+            this.scene_b.parar_musica();
             this.scene.stop('main');
             this.scene.start('main_menu');
         });
