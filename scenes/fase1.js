@@ -98,7 +98,7 @@ export default class fase1 extends Phaser.Scene {
 
         this.boton_next.on("pointerdown", ()=>{
             sound3.play();
-            this.scene.start('main', {inventario:this.inventario}); //fase 2
+            this.scene.start('tutorial_fase2', {inventario:this.inventario}); //fase 2
 
         });
 

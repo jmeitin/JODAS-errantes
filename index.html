@@ -49,6 +49,7 @@
       import game_menu from "./scenes/game_menu.js";
       import end_menu from "./scenes/end_menu.js";
       import fase3 from "./scenes/fase3.js";
+      import tutorial_fase2 from "./scenes/tutorial_fase2.js";
 
       var config = {
         type: Phaser.AUTO,
@@ -62,7 +63,7 @@
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         },//la primera escena de la lista de abajo es la que se muestra nada mas empezar
-        scene: [main_menu, game, fase1, fase3, game_menu, end_menu],
+        scene: [main_menu , fase1, game, tutorial_fase2, fase3, game_menu, end_menu],
         //scene: [Game, fase1],
         physics: {
           default: "arcade",
