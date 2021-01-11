@@ -106,20 +106,22 @@ export default class policia extends person {
        // console.log('Container');
         if (this.dir_y > 0.5){
            this.anims.play('poliup', true);
-           this.move_up();//----------------------------------------------------------------------------------------------------------------------------
-
+           this.move_up();
            //this.anims.play('right', true);
         }
         else if (this.dir_y < -0.5){
            this.anims.play('polidown', true);
+           this.move_down();
            // console.log("ANIM");
         }
         else if (this.dir_x < 0){
             this.anims.play('polileft', true);
+            this.move_left();
             // console.log("ANIM");
          }
          else if (this.dir_x > 0){
             this.anims.play('poliright', true);
+            this.move_right();
          }
         
        // this.anims.play('polidown', true);
