@@ -27,9 +27,7 @@ export default class game extends Phaser.Scene {
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
     this.load.image('flecha','imgs/flecha_direccion.png');
 
-    this.load.spritesheet('cape', 'imgs/capa_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('player', 'imgs/jugador_spritesheet_ampliado.png', { frameWidth: 150, frameHeight: 150 });
-    this.load.spritesheet('zapatillas', 'imgs/zapatillas_spritesheet.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('police', 'imgs/policeman.png', {frameWidth: 85, frameHeight: 135 });
     
   }
@@ -44,12 +42,7 @@ export default class game extends Phaser.Scene {
     const tileset1 = this.map.addTilesetImage('tilemap-export96','tilemapjuego');
     this.background_layer = this.map.createStaticLayer('capa1', tileset1);
     this.colision_layer = this.map.createStaticLayer('colision',tileset1);
-    
-
-    this.sprite_player ='player';
-    if (this.inventario.includes('zapatos')) this.sprite_player = 'zapatillas';
-    if (this.inventario.includes('capa')) this.sprite_player = 'cape';
-
+  
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(this.i = 0; this.i < this.inventario.length; this.i++){
       if(this.inventario[this.i] == 'bomba_plus' || this.inventario[this.i] == 'bomba_minus' || this.inventario[this.i] == 'capa' || this.inventario[this.i] == 'zapatos')//pasivos
@@ -105,7 +98,7 @@ export default class game extends Phaser.Scene {
     const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnpoint");
 
     this.flecha = 'flecha';
-    this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  this.sprite_player, this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
+    this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
     this.physics.add.collider(this.player, this.colision_layer);
     this.colision_layer.setCollisionByProperty({colision: true});
 

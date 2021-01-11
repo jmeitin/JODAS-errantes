@@ -23,35 +23,64 @@ export default class player extends person{
         this.key_s = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.key_d = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
        
-        //OBJETOS
-        if (this.inventario.includes('zapatos')) this.multiply_velocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
+        //OBJETOS        
         if (this.inventario.includes('pistola')) this.pistola = true; //lleva pistola
 
+        this.frames = [];
+        this.frames_normal = [0, 2, 3, 5, 6, 8, 9, 11];
+        this.frames_zapatos = [24, 26, 27, 29, 30, 32, 33, 35];
+        this.frames_capa = [36, 38, 39, 41, 42, 44, 45, 47];
+        this.frames_capa_zapas = [60, 62, 63, 65, 66, 68, 69, 71];
+        
 
+        if (this.inventario.includes('zapatos')) {
+          this.multiply_velocity (10); //QUE LA MULTIPLIQUE POR ESTE PORCENTAJE
+          if (this.inventario.includes('capa')) this.frames = this.frames_capa_zapas;
+          else this.frames = this.frames_zapatos;
+        }
+        else if (this.inventario.includes('capa')){
+          this.frames = this.frames_capa;
+        }
+        else{
+          this.frames = this.frames_normal;
+        }
+        
+
+        this.frames_sombrero = [];
+        this.frames_somb = [12, 14, 15, 17, 18, 20, 21, 23];
+        this.frames_somb_zapatos = [48, 50, 51, 53, 54, 56, 57, 59];
+
+        if (this.inventario.includes('zapatos') && this.inventario.includes('sombrero')){
+          this.frames_sombrero = this.frames_somb_zapatos;
+        }
+        else{
+          this.frames_sombrero = this.frames_somb;
+        }
+     
         //ANIMACIONES
         this.frame_rate = 4;
         this.scene.anims.create({
             key: 'down',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 0, end: 2 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames[0], end: this.frames[1] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
 
         this.scene.anims.create({
             key: 'left',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 3, end: 5 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames[2], end: this.frames[3] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
         this.scene.anims.create({
             key: 'right',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 6, end: 8 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames[4], end: this.frames[5] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
         this.scene.anims.create({
             key: 'up',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 9, end: 11 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames[6], end: this.frames[7] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
@@ -59,31 +88,29 @@ export default class player extends person{
           //SOMBRERO
           this.scene.anims.create({
             key: 'sombrerodown',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 12, end: 14 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames_sombrero[0], end: this.frames_sombrero[1] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
 
         this.scene.anims.create({
             key: 'sombreroleft',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 15, end: 17 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames_sombrero[2], end: this.frames_sombrero[3] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
         this.scene.anims.create({
             key: 'sombreroright',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 18, end: 20 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames_sombrero[4], end: this.frames_sombrero[5] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
         this.scene.anims.create({
             key: 'sombreroup',
-            frames: this.scene.anims.generateFrameNumbers(type, { start: 21, end: 23 }),
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames_sombrero[6], end: this.frames_sombrero[7] }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
-  
-  
 
         
     }
