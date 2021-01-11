@@ -28,6 +28,7 @@ export default class person extends gameobject{
     }
 
     move_up(){
+        console.log("Up");
         this.body.velocity.x = 0;
         this.body.velocity.y = 0;
         this.body.velocity.y -= this.speed;
@@ -51,6 +52,9 @@ export default class person extends gameobject{
 
     multiply_velocity (percentage){
         this.speed = this.speed + this.speed*percentage/100;
+    }
+    multiply_speed(multiplier){
+        this.set_speed(this.speed * multiplier);
     }
     
     set_speed (speed){

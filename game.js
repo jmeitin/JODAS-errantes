@@ -100,7 +100,7 @@ export default class game extends Phaser.Scene {
     this.flecha = 'flecha';
     this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
     this.physics.add.collider(this.player, this.colision_layer);
-    this.colision_layer.setCollisionByProperty({colision: true});
+    
 
 
 
@@ -122,8 +122,9 @@ export default class game extends Phaser.Scene {
     }
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.policia = new policia(this, spawnpoint.x, spawnpoint.y, 1, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles); 
-
+    this.policia = new policia(this, spawnpoint.x, spawnpoint.y, 2, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles); 
+    this.physics.add.collider(this.policia, this.colision_layer);
+    this.colision_layer.setCollisionByProperty({colision: true});
     this.cameras.main.startFollow(this.player);    
 
     

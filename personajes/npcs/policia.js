@@ -1,22 +1,22 @@
 import gameobject from "../../clases/gameobject.js";
 import person from "../person.js";
 
-export default class policia extends gameobject {
+export default class policia extends person {
 
     //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
-    constructor(scene, x, y, speed,  image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles) {
-        super(scene, x, y, image);
+    constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles) {
+        super(scene, x, y, image, speed);
         
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
+        this.x1 = x;
+        this.y1 = y;
+        this.speed1 = speed;
         this.campo_vision_x = campo_vision_x;
         this.campo_auditivo_x = campo_auditivo_x;
         this.control_policial_x = control_policial_x;
         this.player = player;
         this.civiles = civiles;
 
-       this.container = scene.add.container(this.x, this.y);   
+       this.container = scene.add.container(this.x1, this.y1);   
 
        //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
        this.control_policial = scene.add.zone(0, 0);
@@ -102,10 +102,11 @@ export default class policia extends gameobject {
     // preUpdate(time, delta) {}
     preUpdate(time, delta){
         super.preUpdate(time, delta);
-        this.move();
+        //this.move();
        // console.log('Container');
         if (this.dir_y > 0.5){
-           this.anims.play('poliup', true);//----------------------------------------------------------------------------------------------------------------------------
+           this.anims.play('poliup', true);
+           this.move_up();//----------------------------------------------------------------------------------------------------------------------------
 
            //this.anims.play('right', true);
         }
@@ -198,24 +199,55 @@ export default class policia extends gameobject {
     }   
 
     move(){
-       if (this.dir_x != 0 && this.dir_y !=0){ //DIAGONAL
-           this.move_x();
-           this.move_y();
-       }
-
-       else if (this.dir_x == 0 && this.dir_y !=0){ //VERTICAL
-           this.move_y();
-       }
-       
-       else if (this.dir_x != 0 && this.dir_y == 0){ //HORIZONTAL
-           this.move_x();
-       }
-       else{ //quieto
-
-       }//
+        this.xabsoluto=Math.abs(this.dir_x);
+        this.yabsoluto=Math.abs(this.dir_y);
+        if(this.dir_x > 0 &&this.dir_y>0){      //derecha y arriba
+            if(this.xabsoluto>this.yabsoluto){
+                this.move_right();  
+                //this.container.x += this.speed;        
+            }
+            else{
+                this.move_up();
+                //this.container.y += this.speed;   
+            }
+        }
+        else if(this.dir_x > 0 &&this.dir_y<0){             //derecha abajo
+            if(this.xabsoluto>this.yabsoluto){
+                this.move_right();
+                //this.container.x += this.speed; 
+            }
+            else{
+                this.move_down();
+                //this.container.y -= this.speed;   
+            }
+        }
+        else if(this.dir_x < 0 &&this.dir_y<0){             //izquierda abajo
+            if(this.xabsoluto>this.yabsoluto){
+                this.move_left();
+                //this.container.x -= this.speed; 
+            }
+            else{
+                this.move_down();
+                //this.container.y -= this.speed;   
+            }
+        }
+        else if(this.dir_x < 0 &&this.dir_y>0){             //izquierda arriba
+            if(this.xabsoluto>this.yabsoluto){
+                this.move_left();
+                //this.container.x -= this.speed; 
+            }
+            else{
+                this.move_up();
+                //this.container.y += this.speed;   
+            }
+        }
+        else{
+            this.move_down();
+        }
+      
     }
 
-    move_x(){
+    /*move_x(){
         this.x += this.dir_x * this.speed;
         this.container.x += this.dir_x * this.speed;
     }
@@ -223,7 +255,7 @@ export default class policia extends gameobject {
     move_y(){
         this.y += this.dir_y * this.speed;
         this.container.y += this.dir_y * this.speed;
-    }
+    }*/
 
 
     //CALCULA LA DIR EN LA QUE TIENE QUE SEGUIR AL JUGADOR
@@ -232,7 +264,7 @@ export default class policia extends gameobject {
         this.jugador_y = jugador_y;    
   
         //get angle
-        this.angle = Math.atan2(this.jugador_y - this.y, this.jugador_x - this.x); //CALCULA EL ANGULO
+        this.angle = Math.atan2(this.jugador_y - this.y1, this.jugador_x - this.x1); //CALCULA EL ANGULO
 
         this.dir_x = Math.cos(this.angle);
         this.dir_y = Math.sin(this.angle);
@@ -242,7 +274,7 @@ export default class policia extends gameobject {
         this.descubierto = descubierto;
         
         
-        console.log('descubierto: ', this.speed); 
+        console.log('descubierto: ', this.speed1); 
     }
 
     get_descubierto(){
@@ -295,31 +327,11 @@ export default class policia extends gameobject {
     }
 
 
-    multiply_speed(multiplier){
-        this.set_speed(this.speed * multiplier);
-    }
+    
 
 
     //persona
-    move_left(){
-        this.x += this.speed;
-    }
 
-    move_right(){
-        this.x+= this.speed;
-    }
-
-    move_up(){
-        this.y-= this.speed;
-    }
-
-    move_down(){
-        this.y+= this.speed;
-    }
-
-    set_speed (speed){
-        this.speed = speed;
-    }
 
 
 
