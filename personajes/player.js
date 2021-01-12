@@ -145,6 +145,9 @@ export default class player extends person{
             if (this.sombrero) this.anims.play('sombrerodown', true);
             else this.anims.play('down', true);
         }
+
+
+        
         if(this.cursorkeys.space.isDown) this.stop();
         this.update_flecha();
 
