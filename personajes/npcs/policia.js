@@ -63,7 +63,7 @@ export default class policia extends person {
         //ANIMACIONES
         this.frame_rate = 4;
         this.scene.anims.create({
-            key: 'poliup',
+            key: 'polifront',
             frames: this.scene.anims.generateFrameNumbers(image, { start: 0, end: 3 }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
@@ -85,180 +85,50 @@ export default class policia extends person {
 
          
           this.scene.anims.create({
-            key: 'polidown',
+            key: 'poliback',
             frames: this.scene.anims.generateFrameNumbers(image, { start: 12, end: 15 }),
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
 
-         
-  
-  
-
-
     }
    
 
-    // preUpdate(time, delta) {}
     preUpdate(time, delta){
         super.preUpdate(time, delta);
-        //this.move();
-       // console.log('Container');
-        if (this.dir_y > 0.5){
-           this.anims.play('poliup', true);
-           this.move_up();
-           //this.anims.play('right', true);
-        }
-        else if (this.dir_y < -0.5){
-           this.anims.play('polidown', true);
-           this.move_down();
-           // console.log("ANIM");
-        }
-        else if (this.dir_x < 0){
-            this.anims.play('polileft', true);
-            this.move_left();
-            // console.log("ANIM");
-         }
-         else if (this.dir_x > 0){
-            this.anims.play('poliright', true);
-            this.move_right();
-         }
-        
-       // this.anims.play('polidown', true);
-
-        
-
-
-        ///////////////////////////////////////////////ZONA DE RADIOS POLICIA///////////////////////////////////////////////////
-
-        this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
-        this.jugador_y = this.player.get_y();
-
-        //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-        if (this.scene.physics.overlap(this.player, this.campo_auditivo)){
-
-            this.civiles.forEach((civil) =>{
-                //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
-                if (this.scene.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA               
-                    this.calcular_dir(this.jugador_x, this.jugador_y);      
-                    // console.log("Quien anda ahi?!");
-                }
-            })
-
-        
-            //PLAYER ESTA DENTRO DEL RANGO DE VISION
-            if(this.scene.physics.overlap(this.player, this.campo_vision)) { 
-                console.log(this.get_reconoce_sin_sombrero());
-                this.calcular_dir(this.jugador_x, this.jugador_y); 
-
-                //si le he visto con la bomba previamente(ha entrado en radio pequeño), empiezo a perseguirle rapido
-                if(this.get_descubierto() && !this.get_persiguiendo()){
-                    this.set_persiguiendo(true, this.player.get_sombrero());
-                }
-                
-
-                //CONTROL POLICIAL
-                if(this.scene.physics.overlap(this.player,  this.control_policial)){
-                    if(!this.get_persiguiendo()){
-                        //el policia descubre que eres terrorista
-                        this.set_persiguiendo(true, this.player.get_sombrero());
-                        this.set_descubierto(true);
-                    }
-                    
-                    console.log('CONTROL POLICIAL');
-                    
-
-                    // SI POLICIA CHOCA CON PLAYER
-                    if (this.scene.physics.overlap(this.player, this)){  //MUERTO
-                            //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
-                        
-                        console.log ("Usted queda ARRESTADO");
-                        this.player.set_speed(0); //el player ya no se puede mover
-                        this.set_speed(0);
-
-                        if (this.player.has_gun()) {
-                            console.log ("Pues me SUICIDIO");
-                            //FALTA ANIMACION-------------------------------------------------------------------------------------------------------------------
-                        }
-                        // imagen fin partida
-                        // meter tambien un timer o algo
-                        this.scene.parar_musica();
-                        this.scene.scene.start('end_menu',{vic:false,score:0});
-                    }
-
-                } //control policial
-
-                
-                
-            } //rango de vision
-
-            else{
-                if(this.get_persiguiendo()){
-                    this.set_persiguiendo(false, this.player.get_sombrero());
-                }
-            }        
-        }//  //campo auditivo
+        this.move();
+        this.rangos_vision();  
+     
     }   
 
     move(){
-        this.xabsoluto=Math.abs(this.dir_x);
-        this.yabsoluto=Math.abs(this.dir_y);
-        if(this.dir_x > 0 &&this.dir_y>0){      //derecha y arriba
-            if(this.xabsoluto>this.yabsoluto){
-                this.move_right();  
-                //this.container.x += this.speed;        
-            }
-            else{
-                this.move_up();
-                //this.container.y += this.speed;   
-            }
+        if (this.dir_x > 0){
+            this.move_right();
+            this.anims.play('poliright', true);
         }
-        else if(this.dir_x > 0 &&this.dir_y<0){             //derecha abajo
-            if(this.xabsoluto>this.yabsoluto){
-                this.move_right();
-                //this.container.x += this.speed; 
-            }
-            else{
-                this.move_down();
-                //this.container.y -= this.speed;   
-            }
+        else if (this.dir_x < 0){
+            this.move_left();
+            this.anims.play('polileft', true);  
         }
-        else if(this.dir_x < 0 &&this.dir_y<0){             //izquierda abajo
-            if(this.xabsoluto>this.yabsoluto){
-                this.move_left();
-                //this.container.x -= this.speed; 
-            }
-            else{
-                this.move_down();
-                //this.container.y -= this.speed;   
-            }
-        }
-        else if(this.dir_x < 0 &&this.dir_y>0){             //izquierda arriba
-            if(this.xabsoluto>this.yabsoluto){
-                this.move_left();
-                //this.container.x -= this.speed; 
-            }
-            else{
-                this.move_up();
-                //this.container.y += this.speed;   
-            }
-        }
-        else{
+        else if (this.dir_y > 0){
             this.move_down();
+            this.anims.play('polifront', true);
         }
-      
+        else if (this.dir_y < 0){
+            this.move_up();
+            this.anims.play('poliback', true);
+        }
+        else {
+            this.stop ();
+            //this.anims.play('poliup', true);
+        }
+         
+
+        this.container.x = this.x;
+        this.container.y = this.y;      
     }
 
-    /*move_x(){
-        this.x += this.dir_x * this.speed;
-        this.container.x += this.dir_x * this.speed;
-    }
-
-    move_y(){
-        this.y += this.dir_y * this.speed;
-        this.container.y += this.dir_y * this.speed;
-    }*/
-
+   
 
     //CALCULA LA DIR EN LA QUE TIENE QUE SEGUIR AL JUGADOR
     calcular_dir(jugador_x, jugador_y){
@@ -266,10 +136,101 @@ export default class policia extends person {
         this.jugador_y = jugador_y;    
   
         //get angle
-        this.angle = Math.atan2(this.jugador_y - this.y1, this.jugador_x - this.x1); //CALCULA EL ANGULO
+        this.dirxxx = this.jugador_x - this.x;
+        this.diryyy = this.jugador_y - this.y;
+       // console.log ("DIR X = ", this.dirxxx);
+        //console.log ("DIR Y = ", this.diryyy);
 
-        this.dir_x = Math.cos(this.angle);
-        this.dir_y = Math.sin(this.angle);
+        this.xabsoluto = Math.abs(this.dirxxx);
+        this.yabsoluto = Math.abs(this.diryyy);
+
+        if (this.xabsoluto > this.yabsoluto){ //EJE HORIZONTAL
+            if (this.dirxxx > 0) this.dir_x = 1;
+            else this.dir_x = -1;
+
+            this.dir_y = 0;
+        }
+        else { //EJE VERTICAL
+            if (this.diryyy > 0) this.dir_y = 1;
+            else this.dir_y = -1;
+
+            this.dir_x = 0;//
+        }
+       // console.log ("DIR X = ", this.dir_x);
+       // console.log ("DIR Y = ", this.dir_y);
+    }
+
+
+    rangos_vision (){
+           ///////////////////////////////////////////////ZONA DE RADIOS POLICIA///////////////////////////////////////////////////
+
+           this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
+           this.jugador_y = this.player.get_y();
+   
+           //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
+           if (this.scene.physics.overlap(this.player, this.campo_auditivo)){
+   
+               this.civiles.forEach((civil) =>{
+                   //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
+                   if (this.scene.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA               
+                       this.calcular_dir(this.jugador_x, this.jugador_y);      
+                       // console.log("Quien anda ahi?!");
+                   }
+               })
+   
+           
+               //PLAYER ESTA DENTRO DEL RANGO DE VISION
+               if(this.scene.physics.overlap(this.player, this.campo_vision)) { 
+                  // console.log(this.get_reconoce_sin_sombrero());
+                   this.calcular_dir(this.jugador_x, this.jugador_y); 
+   
+                   //si le he visto con la bomba previamente(ha entrado en radio pequeño), empiezo a perseguirle rapido
+                   if(this.get_descubierto() && !this.get_persiguiendo()){
+                       this.set_persiguiendo(true, this.player.get_sombrero());
+                   }
+                   
+   
+                   //CONTROL POLICIAL
+                   if(this.scene.physics.overlap(this.player,  this.control_policial)){
+                       if(!this.get_persiguiendo()){
+                           //el policia descubre que eres terrorista
+                           this.set_persiguiendo(true, this.player.get_sombrero());
+                           this.set_descubierto(true);
+                       }
+                       
+                       console.log('CONTROL POLICIAL');
+                       
+   
+                       // SI POLICIA CHOCA CON PLAYER
+                       if (this.scene.physics.overlap(this.player, this)){  //MUERTO
+                               //FIN DE JUEGO-------------------------------------------------------------------------------------------------------------------
+                           
+                           console.log ("Usted queda ARRESTADO");
+                           this.player.set_speed(0); //el player ya no se puede mover
+                           this.set_speed(0);
+   
+                           if (this.player.has_gun()) {
+                               console.log ("Pues me SUICIDIO");
+                               //FALTA ANIMACION-------------------------------------------------------------------------------------------------------------------
+                           }
+                           // imagen fin partida
+                           // meter tambien un timer o algo
+                           this.scene.parar_musica();
+                           this.scene.scene.start('end_menu',{vic:false,score:0});
+                       }
+   
+                   } //control policial
+   
+                   
+                   
+               } //rango de vision
+   
+               else{
+                   if(this.get_persiguiendo()){
+                       this.set_persiguiendo(false, this.player.get_sombrero());
+                   }
+               }        
+           }//  //campo auditivo
     }
 
     set_descubierto(descubierto){
@@ -332,7 +293,7 @@ export default class policia extends person {
     
 
 
-    //persona
+
 
 
 

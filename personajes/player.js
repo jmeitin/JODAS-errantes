@@ -147,6 +147,8 @@ export default class player extends person{
         }
         if(this.cursorkeys.space.isDown) this.stop();
         this.update_flecha();
+
+      //  console.log ("player ", this.y);
     }
 
     update_flecha(){

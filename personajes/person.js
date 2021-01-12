@@ -28,7 +28,7 @@ export default class person extends gameobject{
     }
 
     move_up(){
-        console.log("Up");
+       // console.log("Up");
         this.body.velocity.x = 0;
         this.body.velocity.y = 0;
         this.body.velocity.y -= this.speed;
