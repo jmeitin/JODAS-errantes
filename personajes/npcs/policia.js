@@ -96,7 +96,6 @@ export default class policia extends person {
 
     preUpdate(time, delta){
         super.preUpdate(time, delta);
-        console.log("Plocia");
         this.move();
         this.rangos_vision();  
      
