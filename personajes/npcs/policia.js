@@ -208,15 +208,15 @@ export default class policia extends person {
                            console.log ("Usted queda ARRESTADO");
                            this.player.set_speed(0); //el player ya no se puede mover
                            this.set_speed(0);
+                           let suicidio = false;
    
                            if (this.player.has_gun()) {
                                console.log ("Pues me SUICIDIO");
-                               //FALTA ANIMACION-------------------------------------------------------------------------------------------------------------------
-                           }
-                           // imagen fin partida
+                               suicidio = true;
+                             }
                            // meter tambien un timer o algo
                            this.scene.parar_musica();
-                           this.scene.scene.start('end_menu',{vic:false,score:0});
+                           this.scene.scene.start('end_menu',{vic:false,score:0,sui:suicidio});
                        }
    
                    } //control policial

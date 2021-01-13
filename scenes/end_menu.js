@@ -3,11 +3,13 @@ export default class end_menu extends Phaser.Scene{
         super({key:"end_menu"});
         this.bool_victoria;
         this.score;
+        this.suicidio;
     }
 
     init(data){
         this.bool_victoria = data.vic;
         this.score = data.score;
+        this.suicidio = data.sui;
     }
 
     preload(){
@@ -17,10 +19,33 @@ export default class end_menu extends Phaser.Scene{
         else{
             this.load.image('fondo_menu_final','imgs/fondos/derrota.png');
         }
+        if(this.suicidio) this.load.audio('suicidio','sounds/suicidio.mp3');
         this.load.image('continue','imgs/botones/continuar.png');
     }
 
     create(){
+        if(this.suicidio){
+            const config = {
+                mute: false,
+                volume: 0.2,
+                rate: 1,
+                detune: 0,
+                seek: 0,
+                loop: false,
+                delay: 0
+              };
+              let music = this.sound.add('suicidio',config);
+              music.play();
+              this.timer = this.time.addEvent({delay:10000, callback: this.set_scene, callbackScope:this, repeat:0});
+        }
+        else this.set_scene();
+    }
+
+    update(){
+
+    }
+
+    set_scene(){
         this.add.image(710,400,'fondo_menu_final').setScale(1.5);
 
         this.add.text(500,650,"Puntuacion: " + this.score).setFontSize(50);
@@ -35,10 +60,5 @@ export default class end_menu extends Phaser.Scene{
         this.boton_continuar.on("pointerdown",()=>{
             this.scene.start('main_menu');
         });
-
-    }
-
-    update(){
-
     }
 }
