@@ -19,7 +19,10 @@ export default class end_menu extends Phaser.Scene{
         else{
             this.load.image('fondo_menu_final','imgs/fondos/derrota.png');
         }
-        if(this.suicidio) this.load.audio('suicidio','sounds/suicidio.mp3');
+        if(this.suicidio) {
+            this.load.audio('suicidio','sounds/suicidio.mp3');
+            this.load.image('suicidio_texto','imgs/fondos/suicidio_texto.png');
+        }
         this.load.image('continue','imgs/botones/continuar.png');
     }
 
@@ -36,7 +39,8 @@ export default class end_menu extends Phaser.Scene{
               };
               let music = this.sound.add('suicidio',config);
               music.play();
-              this.timer = this.time.addEvent({delay:10000, callback: this.set_scene, callbackScope:this, repeat:0});
+              this.timer2 = this.time.addEvent({delay:9000, callback:this.mensaje_suicidio, callbackScope:this,repeat:0});
+              this.timer = this.time.addEvent({delay:12000, callback: this.set_scene, callbackScope:this, repeat:0});
         }
         else this.set_scene();
     }
@@ -45,7 +49,14 @@ export default class end_menu extends Phaser.Scene{
 
     }
 
+    mensaje_suicidio(){
+        this.cameras.main.fadeIn(1000);
+        this.mensaje = this.add.image(710,400,'suicidio_texto');
+    }
+
     set_scene(){
+        this.mensaje.destroy(false);
+        this.cameras.main.fadeIn(100);
         this.add.image(710,400,'fondo_menu_final').setScale(1.5);
 
         this.add.text(500,650,"Puntuacion: " + this.score).setFontSize(50);
