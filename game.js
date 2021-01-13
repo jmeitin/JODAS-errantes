@@ -100,7 +100,7 @@ export default class game extends Phaser.Scene {
     this.cursor_keys = this.input.keyboard.createCursorKeys();    
 
     this.funcion_botones();
-    const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnpoint");
+    const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnplayer");
 
     this.flecha = 'flecha';
     this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
@@ -127,9 +127,21 @@ export default class game extends Phaser.Scene {
     }
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
-    this.policia = new policia(this, spawnpoint.x, spawnpoint.y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles); 
-    this.physics.add.collider(this.policia, this.colision_layer);
-    this.colision_layer.setCollisionByProperty({colision: true});
+    const spawnpolice =[
+     this.map.findObject("person", obj => obj.name === "spawnpolice1"),
+     this.map.findObject("person", obj => obj.name === "spawnpolice2"),
+     this.map.findObject("person", obj => obj.name === "spawnpolice3"),
+     this.map.findObject("person", obj => obj.name === "spawnpolice4"),
+     this.map.findObject("person", obj => obj.name === "spawnpolice5") 
+    ];
+    this.policias=[];
+    this.policias.forEach((police, i=0)=>{
+      police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles); 
+      console.log("heeey");
+      i++;
+    })
+    this.physics.add.collider(this.policias, this.colision_layer);
+    this.colision_layer.setCollisionByProperty({colision: true});   //Si los tiled tienen colision a true, se choca con la pared
     this.cameras.main.startFollow(this.player);    
 
     
@@ -146,7 +158,6 @@ export default class game extends Phaser.Scene {
       this.scene.run('game_menu');
       this.scene.pause();
     }
-
     //modificamos posicion de inventario
     this.contenedor_inventario.x = this.player.x - 600;
     this.contenedor_inventario.y = this.player.y - 300;
@@ -182,16 +193,19 @@ export default class game extends Phaser.Scene {
 
           if (this.inventario[this.i] =='sombrero'){ 
             this.player.set_sombrero(true);
-            
-            if(!this.physics.overlap(this.player, this.policia.campo_vision)){
-              console.log("Te has puesto el sombrero");
 
-              if(!this.policia.get_reconoce_sombrero()){
-                this.policia.set_descubierto(false);
-                //this.policia.
+            this.policias.forEach((police)=>{
+              if(!this.physics.overlap(this.player, police.campo_vision)){
+                console.log("Te has puesto el sombrero");
+  
+                if(!police.get_reconoce_sombrero()){
+                  police.set_descubierto(false);
+                  //this.policia.
+                }
+  
               }
-
-            }
+            })
+           
           }
           else if (this.inventario[this.i] =='pistola'){ 
             //ANIMACION - CAMBIO ESCENA
@@ -208,15 +222,17 @@ export default class game extends Phaser.Scene {
 
           if (this.inventario[this.i] =='sombrero'){ 
             this.player.set_sombrero(false);
-
-            if(!this.physics.overlap(this.player, this.policia.campo_vision)){
-              console.log("Te has quitado el sombrero");
-
-              if(!this.policia.get_reconoce_sin_sombrero()){
-                this.policia.set_descubierto(false);
+            this.policias.forEach((police)=>{
+              if(!this.physics.overlap(this.player, police.campo_vision)){
+                console.log("Te has quitado el sombrero");
+  
+                if(!police.get_reconoce_sin_sombrero()){
+                  police.set_descubierto(false);
+                }
+  
               }
-
-            }
+            })
+            
           }
         }
         
