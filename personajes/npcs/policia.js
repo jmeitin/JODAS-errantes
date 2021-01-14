@@ -7,8 +7,8 @@ export default class policia extends person {
     constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles) {
         super(scene, x, y, image, speed);
         
-        this.x1 = x;
-        this.y1 = y;
+
+
         this.speed1 = speed;
         this.campo_vision_x = campo_vision_x;
         this.campo_auditivo_x = campo_auditivo_x;
@@ -16,7 +16,7 @@ export default class policia extends person {
         this.player = player;
         this.civiles = civiles;
 
-       this.container = scene.add.container(this.x1, this.y1);   
+       this.container = scene.add.container(x, y);   
 
        //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
        this.control_policial = scene.add.zone(0, 0);
@@ -58,6 +58,10 @@ export default class policia extends person {
         this.reconoce_sombrero = false;
         this.reconoce_sin_sombrero = false;
         
+
+        this.time=new Date().getTime();         //para que los policias no se queden parados cuando colisionen
+        this.posiblesdir=[{x:1, y:0}, {x:0, y:-1}, {x:-1, y:0}, {x:0, y:1}];
+
 
 
         //ANIMACIONES
@@ -102,6 +106,12 @@ export default class policia extends person {
     }   
 
     move(){
+        if(this.start+20000>=new Date().getTime()){
+            this.i=this.get_random_int(0, 4);
+            this.dir_x=this.posiblesdir[i].x;
+            this.dir_y=this.posiblesdir[i].y;
+            this.start=new Date().getTime();
+        }
         if (this.dir_x > 0){
             this.move_right();
             this.anims.play('poliright', true);
@@ -134,7 +144,7 @@ export default class policia extends person {
     calcular_dir(jugador_x, jugador_y){
         this.jugador_x = jugador_x;
         this.jugador_y = jugador_y;    
-  
+        
         //get angle
         this.dirxxx = this.jugador_x - this.x;
         this.diryyy = this.jugador_y - this.y;
@@ -147,14 +157,18 @@ export default class policia extends person {
         if (this.xabsoluto > this.yabsoluto){ //EJE HORIZONTAL
             if (this.dirxxx > 0) this.dir_x = 1;
             else this.dir_x = -1;
-
+    
             this.dir_y = 0;
+            
+
         }
         else { //EJE VERTICAL
             if (this.diryyy > 0) this.dir_y = 1;
             else this.dir_y = -1;
 
             this.dir_x = 0;//
+
+           
         }
        // console.log ("DIR X = ", this.dir_x);
        // console.log ("DIR Y = ", this.dir_y);
@@ -290,7 +304,7 @@ export default class policia extends person {
     }
 
 
-    
+
 
 
 

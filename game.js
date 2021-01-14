@@ -161,10 +161,14 @@ export default class game extends Phaser.Scene {
   update(time, delta) {
 
     this.player.movement_manager();
+    
+    
+
     if(this.player.pausa()) {
       this.scene.run('game_menu');
       this.scene.pause();
     }
+
     //modificamos posicion de inventario
     this.contenedor_inventario.x = this.player.x - 600;
     this.contenedor_inventario.y = this.player.y - 300;
