@@ -59,7 +59,8 @@ export default class policia extends person {
         this.reconoce_sin_sombrero = false;
         
 
-        this.time=new Date().getTime();         //para que los policias no se queden parados cuando colisionen
+        this.last_time=new Date().getTime();         //para que los policias no se queden parados cuando colisionen
+        this.current_time = this.last_time;
         this.posiblesdir=[{x:1, y:0}, {x:0, y:-1}, {x:-1, y:0}, {x:0, y:1}];
 
 
@@ -103,15 +104,31 @@ export default class policia extends person {
         this.move();
         this.rangos_vision();  
      
+        this.current_time = new Date().getTime();
     }   
 
     move(){
-        if(this.start+20000>=new Date().getTime()){
-            this.i=this.get_random_int(0, 4);
-            this.dir_x=this.posiblesdir[i].x;
-            this.dir_y=this.posiblesdir[i].y;
-            this.start=new Date().getTime();
+
+        //si no veo a player && ha pasado cierto tiempo cambio de dir
+        if(!this.scene.physics.overlap(this.player, this.campo_vision) && this.current_time >=this.last_time + 20000){
+            this.i = this.get_random_int(0, 4);
+            this.a = this.posiblesdir[this.i].x;
+            this.b = this.posiblesdir[this.i].y;
+   
+            while (this.dir_x == this. a && this.dir_y == this.b){
+                this.i=this.get_random_int(0, 4);
+                this.a = this.posiblesdir[this.i].x;
+                this.b = this.posiblesdir[this.i].y;
+            }
+            this.dir_x = this.a;
+            this.dir_y = this.b;
+
+            this.last_time = new Date().getTime();
+           // console.log ("nuevo start");
         }
+        //else this.last_time = new Date().getTime();
+       // else console.log ("idiota");
+
         if (this.dir_x > 0){
             this.move_right();
             this.anims.play('poliright', true);
@@ -159,16 +176,12 @@ export default class policia extends person {
             else this.dir_x = -1;
     
             this.dir_y = 0;
-            
-
         }
         else { //EJE VERTICAL
             if (this.diryyy > 0) this.dir_y = 1;
             else this.dir_y = -1;
 
             this.dir_x = 0;//
-
-           
         }
        // console.log ("DIR X = ", this.dir_x);
        // console.log ("DIR Y = ", this.dir_y);
