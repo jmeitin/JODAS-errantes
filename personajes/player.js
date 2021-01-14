@@ -84,6 +84,12 @@ export default class player extends person{
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
+          this.scene.anims.create({
+            key: 'stop',
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames[0]+1, end: this.frames[0]+1 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
 
           //SOMBRERO
           this.scene.anims.create({
@@ -145,10 +151,16 @@ export default class player extends person{
             if (this.sombrero) this.anims.play('sombrerodown', true);
             else this.anims.play('down', true);
         }
+        else {//if (this.cursorkeys.space.isDown){ //-----------------------------------------------------------------------------------------------------------------------
+          //this.anims.play ("stop", true);
+          //this.stop();
+        }
 
+        if(this.cursorkeys.space.isDown){
+          this.stop();
+          this.anims.play ("stop", true);
 
-        
-        if(this.cursorkeys.space.isDown) this.stop();
+        } 
         this.update_flecha();
 
       //  console.log ("player ", this.y);
