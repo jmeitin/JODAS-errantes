@@ -5,8 +5,13 @@ export default class fase3 extends Phaser.Scene {
     constructor(){
         super({
             key: 'fase3'
-        })
+        });
+        this.contenedor_inventario;
     }
+    init (data){
+        this.inventario = data.inventario;
+      
+      }
 
     preload(){
         this.load.image('civil', './imgs/viandante0.png');
@@ -17,6 +22,7 @@ export default class fase3 extends Phaser.Scene {
         this.load.image('carroza', './imgs/carroza.png');
         this.load.image('victoria', './imgs/fondos/victoria.png');
         this.load.image('derrota', './imgs/fondos/derrota.png');
+        this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
     }
 
     create(){
@@ -32,10 +38,18 @@ export default class fase3 extends Phaser.Scene {
         this.bomba = new Bomba(this, -500, 0, "bomba");
         this.lanzada = false;
         this.fixed = false;
-        this.scale = 1;
+        this.initScale = 1;
+        this.crea_inventario();
+        if(this.inventario.includes('bomba_plus')){
+            this.initScale += 0.25;
+        }
+        if(this.inventario.includes('bomba_minus')){
+            this.initScale -= 0.25; 
+        }
+        this.scale = this.initScale;
         this.pointer = this.input.activePointer;
         this.music=this.sound.add('music', {loop: true});
-        music.play();
+        this.music.play();
         this.carroza = new Civil(this, 870, 1020, "carroza", 10);
         this.civiles = [];
         for(let i = 0; i < 10; i++){
@@ -54,6 +68,7 @@ export default class fase3 extends Phaser.Scene {
         }
         this.text = this.add.text(0, 0,  'Puntuación: ' + this.score);
         this.text.setFontSize(50);
+        
     }
 
     update(){
@@ -66,11 +81,11 @@ export default class fase3 extends Phaser.Scene {
             //this.input.setDefaultCursor('default, pointer');
         }
         if(this.fixed && !this.lanzada){
-            if(this.scale < 1.5){
+            if(this.scale < this.initScale + 0.5){
                 this.scale += 0.01;
             }
             else{
-                this.scale = 1;
+                this.scale = this.initScale;
             }
             this.bomba.setScale(this.scale);
             if(!this.pointer.isDown){
@@ -103,4 +118,18 @@ export default class fase3 extends Phaser.Scene {
         
     }
     
+    crea_inventario(){
+        this.contenedor_inventario = this.add.container(100, 100);
+        console.log(this.inventario.length);
+        this.coloca_me_en = 0;
+        
+        for(this.i = 0; this.i < this.inventario.length; this.i++){
+          this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, 'inventory'));
+          this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, this.inventario[this.i]).setScale(0.3));
+          
+          this.coloca_me_en += 100;
+  
+        }
+  
+    }
 }
