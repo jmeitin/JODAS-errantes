@@ -4,9 +4,12 @@ import person from "../person.js";
 export default class policia extends person {
 
     //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
-    constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles) {
+    constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles, img_rango_para) {
         super(scene, x, y, image, speed);
-        
+
+        let img_rango = img_rango_para;
+        this.imagen_rango = this.scene.add.image(this.x,this.y,img_rango);
+        this.imagen_rango.setBlendMode(Phaser.BlendModes.ADD);
 
 
         this.speed1 = speed;
@@ -101,14 +104,18 @@ export default class policia extends person {
 
     preUpdate(time, delta){
         super.preUpdate(time, delta);
+        this.dibuja_rango();
         this.move();
         this.rangos_vision();  
      
         this.current_time = new Date().getTime();
     }   
 
-    move(){
+    dibuja_rango(){
+        this.imagen_rango.setPosition(this.x,this.y);
+    }
 
+    move(){
         //si no veo a player && ha pasado cierto tiempo cambio de dir
         if(!this.scene.physics.overlap(this.player, this.campo_vision) && this.current_time >=this.last_time + 20000){
             this.i = this.get_random_int(0, 4);
