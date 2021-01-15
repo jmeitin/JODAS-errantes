@@ -136,7 +136,7 @@ export default class game extends Phaser.Scene {
     ];
     this.policias=[];
     for(let i = 0; i < 6; i++){
-      let police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja');
+      let police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
       this.physics.add.collider(police, this.colision_layer);
       this.policias.push (police);
     }
