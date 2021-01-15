@@ -117,6 +117,8 @@ export default class game extends Phaser.Scene {
 
     this.civiles = []; // constructor(scene, x, y, type, speed, fase3){
     
+
+    /*
     for(let i = 0; i < 2; i++){
       for(let j = 0; j < 4; j++){
         let civil_1 = new civil(this, spawnciviles[this.i].x + Math.random(-100, 100), spawnciviles[this.i].y + Math.random(-100, 100), "civil", 100, false);
@@ -124,6 +126,9 @@ export default class game extends Phaser.Scene {
         this.civiles.push(civil_1);
       }
     }
+    */
+
+
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     const spawnpolice =[
@@ -155,6 +160,8 @@ export default class game extends Phaser.Scene {
     this.physics.add.collider(police5, this.colision_layer);
     this.policias.push (police5);
 
+    this.pasofase = this.map.findObject("person", obj => obj.name === "finfase"); 
+
     this.colision_layer.setCollisionByProperty({colision: true});   //Si los tiled tienen colision a true, se choca con la pared
     this.cameras.main.startFollow(this.player);    
 
@@ -166,7 +173,6 @@ export default class game extends Phaser.Scene {
   }
 
   update(time, delta) {
-
     this.player.movement_manager();
     
     
@@ -183,6 +189,9 @@ export default class game extends Phaser.Scene {
         })
       }
     })
+    if(this.player.x == this.pasofase.x && this.player.y == this.pasofase.y){
+      this.scene.start('fase3', {inventario:this.inventario});
+    }
 
     //modificamos posicion de inventario
     this.contenedor_inventario.x = this.player.x - 600;
