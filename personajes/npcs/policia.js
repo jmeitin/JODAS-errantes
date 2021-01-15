@@ -4,13 +4,18 @@ import person from "../person.js";
 export default class policia extends person {
 
     //ew MyContainer(this, 400, 500, 1, 'cop', this.campoVisionX, this.campoAuditivoX); 
-    constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles, img_rango_para) {
+    constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles, img_rango_para, ex_ama_para, ex_roja_para) {
         super(scene, x, y, image, speed);
 
         let img_rango = img_rango_para;
         this.imagen_rango = this.scene.add.image(this.x,this.y,img_rango);
         this.imagen_rango.setBlendMode(Phaser.BlendModes.ADD);
 
+        
+        this.exc_ama = this.scene.add.image(this.x,this.y-150, ex_ama_para).setScale(0.5);
+        this.exc_roja = this.scene.add.image(this.x,this.y-150, ex_roja_para).setScale(0.5);
+        this.exc_ama.setAlpha(0);
+        this.exc_roja.setAlpha(0);
 
         this.speed1 = speed;
         this.campo_vision_x = campo_vision_x;
@@ -106,6 +111,7 @@ export default class policia extends person {
         super.preUpdate(time, delta);
         this.dibuja_rango();
         this.move();
+        this.dibuja_exc();
         this.rangos_vision();  
      
         this.current_time = new Date().getTime();
@@ -115,9 +121,16 @@ export default class policia extends person {
         this.imagen_rango.setPosition(this.x,this.y);
     }
 
+    dibuja_exc(){
+        this.exc_ama.setPosition(this.x,this.y-150);
+        this.exc_roja.setPosition(this.x,this.y-150);
+    }
+
     move(){
         //si no veo a player && ha pasado cierto tiempo cambio de dir
         if(!this.scene.physics.overlap(this.player, this.campo_vision) && this.current_time >=this.last_time + 20000){
+            this.exc_ama.setAlpha(0);
+            this.exc_roja.setAlpha(0);
             this.i = this.get_random_int(0, 4);
             this.a = this.posiblesdir[this.i].x;
             this.b = this.posiblesdir[this.i].y;
@@ -207,7 +220,9 @@ export default class policia extends person {
                this.civiles.forEach((civil) =>{
                    //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
                    if (this.scene.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA               
-                       this.calcular_dir(this.jugador_x, this.jugador_y);      
+                       this.calcular_dir(this.jugador_x, this.jugador_y);    
+                       this.exc_roja.setAlpha(0);
+                       this.exc_ama.setAlpha(1);  
                        // console.log("Quien anda ahi?!");
                    }
                })
@@ -215,6 +230,9 @@ export default class policia extends person {
            
                //PLAYER ESTA DENTRO DEL RANGO DE VISION
                if(this.scene.physics.overlap(this.player, this.campo_vision)) { 
+                   this.exc_ama.setAlpha(0);
+                   this.exc_roja.setAlpha(1);
+                   this.dibuja_exc(false);
                   // console.log(this.get_reconoce_sin_sombrero());
                    this.calcular_dir(this.jugador_x, this.jugador_y); 
    

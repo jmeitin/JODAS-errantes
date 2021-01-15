@@ -27,6 +27,8 @@ export default class game extends Phaser.Scene {
     this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
     this.load.image('flecha','imgs/flecha_direccion.png');
     this.load.image('img_rango','imgs/indicador_rango.png');
+    this.load.image('ex_ama','imgs/exclamacion_amarilla.png');
+    this.load.image('ex_roja','imgs/exclamacion_roja.png');
 
     this.load.spritesheet('player', 'imgs/jugador_spritesheet_ampliado.png', { frameWidth: 150, frameHeight: 150 });
     this.load.spritesheet('police', 'imgs/policeman.png', {frameWidth: 85, frameHeight: 135 });
@@ -137,7 +139,7 @@ export default class game extends Phaser.Scene {
     ];
     this.policias=[];
     for(let i = 0; i < 5; i++){
-      let police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango');
+      let police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja');
       this.physics.add.collider(police, this.colision_layer);
       this.policias.push (police);
      // console.log("heeey");
