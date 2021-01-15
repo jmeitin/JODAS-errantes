@@ -25,6 +25,9 @@ export default class fase1 extends Phaser.Scene {
     }
 
     preload(){
+        this.peso_actual = 0;
+        this.inventario = [];
+        
         //cargamos fondo
         this.load.image('fondo', 'imgs/planks/plank1.png');
 
