@@ -7,8 +7,8 @@ export default class policia extends person {
     constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles, img_rango_para, ex_ama_para, ex_roja_para, arriba_abajo_para) {
         super(scene, x, y, image, speed);
 
-        this.timer_arriba = this.scene.time.addEvent({delay: 4000, callback:this.cambia_dir_y, callbackScope:this, loop:true});
-        this.timer_derecha = this.scene.time.addEvent({delay: 4000, callback: this.cambia_dir_x, callbackScope:this, loop:true});
+        this.timer_arriba = this.scene.time.addEvent({delay: 5000, callback:this.cambia_dir_y, callbackScope:this, loop:true});
+        this.timer_derecha = this.scene.time.addEvent({delay: 5000, callback: this.cambia_dir_x, callbackScope:this, loop:true});
         this.timer_arriba.paused = true;
         this.timer_derecha.paused = true;
 
@@ -145,19 +145,19 @@ export default class policia extends person {
 
     move(){
         //si no veo a player && ha pasado cierto tiempo cambio de dir
-        if(!this.scene.physics.overlap(this.player, this.campo_vision) && this.current_time >=this.last_time + 20000){
+        if(!this.scene.physics.overlap(this.player, this.campo_vision) && this.current_time >=this.last_time + 5000){
             this.exc_ama.setAlpha(0);
             this.exc_roja.setAlpha(0);
             this.rango_per.setAlpha(0);
 
             if(this.arriba_abajo){
                 this.dir_x = 0;
-                this.dir_y = 1;
+                if(this.dir_y === 0) this.dir_y = 1;
                 this.timer_arriba.paused = false;
             }
             else{
                 this.dir_y = 0;
-                this.dir_x = 1;
+                if(this.dir_x === 0) this.dir_x = -1;
                 this.timer_derecha.paused = false;
             }
 

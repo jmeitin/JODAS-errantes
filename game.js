@@ -106,7 +106,7 @@ export default class game extends Phaser.Scene {
     const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnplayer");
 
     this.flecha = 'flecha';
-    this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
+    this.player = new player(this, spawnpoint.x, spawnpoint.y,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
     this.physics.add.collider(this.player, this.colision_layer);
     
     //CIVILES
@@ -135,11 +135,25 @@ export default class game extends Phaser.Scene {
      this.map.findObject("person", obj => obj.name === "spawnpolice6")
     ];
     this.policias=[];
-    for(let i = 0; i < 6; i++){
-      let police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-      this.physics.add.collider(police, this.colision_layer);
-      this.policias.push (police);
-    }
+
+    let police = new policia(this, spawnpolice[0].x, spawnpolice[0].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
+    this.physics.add.collider(police, this.colision_layer);
+    this.policias.push (police);
+    let police1 = new policia(this, spawnpolice[1].x, spawnpolice[1].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
+    this.physics.add.collider(police1, this.colision_layer);
+    this.policias.push (police1);
+    let police2 = new policia(this, spawnpolice[2].x, spawnpolice[2].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
+    this.physics.add.collider(police2, this.colision_layer);
+    this.policias.push (police2);
+    let police3 = new policia(this, spawnpolice[3].x, spawnpolice[3].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
+    this.physics.add.collider(police3, this.colision_layer);
+    this.policias.push (police3);
+    let police4 = new policia(this, spawnpolice[4].x, spawnpolice[4].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
+    this.physics.add.collider(police4, this.colision_layer);
+    this.policias.push (police4);
+    let police5 = new policia(this, spawnpolice[5].x, spawnpolice[5].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
+    this.physics.add.collider(police5, this.colision_layer);
+    this.policias.push (police5);
 
     this.colision_layer.setCollisionByProperty({colision: true});   //Si los tiled tienen colision a true, se choca con la pared
     this.cameras.main.startFollow(this.player);    
