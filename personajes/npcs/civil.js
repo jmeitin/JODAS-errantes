@@ -1,8 +1,8 @@
 import person from "../person.js"
 
 export default class civil extends person{
-    constructor(scene, x, y, type, speed){
-        super(scene, x, y, type, speed);       
+    constructor(scene, x, y, type, speed, fase3){
+        super(scene, x, y, type, speed, fase3);       
 		this.scene.physics.add.existing(this); //le dota de fisicas
         this.body.allowGravity = false;   
 
@@ -23,40 +23,47 @@ export default class civil extends person{
 
     move (){
         //si ha pasado cierto tiempo cambio de dir
-        if(this.current_time >=this.last_time + 20000){
-            this.exc_ama.setAlpha(0);
-            this.exc_roja.setAlpha(0);
-            this.rango_per.setAlpha(0);
-
-            this.i = this.get_random_int(0, 4);
-            this.a = this.posiblesdir[this.i].x;
-            this.b = this.posiblesdir[this.i].y;
-   
-            while (this.dir_x == this. a && this.dir_y == this.b){
-                this.i=this.get_random_int(0, 4);
+        if(this.isFase3){
+            console.debug("entre");
+            if(this.current_time >=this.last_time + 20000){
+                this.exc_ama.setAlpha(0);
+                this.exc_roja.setAlpha(0);
+                this.rango_per.setAlpha(0);
+    
+                this.i = this.get_random_int(0, 4);
                 this.a = this.posiblesdir[this.i].x;
                 this.b = this.posiblesdir[this.i].y;
+       
+                while (this.dir_x == this. a && this.dir_y == this.b){
+                    this.i=this.get_random_int(0, 4);
+                    this.a = this.posiblesdir[this.i].x;
+                    this.b = this.posiblesdir[this.i].y;
+                }
+                this.dir_x = this.a;
+                this.dir_y = this.b;
+    
+                this.last_time = new Date().getTime();
             }
-            this.dir_x = this.a;
-            this.dir_y = this.b;
-
-            this.last_time = new Date().getTime();
+    
+            if (this.dir_x > 0){
+                this.move_right();
+            }
+            else if (this.dir_x < 0){
+                this.move_left();
+            }
+            else if (this.dir_y > 0){
+                this.move_down();
+            }
+            else if (this.dir_y < 0){
+                this.move_up();
+            }
+            else {
+                this.stop ();
+            }
         }
-
-        if (this.dir_x > 0){
-            this.move_right();
-        }
-        else if (this.dir_x < 0){
-            this.move_left();
-        }
-        else if (this.dir_y > 0){
-            this.move_down();
-        }
-        else if (this.dir_y < 0){
+        else{
             this.move_up();
         }
-        else {
-            this.stop ();
-        }
+        
     }
 }
