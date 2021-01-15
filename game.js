@@ -118,11 +118,11 @@ export default class game extends Phaser.Scene {
       for(let j = 0; j < 10; j++){
         if(((i < 3 || i > 6) || (j < 3 || j > 6))){
           if(i < 2 || i > 7){
-            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", 100);
+            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", 100, false);
             this.civiles.push(civil_1);
           }
           else{
-            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 100);
+            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 100, false);
             this.civiles.push(civil_1);
           }
         }
