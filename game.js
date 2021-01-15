@@ -109,23 +109,20 @@ export default class game extends Phaser.Scene {
     this.player = new player(this, spawnpoint.x, spawnpoint.y - 400,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
     this.physics.add.collider(this.player, this.colision_layer);
     
-
+    const spawnciviles =[
+      this.map.findObject("person", obj => obj.name === "spawncivil1"),
+      this.map.findObject("person", obj => obj.name === "spawncivil2")
+     ];
 
 
     //CIVILES
     this.civiles = [];
-    for(let i = 0; i < 10; i++){
-      for(let j = 0; j < 10; j++){
-        if(((i < 3 || i > 6) || (j < 3 || j > 6))){
-          if(i < 2 || i > 7){
-            let civil_1 = new civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 500 + 70 * j, "civil", 100);
-            this.civiles.push(civil_1);
-          }
-          else{
-            let civil_1 = new civil(this, 600 + 60 * i, 500 + 70 * j, "civil", 100);
-            this.civiles.push(civil_1);
-          }
-        }
+    
+    for(let i = 0; i < 2; i++){
+      for(let j = 0; j < 4; j++){
+        let civil_1 = new civil(this, spawnciviles[this.i].x + Math.random(-100, 100), spawnciviles[this.i].y + Math.random(-100, 100), "civil", 100);
+        this.physics.add.collider(civil_1, this.colision_layer);
+        this.civiles.push(civil_1);
       }
     }
 
@@ -135,10 +132,11 @@ export default class game extends Phaser.Scene {
      this.map.findObject("person", obj => obj.name === "spawnpolice2"),
      this.map.findObject("person", obj => obj.name === "spawnpolice3"),
      this.map.findObject("person", obj => obj.name === "spawnpolice4"),
-     this.map.findObject("person", obj => obj.name === "spawnpolice5") 
+     this.map.findObject("person", obj => obj.name === "spawnpolice5"),
+     this.map.findObject("person", obj => obj.name === "spawnpolice6")
     ];
     this.policias=[];
-    for(let i = 0; i < 5; i++){
+    for(let i = 0; i < 6; i++){
       let police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja');
       this.physics.add.collider(police, this.colision_layer);
       this.policias.push (police);

@@ -137,6 +137,30 @@
                  "width":0,
                  "x":8288,
                  "y":2544
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"spawnpolice6",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1760,
+                 "y":3936
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"finfase",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2384,
+                 "y":2112
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -145,7 +169,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":17,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.3",
