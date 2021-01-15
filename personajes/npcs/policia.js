@@ -10,6 +10,9 @@ export default class policia extends person {
         let img_rango = img_rango_para;
         this.imagen_rango = this.scene.add.image(this.x,this.y,img_rango);
         this.imagen_rango.setBlendMode(Phaser.BlendModes.ADD);
+        this.rango_per = this.scene.add.image(this.x,this.y,img_rango).setScale(2);
+        this.rango_per.setAlpha(0);
+        this.rango_per.setBlendMode(Phaser.BlendModes.SCREEN);
 
         
         this.exc_ama = this.scene.add.image(this.x,this.y-150, ex_ama_para).setScale(0.5);
@@ -119,6 +122,7 @@ export default class policia extends person {
 
     dibuja_rango(){
         this.imagen_rango.setPosition(this.x,this.y);
+        this.rango_per.setPosition(this.x,this.y);
     }
 
     dibuja_exc(){
@@ -131,6 +135,8 @@ export default class policia extends person {
         if(!this.scene.physics.overlap(this.player, this.campo_vision) && this.current_time >=this.last_time + 20000){
             this.exc_ama.setAlpha(0);
             this.exc_roja.setAlpha(0);
+            this.rango_per.setAlpha(0);
+
             this.i = this.get_random_int(0, 4);
             this.a = this.posiblesdir[this.i].x;
             this.b = this.posiblesdir[this.i].y;
@@ -232,7 +238,9 @@ export default class policia extends person {
                if(this.scene.physics.overlap(this.player, this.campo_vision)) { 
                    this.exc_ama.setAlpha(0);
                    this.exc_roja.setAlpha(1);
+                   this.rango_per.setAlpha(1);
                    this.dibuja_exc(false);
+
                   // console.log(this.get_reconoce_sin_sombrero());
                    this.calcular_dir(this.jugador_x, this.jugador_y); 
    
