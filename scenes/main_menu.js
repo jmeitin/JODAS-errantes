@@ -13,6 +13,8 @@ export default class main_menu extends Phaser.Scene {
         this.load.image('fondo_menu', 'imgs/fondos/fondo_menu_ppal.png');
         this.load.audio('sound', 'music/fase1.mp3');
         this.load.audio('soundbutton', 'sounds/continue.mp3');
+        this.load.image('sube_sonido','imgs/botones/sumar.png');
+        this.load.image('baja_sonido','imgs/botones/restar.png');
     }
 
     create(){
@@ -25,20 +27,23 @@ export default class main_menu extends Phaser.Scene {
             loop: false,
             delay: 0
         }; 
-          let music=this.sound.add('sound', config);
-          let sound=this.sound.add('soundbutton', config);
-          music.play();
+          this.music= this.sound.add('sound', config);
+          this.sound_b= this.sound.add('soundbutton', config);
+          this.music.play();
         // this.cameras.main.setBounds(0, 0, 4000, 4000);
         // this.physics.world.setBounds(0, 0, 4000, 4000); 
         this.add.image(710, 400, 'fondo_menu').setScale(2);
 
         this.boton_comenzar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,"bot_comenzar");
-        this.boton_sonido = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"bot_sonido").setScale(0.8);
+        this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 100,"bot_sonido").setScale(0.8);
+        this.boton_suma = this.add.image(this.game.renderer.width/2 + 150,this.game.renderer.height/2 + 100,"sube_sonido").setScale(2);
+        this.boton_resta = this.add.image(this.game.renderer.width/2 - 150,this.game.renderer.height/2 + 100,"baja_sonido").setScale(2);
         this.boton_creditos = this.add.image(this.game.renderer.width/2,this.game.renderer.height/2 + 200,"bot_creditos").setScale(0.8);
         
         this.boton_comenzar.setInteractive();
-        this.boton_sonido.setInteractive();
         this.boton_creditos.setInteractive();
+        this.boton_suma.setInteractive();
+        this.boton_resta.setInteractive();
 
         //funcionalidad boton comenzar
         this.boton_comenzar.on('pointerover', () => { 
@@ -50,24 +55,34 @@ export default class main_menu extends Phaser.Scene {
         });
 
         this.boton_comenzar.on("pointerdown", ()=>{
-            sound.play();
+            sound_b.play();
             this.scene.start('fase1');
             music.pause();
         });
 
-        //funcionalidad boton sonido
-        this.boton_sonido.on('pointerover', () => { 
-            this.boton_sonido.setScale(0.9);            
+        //funcionalidad de botones para modificar el volumen de la musica
+        this.boton_suma.on("pointerover",()=>{
+            this.boton_suma.setScale(3);
         });
-        
-        this.boton_sonido.on('pointerout', () => {
-            this.boton_sonido.setScale(0.8);
+        this.boton_suma.on("pointerout", ()=>{
+            this.boton_suma.setScale(2);
         });
-
-        this.boton_sonido.on("pointerdown", ()=>{
-            sound.play();
-            console.log('joder!');
-            music.pause();
+        this.boton_resta.on("pointerover",()=>{
+            this.boton_resta.setScale(3);
+        });
+        this.boton_resta.on("pointerout", ()=>{
+            this.boton_resta.setScale(2);
+        });
+        this.boton_suma.on("pointerdown",()=>{
+            this.music.volume += 0.1;
+            this.sound_b.volume += 0.1;
+        });
+        this.boton_resta.on("pointerdown",()=>{
+            if(this.music.volume - 0.1 <= 0) this.music.volume = 0; 
+            else {
+                this.music.volume -= 0.1;
+                this.sound_b.volume -= 0.1;
+            }
         })
 
         //funcionalidad boton creditos
