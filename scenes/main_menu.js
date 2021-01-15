@@ -55,9 +55,9 @@ export default class main_menu extends Phaser.Scene {
         });
 
         this.boton_comenzar.on("pointerdown", ()=>{
-            sound_b.play();
+            this.sound_b.play();
             this.scene.start('fase1');
-            music.pause();
+            this.music.pause();
         });
 
         //funcionalidad de botones para modificar el volumen de la musica
@@ -95,9 +95,9 @@ export default class main_menu extends Phaser.Scene {
         });
 
         this.boton_creditos.on("pointerdown", ()=>{
-            sound.play();
+            this.sound_b.play();
             console.log('joder!');
-            music.pause();
+            this.music.pause();
         })
        
     }
