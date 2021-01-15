@@ -142,14 +142,7 @@ export default class game extends Phaser.Scene {
       let police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja');
       this.physics.add.collider(police, this.colision_layer);
       this.policias.push (police);
-     // console.log("heeey");
     }
-
-  /*  this.policias.forEach((police, i=0)=>{
-      police = new policia(this, spawnpolice[i].x, spawnpolice[i].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles); 
-      console.log("heeey");
-      i++;
-    })*/
 
     this.colision_layer.setCollisionByProperty({colision: true});   //Si los tiled tienen colision a true, se choca con la pared
     this.cameras.main.startFollow(this.player);    
