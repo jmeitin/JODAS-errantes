@@ -141,7 +141,7 @@ export default class player extends person{
             if (this.sombrero) this.anims.play('sombreroleft', true);
             else this.anims.play('left', true);
         }
-        if(this.cursorkeys.up.isDown || this.key_w.isDown){
+        else if(this.cursorkeys.up.isDown || this.key_w.isDown){
             this.move_up();
             if (this.sombrero) this.anims.play('sombreroup', true);
             else this.anims.play('up', true);
@@ -151,16 +151,12 @@ export default class player extends person{
             if (this.sombrero) this.anims.play('sombrerodown', true);
             else this.anims.play('down', true);
         }
-        else {//if (this.cursorkeys.space.isDown){ //-----------------------------------------------------------------------------------------------------------------------
-          //this.anims.play ("stop", true);
-          //this.stop();
+        else {
+          this.anims.play ("stop", true);
+          this.stop();
         }
 
-        if(this.cursorkeys.space.isDown){
-          this.stop();
-          this.anims.play ("stop", true);
-
-        } 
+        
         this.update_flecha();
 
       //  console.log ("player ", this.y);

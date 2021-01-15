@@ -2,7 +2,7 @@ import person from "../person.js"
 
 export default class civil extends person{
     constructor(scene, x, y, type, speed, fase3){
-        super(scene, x, y, type, speed, fase3);       
+        super(scene, x, y, type, speed);       
 		this.scene.physics.add.existing(this); //le dota de fisicas
         this.body.allowGravity = false;   
 
@@ -12,6 +12,7 @@ export default class civil extends person{
            
         this.dir_x = 1; //dir inicial
         this.dir_y = 0;
+        this.is_fase3 = fase3;
     }
 
     preUpdate(){
@@ -23,13 +24,9 @@ export default class civil extends person{
 
     move (){
         //si ha pasado cierto tiempo cambio de dir
-        if(this.isFase3){
+        if(!this.is_fase3){ //FASE 2
             console.debug("entre");
             if(this.current_time >=this.last_time + 20000){
-                this.exc_ama.setAlpha(0);
-                this.exc_roja.setAlpha(0);
-                this.rango_per.setAlpha(0);
-    
                 this.i = this.get_random_int(0, 4);
                 this.a = this.posiblesdir[this.i].x;
                 this.b = this.posiblesdir[this.i].y;
@@ -61,9 +58,14 @@ export default class civil extends person{
                 this.stop ();
             }
         }
-        else{
+        else{ //FASE 3
             this.move_up();
         }
         
     }
+
+    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
+    get_random_int(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
 }
