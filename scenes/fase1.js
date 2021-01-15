@@ -22,6 +22,10 @@ export default class fase1 extends Phaser.Scene {
         this.img_peso_actual;
 
         this.bombaPlus;
+
+        //para saber si llevamos las dos bombas simultaneamente
+        this.lleva_bomba_min = false;
+        this.lleva_bomba_max = false;
     }
 
     preload(){
@@ -59,6 +63,12 @@ export default class fase1 extends Phaser.Scene {
         this.load.audio('soundbutton', 'sounds/seleccion.mp3');
         this.load.audio('soundbutton2', 'sounds/maxobjetos.mp3');
         this.load.audio('soundbutton3', 'sounds/continue.mp3');
+
+        //imagenes de aviso de inventario
+        this.load.image('aviso_sin_obj', 'imgs/tutoriales/aviso_sin_obj.png');
+        this.load.image('aviso_doble_modificador', 'imgs/tutoriales/aviso_doble_modificador.png');
+        this.load.image('boton_si', 'imgs/tutoriales/boton_si.png');
+        this.load.image('boton_no', 'imgs/tutoriales/boton_no.png');
     } 
 
     create(){
@@ -71,9 +81,11 @@ export default class fase1 extends Phaser.Scene {
             loop: false,
             delay: 0
         }; 
-          let sound1=this.sound.add('soundbutton', config);
-          let sound2=this.sound.add('soundbutton2', config);
-          let sound3=this.sound.add('soundbutton3', config);
+
+        let sound1=this.sound.add('soundbutton', config);
+        let sound2=this.sound.add('soundbutton2', config);
+        let sound3=this.sound.add('soundbutton3', config);
+
         this.fondo_scale = 7;//tamaño de los tiles de madera de fondo
 
         //dividimos entre fondoScale para compensar el tamaño incrementado de los tiles que usamos de fondo y que ocupe el tamaño de la ventana
@@ -100,10 +112,25 @@ export default class fase1 extends Phaser.Scene {
         });
 
         this.boton_next.on("pointerdown", ()=>{
-            sound3.play();
-            this.scene.start('tutorial_fase2', {inventario:this.inventario}); //fase 2
+            if(this.inventario.length == 0){
+                this.img_aviso_sin_obj.setVisible(true);
+                this.contenedor_textos_aviso.setVisible(true);
+            }
+            else if(this.lleva_bomba_max && this.lleva_bomba_min){
+                this.img_aviso_doble_modificador.setVisible(true);
+                this.contenedor_textos_aviso.setVisible(true);
+                console.log("aaa");
+            }
+            else{
+                sound3.play();
+                this.scene.start('tutorial_fase2', {inventario:this.inventario}); //fase 2
+            }
+            
 
         });
+
+        //texto de avisos varios sobre el inventario que llevas
+        this.crea_texto_aviso();
 
         //texto de tutorial cuando abres la pagina
         this.tutorialText = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,'tutorialf1').setScale(2);
@@ -118,7 +145,54 @@ export default class fase1 extends Phaser.Scene {
     }
 
     update(){
+
+    }
+
+    crea_texto_aviso(){
         
+
+        this.img_aviso_sin_obj = this.add.sprite(650, 650, 'aviso_sin_obj').setVisible(false);;
+        this.img_aviso_doble_modificador = this.add.sprite(650, 650, 'aviso_doble_modificador').setVisible(false);
+
+        this.contenedor_textos_aviso = this.add.container(650, 650).setVisible(false);
+
+        this.img_boton_si = this.add.sprite(-50, 50, 'boton_si');
+        this.img_boton_no = this.add.sprite(50, 50, 'boton_no');
+
+        this.img_boton_si.setInteractive();
+        this.img_boton_no.setInteractive();
+
+        // this.contenedor_textos_aviso.add(this.img_aviso_sin_obj);
+        // this.contenedor_textos_aviso.add(this.img_aviso_doble_modificador);
+        this.contenedor_textos_aviso.add(this.img_boton_si);
+        this.contenedor_textos_aviso.add(this.img_boton_no);
+
+        this.img_boton_si.on('pointerdown', () => {
+            this.scene.start('tutorial_fase2', {inventario:this.inventario}); //fase 2
+        });
+
+        this.img_boton_si.on('pointerover', () => { 
+            this.img_boton_si.setScale(1.1);            
+        });
+        
+        this.img_boton_si.on('pointerout', () => {
+            this.img_boton_si.setScale(1);
+        });
+
+        this.img_boton_no.on('pointerdown', () => {
+            this.contenedor_textos_aviso.setVisible(false);
+            this.img_aviso_sin_obj.setVisible(false);
+            this.img_aviso_doble_modificador.setVisible(false);
+        });
+
+        this.img_boton_no.on('pointerover', () => { 
+            this.img_boton_no.setScale(1.1);            
+        });
+        
+        this.img_boton_no.on('pointerout', () => {
+            this.img_boton_no.setScale(1);
+        });
+
     }
 
     crea_textos(){
@@ -181,5 +255,13 @@ export default class fase1 extends Phaser.Scene {
         this.img_peso_actual.setFrame( this.peso_actual);
         // = this.add.sprite(1150, 50, 'nums', this.pesoActual);
         console.log(this.inventario);
+    }
+
+    set_lleva_bomba_plus(lleva_bomba_plus){
+        this.lleva_bomba_max = lleva_bomba_plus;
+    }
+
+    set_lleva_bomba_minus(lleva_bomba_minus){
+        this.lleva_bomba_min = lleva_bomba_minus;
     }
 }

@@ -56,6 +56,13 @@ export default class buttonf1 extends gameobject{
         this.inventario.push(this.type);
         this.peso_act += this.peso_obj; 
         this.scene.set_peso_actual(this.peso_act);
+
+        if(this.type == 'bomba_plus'){
+            this.scene.set_lleva_bomba_plus(true);            
+        }
+        else if(this.type == 'bomba_minus'){
+            this.scene.set_lleva_bomba_minus(true);
+        }
     }
 
     quita_inventario(){
@@ -65,6 +72,15 @@ export default class buttonf1 extends gameobject{
         this.peso_act -= this.peso_obj;
         
         this.scene.set_peso_actual(this.peso_act); 
+
+        if(this.type == 'bomba_plus'){
+            this.scene.set_lleva_bomba_plus(false);
+        }
+        else if(this.type == 'bomba_minus'){
+            this.scene.set_lleva_bomba_minus(false);
+        }
     }
+
+    
    
 }
