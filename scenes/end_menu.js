@@ -55,7 +55,7 @@ export default class end_menu extends Phaser.Scene{
     }
 
     set_scene(){
-        this.mensaje.destroy(false);
+        if(this.mensaje != undefined) this.mensaje.destroy(false);
         this.cameras.main.fadeIn(100);
         this.add.image(710,400,'fondo_menu_final').setScale(1.5);
 
