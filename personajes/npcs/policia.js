@@ -61,7 +61,7 @@ export default class policia extends person {
        this.dir_x = this.get_random_int(-1, 2); //DIRECCION RANDOM
        this.dir_y = this.get_random_int(-1, 2);
 
-        
+        this.player_civil = false; //choco player con civil?
 
         this.descubierto = false; // NI SOSPECHO NI HE DESCUBIERTO A PLAYER
         this.persiguiendo = false;
@@ -213,6 +213,9 @@ export default class policia extends person {
        // console.log ("DIR Y = ", this.dir_y);
     }
 
+    player_choco_con_civil(choque){
+        this.player_civil = choque;
+    }
 
     rangos_vision (){
            ///////////////////////////////////////////////ZONA DE RADIOS POLICIA///////////////////////////////////////////////////
@@ -223,7 +226,7 @@ export default class policia extends person {
            //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
            if (this.scene.physics.overlap(this.player, this.campo_auditivo)){
    
-               this.civiles.forEach((civil) =>{
+               /*this.civiles.forEach((civil) =>{
                    //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
                    if (this.scene.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA               
                        this.calcular_dir(this.jugador_x, this.jugador_y);    
@@ -231,7 +234,15 @@ export default class policia extends person {
                        this.exc_ama.setAlpha(1);  
                        // console.log("Quien anda ahi?!");
                    }
-               })
+               })*/
+
+               if (this.player_civil){ //PLAYER HA CHOCADO CON UN CIVIL
+                this.calcular_dir(this.jugador_x, this.jugador_y);    
+                this.exc_roja.setAlpha(0);
+                this.exc_ama.setAlpha(1);  
+                console.log("OIDO COCINA!");
+                this.player_civil = false;
+               }
    
            
                //PLAYER ESTA DENTRO DEL RANGO DE VISION

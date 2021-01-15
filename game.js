@@ -162,6 +162,14 @@ export default class game extends Phaser.Scene {
       this.scene.pause();
     }
 
+    this.civiles.forEach((civil_1)=>{
+      if (this.physics.overlap(this.player, civil_1)){
+        this.policias.forEach((poli)=>{
+          poli.player_choco_con_civil(true);
+        })
+      }
+    })
+
     //modificamos posicion de inventario
     this.contenedor_inventario.x = this.player.x - 600;
     this.contenedor_inventario.y = this.player.y - 300;

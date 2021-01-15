@@ -13,6 +13,7 @@ export default class civil extends person{
         this.dir_x = 1; //dir inicial
         this.dir_y = 0;
         this.is_fase3 = fase3;
+
     }
 
     preUpdate(){
