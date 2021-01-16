@@ -242,7 +242,7 @@
                         {
                          "name":"colision",
                          "type":"bool",
-                         "value":true
+                         "value":false
                         }]
                 }, 
                 {
@@ -259,13 +259,13 @@
         {
          "columns":10,
          "firstgid":101,
-         "image":"C:\/Users\/O\/Downloads\/ContouredTilemap\/ContouredTilemap\/tilemap-export96.png",
+         "image":"..\/..\/..\/O\/Downloads\/ContouredTilemap\/ContouredTilemap\/tilemap-export96.png",
          "imageheight":960,
          "imagewidth":960,
          "margin":0,
          "name":"tilemap-export96",
          "spacing":0,
-         "tilecount":100,
+         "tilecount":4,
          "tileheight":96,
          "tiles":[
                 {
