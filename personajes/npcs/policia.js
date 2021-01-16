@@ -231,21 +231,11 @@ export default class policia extends person {
     rangos_vision (){
            ///////////////////////////////////////////////ZONA DE RADIOS POLICIA///////////////////////////////////////////////////
 
-           this.jugador_x = this.player.get_x(); //ME GUARDO SU POSICION PORQUE LA NECESITARE
-           this.jugador_y = this.player.get_y();
+           this.jugador_x = this.player.x; //ME GUARDO SU POSICION PORQUE LA NECESITARE
+           this.jugador_y = this.player.y;
    
            //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
            if (this.scene.physics.overlap(this.player, this.campo_auditivo)){
-   
-               /*this.civiles.forEach((civil) =>{
-                   //SI PLAYER CHOCA CON UN CIVIL DENTRO DEL RANGO AUDITIVO DE POLICIA
-                   if (this.scene.physics.overlap(this.player, civil)){  //HACE RUIDO ==> AVISA A POLICIA               
-                       this.calcular_dir(this.jugador_x, this.jugador_y);    
-                       this.exc_roja.setAlpha(0);
-                       this.exc_ama.setAlpha(1);  
-                       // console.log("Quien anda ahi?!");
-                   }
-               })*/
 
                if (this.player_civil){ //PLAYER HA CHOCADO CON UN CIVIL
                 this.calcular_dir(this.jugador_x, this.jugador_y);    
@@ -265,20 +255,22 @@ export default class policia extends person {
                    this.rango_per.setAlpha(1);
                    this.dibuja_exc(false);
 
-                  // console.log(this.get_reconoce_sin_sombrero());
                    this.calcular_dir(this.jugador_x, this.jugador_y); 
    
                    //si le he visto con la bomba previamente(ha entrado en radio pequeño), empiezo a perseguirle rapido
-                   if(this.get_descubierto() && !this.get_persiguiendo()){
-                       this.set_persiguiendo(true, this.player.get_sombrero());
+                   if(this.descubierto && !this.persiguiendo){
+                       if(this.reconoce_sombrero && this.player.sombrero || this.reconoce_sin_sombrero && !this.player.sombrero){      
+                            this.set_persiguiendo(true, this.player.sombrero);
+                            console.log("rapido");                                                         
+                       }
                    }
                    
    
                    //CONTROL POLICIAL
                    if(this.scene.physics.overlap(this.player,  this.control_policial)){
-                       if(!this.get_persiguiendo()){
+                       if(!this.persiguiendo){
                            //el policia descubre que eres terrorista
-                           this.set_persiguiendo(true, this.player.get_sombrero());
+                           this.set_persiguiendo(true, this.player.sombrero);
                            this.set_descubierto(true);
                        }
                        
@@ -310,8 +302,8 @@ export default class policia extends person {
                } //rango de vision
    
                else{
-                   if(this.get_persiguiendo()){
-                       this.set_persiguiendo(false, this.player.get_sombrero());
+                   if(this.persiguiendo){
+                       this.set_persiguiendo(false, this.player.sombrero);
                    }
                }        
            }//  //campo auditivo
@@ -321,7 +313,7 @@ export default class policia extends person {
         this.descubierto = descubierto;
         
         
-        console.log('descubierto: ', this.speed1); 
+        if(this.descubierto) console.log('descubierto: ', this.speed1); 
     }
 
     get_descubierto(){
@@ -342,10 +334,12 @@ export default class policia extends person {
         }
 
         if(this.persiguiendo){
-            this.multiply_speed(2);
+            this.multiply_speed(5);
+            console.log("rapido");
         }
         else{
-            this.multiply_speed(0.5);
+            this.multiply_speed(0.2);
+            console.log("lento");
         }
     }
 

@@ -8,7 +8,6 @@ export default class game extends Phaser.Scene {
     super({ key: "main" });
 
     this.contenedor_inventario;//para tener todas las imagenes del inventario en un container
-    //this.indices_objetos_activos = []; //guarda que objetos del inventario son activos y cuales pasivos
     this.objetos_activos = []; //true si el objeto esta activado en ese momento
     this.objetos_activos_activados = []; //si el objeto esta o no activado
   }
@@ -53,11 +52,7 @@ export default class game extends Phaser.Scene {
         this.objetos_activos.push(false); //son pasivos
       }
       else if(this.inventario[this.i] == 'sombrero' || this.inventario[this.i] == 'pistola'){
-        //this.indices_objetos_activos.push(this.i); 
-        //indicamos que inicialmente el objeto activo no esta activado
-        //this.j = 0;
         this.objetos_activos_activados[this.i] = false; //misma pose que en el la lista de objetos_activos
-        //this.j++;
 
         this.objetos_activos.push(true);
       }
@@ -226,19 +221,6 @@ export default class game extends Phaser.Scene {
 
           if (this.inventario[this.i] =='sombrero'){ 
             this.player.set_sombrero(true);
-
-            this.policias.forEach((police)=>{
-              if(!this.physics.overlap(this.player, police.campo_vision)){
-                console.log("Te has puesto el sombrero");
-  
-                if(!police.get_reconoce_sombrero()){
-                  police.set_descubierto(false);
-                  //this.policia.
-                }
-  
-              }
-            })
-           
           }
           else if (this.inventario[this.i] =='pistola'){ 
             //ANIMACION - CAMBIO ESCENA
@@ -254,75 +236,11 @@ export default class game extends Phaser.Scene {
         
 
           if (this.inventario[this.i] =='sombrero'){ 
-            this.player.set_sombrero(false);
-            this.policias.forEach((police)=>{
-              if(!this.physics.overlap(this.player, police.campo_vision)){
-                console.log("Te has quitado el sombrero");
-  
-                if(!police.get_reconoce_sin_sombrero()){
-                  police.set_descubierto(false);
-                }
-  
-              }
-            })
-            
+            this.player.set_sombrero(false);           
           }
         }
         
       }
-
-      //this.i = 0; // 0, 2
-
-      //while (this.i < this.indices_objetos_activos.length && event.key != this.indices_objetos_activos[this.i] + 1 ) this.i++;
-
-      // if (this.i < this.indices_objetos_activos.length){ // ES ACTIVO ==> activar o descativar
-      //   if (this.objetos_activados[this.i] == false){
-      //     this.objetos_activados[this.i] = true;
-      //     console.log("true");
-
-      //     if (this.inventario[this.i] =='sombrero'){ 
-      //       this.player.set_sombrero(true);
-            
-      //       if(!this.physics.overlap(this.player, this.policia.campo_vision)){
-      //         console.log("Te has puesto el sombrero");
-
-      //         if(!this.policia.get_reconoce_sombrero()){
-      //           this.policia.set_descubierto(false);
-      //           //this.policia.
-      //         }
-
-      //       }
-      //     }
-      //     else if (this.inventario[this.i] =='pistola'){ 
-      //       //ANIMACION - CAMBIO ESCENA
-      //       //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      //       console.log("ME PEGO UN TIRO");
-      //     }
-          
-      //   }
-      //   else{
-      //     this.objetos_activados[this.i] = false;
-      //     console.log("false");
-        
-
-      //     if (this.inventario[this.i] =='sombrero'){ 
-      //       this.player.set_sombrero(false);
-
-      //       if(!this.physics.overlap(this.player, this.policia.campo_vision)){
-      //         console.log("Te has quitado el sombrero");
-
-      //         if(!this.policia.get_reconoce_sin_sombrero()){
-      //           this.policia.set_descubierto(false);
-      //         }
-
-      //       }
-      //     }
-      //   }
-      //   console.log (this.inventario[this.i]);
-    
-
-      // }
-      
 
     });
   }
