@@ -12,8 +12,8 @@ export default class player extends person{
 
         this.botonpausa = this.scene.input.keyboard.addKey('P');
         
-        this.pistola = false; 
-        this.sombrero = false;
+        this.pistola;
+        this.sombrero;
         
         this.inventario = inventario;
 
@@ -120,6 +120,10 @@ export default class player extends person{
         
     }
 
+    preload(){
+      this.pistola = false; 
+      this.sombrero = false;
+    }
 
     pausa(){
         if(this.botonpausa.isDown) {
