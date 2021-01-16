@@ -103,10 +103,11 @@ export default class game extends Phaser.Scene {
     this.cursor_keys = this.input.keyboard.createCursorKeys();    
 
     this.funcion_botones();
+    this.pasofase = this.map.findObject("person", obj => obj.name === "finfase"); 
     const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnplayer");
 
     this.flecha = 'flecha';
-    this.player = new player(this, spawnpoint.x, spawnpoint.y,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha);  
+    this.player = new player(this, spawnpoint.x, spawnpoint.y,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha, this.pasofase.x);  
     this.physics.add.collider(this.player, this.colision_layer);
     
     //CIVILES
@@ -157,7 +158,7 @@ export default class game extends Phaser.Scene {
     this.physics.add.collider(police5, this.colision_layer);
     this.policias.push (police5);
 
-    this.pasofase = this.map.findObject("person", obj => obj.name === "finfase"); 
+    
 
     this.colision_layer.setCollisionByProperty({colision: true});   //Si los tiled tienen colision a true, se choca con la pared
     this.cameras.main.startFollow(this.player);    
