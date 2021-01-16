@@ -7,6 +7,8 @@ export default class policia extends person {
     constructor(scene, x, y, speed, image, campo_vision_x, campo_auditivo_x, control_policial_x, player, civiles, img_rango_para, ex_ama_para, ex_roja_para, arriba_abajo_para) {
         super(scene, x, y, image, speed);
 
+        this.body.setSize(70, 130); //ajustar el collider del objeto
+
         this.timer_arriba = this.scene.time.addEvent({delay: 5000, callback:this.cambia_dir_y, callbackScope:this, loop:true});
         this.timer_derecha = this.scene.time.addEvent({delay: 5000, callback: this.cambia_dir_x, callbackScope:this, loop:true});
         this.timer_arriba.paused = true;

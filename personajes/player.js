@@ -7,7 +7,8 @@ export default class player extends person{
         this.flecha_p = this.scene.add.image(x, y, flecha_img);
         // cambiar estas coordenadas por las que sean con el mapa terminado
         this.coor_fin_x = pos_final;
-        
+        this.body.setSize(70, 150); //ajustar el collider del objeto
+
         this.cursorkeys = cursorkeys;  
 
         this.botonpausa = this.scene.input.keyboard.addKey('P');
