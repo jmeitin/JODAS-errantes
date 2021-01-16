@@ -18,6 +18,9 @@ export default class game extends Phaser.Scene {
   }
 
   preload() {   
+    this.objetos_activos = [];
+    this.objetos_activos_activados = [];
+
     this.load.image('cop', 'imgs/poli.png');
     this.load.image('civil', 'imgs/viandante0.png');
     this.load.tilemapTiledJSON('mapajuego','mapas/mapajuego.json');
@@ -47,7 +50,7 @@ export default class game extends Phaser.Scene {
   
     //asignamos si los objetos del inventario son activos o pasivos(true=>activos)
     for(this.i = 0; this.i < this.inventario.length; this.i++){
-      if(this.inventario[this.i] == 'bomba_plus' || this.inventario[this.i] == 'bomba_minus' || this.inventario[this.i] == 'capa' || this.inventario[this.i] == 'zapatos')//pasivos
+      if(this.inventario[this.i] === 'bomba_plus' || this.inventario[this.i] === 'bomba_minus' || this.inventario[this.i] === 'capa' || this.inventario[this.i] === 'zapatos')//pasivos
       {
         this.objetos_activos.push(false); //son pasivos
       }
