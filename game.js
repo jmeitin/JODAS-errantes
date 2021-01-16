@@ -118,15 +118,12 @@ export default class game extends Phaser.Scene {
     this.civiles = []; // constructor(scene, x, y, type, speed, fase3){
     
 
-    /*
-    for(let i = 0; i < 2; i++){
-      for(let j = 0; j < 4; j++){
-        let civil_1 = new civil(this, spawnciviles[this.i].x + Math.random(-100, 100), spawnciviles[this.i].y + Math.random(-100, 100), "civil", 100, false);
-        this.physics.add.collider(civil_1, this.colision_layer);
-        this.civiles.push(civil_1);
-      }
-    }
-    */
+      let civil_1 = new civil(this, spawnciviles[0].x, spawnciviles[0].y, "civil", 100, false, false);
+      this.physics.add.collider(civil_1, this.colision_layer);
+      this.civiles.push(civil_1);
+      let civil_2 = new civil(this, spawnciviles[1].x, spawnciviles[1].y, "civil", 100, false, false);
+      this.physics.add.collider(civil_2, this.colision_layer);
+      this.civiles.push(civil_2);
 
 
 

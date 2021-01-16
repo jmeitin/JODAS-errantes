@@ -78,7 +78,6 @@ export default class policia extends person {
 
         this.last_time=new Date().getTime();         //para que los policias no se queden parados cuando colisionen
         this.current_time = this.last_time;
-        this.posiblesdir=[{x:1, y:0}, {x:0, y:-1}, {x:-1, y:0}, {x:0, y:1}];
 
 
 
