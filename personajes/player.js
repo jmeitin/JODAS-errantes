@@ -116,6 +116,12 @@ export default class player extends person{
             frameRate: this.frame_rate,
             repeat: -1 //en loop
           });
+          this.scene.anims.create({
+            key: 'stopsombrero',
+            frames: this.scene.anims.generateFrameNumbers(type, { start: this.frames_sombrero[0]+1, end: this.frames_sombrero[0]+1 }),
+            frameRate: this.frame_rate,
+            repeat: -1 //en loop
+          });
 
         
     }
@@ -154,8 +160,9 @@ export default class player extends person{
             if (this.sombrero) this.anims.play('sombrerodown', true);
             else this.anims.play('down', true);
         }
-        else {
-          this.anims.play ("stop", true);
+        else {          
+          if (this.sombrero) this.anims.play ("stopsombrero", true);
+          else this.anims.play ("stop", true);
           this.stop();
         }
 
