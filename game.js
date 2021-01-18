@@ -211,9 +211,37 @@ export default class game extends Phaser.Scene {
   }
 
   funcion_botones(){
-    window.addEventListener('keypress', (event)=>{
 
-      this.i = event.key - 1; //
+    this.boton_pulsado;
+
+    this.input.keyboard.on(Phaser.Input.Keyboard.Events.ANY_KEY_DOWN, (event) => {
+      switch(event.code) {
+          case 'Digit1':
+            this.boton_pulsado = 1;
+          break;
+          case 'Digit2':
+            this.boton_pulsado = 2;
+          break;
+          case 'Digit3':
+            this.boton_pulsado = 3;
+          break;
+          case 'Digit4':
+            this.boton_pulsado = 4;
+          break;
+          case 'Digit5':
+            this.boton_pulsado = 5;
+          break;
+      }
+
+      this.ejecuta_funcion_boton(this.boton_pulsado);
+    });
+
+  }
+
+  ejecuta_funcion_boton(boton_pulsado){
+    
+    this.i = this.boton_pulsado - 1; 
+    console.log(this.objetos_activos[this.i])
 
       if(this.objetos_activos[this.i] == true){ //es un objeto activo
 
@@ -245,7 +273,6 @@ export default class game extends Phaser.Scene {
         
       }
 
-    });
   }
 
   modificar_volumen(cantidad){
