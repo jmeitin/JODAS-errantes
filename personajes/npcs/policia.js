@@ -15,8 +15,11 @@ export default class policia extends person {
         this.timer_derecha.paused = true;
 
         let img_rango = img_rango_para;
-        this.imagen_rango = this.scene.add.image(this.x,this.y,img_rango);
+        this.imagen_rango = this.scene.add.image(this.x,this.y,img_rango)
         this.imagen_rango.setBlendMode(Phaser.BlendModes.ADD);
+        if(campo_vision_x < 800)this.imagen_rango.setScale(0.9);
+        else if(campo_vision_x > 800)this.imagen_rango.setScale(1.1);
+        
         this.rango_per = this.scene.add.image(this.x,this.y,img_rango).setScale(2);
         this.rango_per.setAlpha(0);
         this.rango_per.setBlendMode(Phaser.BlendModes.SCREEN);

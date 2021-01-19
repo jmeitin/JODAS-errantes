@@ -254,9 +254,8 @@ export default class game extends Phaser.Scene {
             this.player.set_sombrero(true);
           }
           else if (this.inventario[this.i] =='pistola'){ 
-            //ANIMACION - CAMBIO ESCENA
-            //----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            console.log("ME PEGO UN TIRO");
+            this.parar_musica();
+            this.scene.start('end_menu',{vic:false,score:0,sui:true});
           }
 
         }
