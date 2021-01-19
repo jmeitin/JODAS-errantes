@@ -13,6 +13,7 @@ export default class end_menu extends Phaser.Scene{
     }
 
     preload(){
+        this.input.setDefaultCursor('url(../imgs/cursor_flecha.png), pointer')
         if(this.bool_victoria){
             this.load.image('fondo_menu_final','imgs/fondos/victoria.png');
         }

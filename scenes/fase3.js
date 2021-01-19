@@ -23,10 +23,10 @@ export default class fase3 extends Phaser.Scene {
         this.load.image('victoria', './imgs/fondos/victoria.png');
         this.load.image('derrota', './imgs/fondos/derrota.png');
         this.load.image('inventory', 'imgs/inventario/inventory_slot.png');
+        this.input.setDefaultCursor('url(../imgs/cursor.png), pointer');
     }
 
     create(){
-        this.input.setDefaultCursor('url(../imgs/cursor.png), pointer');
         this.map = this.make.tilemap({
             key: 'mapajuego',
             tileWidth: 96,
