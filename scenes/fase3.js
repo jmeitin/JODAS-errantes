@@ -50,17 +50,17 @@ export default class fase3 extends Phaser.Scene {
         this.pointer = this.input.activePointer;
         this.music=this.sound.add('music', {loop: true});
         this.music.play();
-        this.carroza = new Civil(this, 870, 1020, "carroza", 10, true);
+        this.carroza = new Civil(this, 870, 1020, "carroza", 50, true);
         this.civiles = [];
         for(let i = 0; i < 10; i++){
            for(let j = 0; j < 10; j++){
                 if(((i < 3 || i > 6) || (j < 3 || j > 6))){
                     if(i < 2 || i > 7){
-                        let civil = new Civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 700 + 70 * j, "civil", (Math.random() + 0.5) * 10, true);
+                        let civil = new Civil(this, ((Math.random() * 50) - 25) + 600 + 60 * i, ((Math.random() * 50) - 25) + 700 + 70 * j, "civil", (Math.random() + 0.5) * 50, true);
                         this.civiles.push(civil);
                     }
                     else{
-                        let civil = new Civil(this, 600 + 60 * i, 700 + 70 * j, "civil", 10,true);
+                        let civil = new Civil(this, 600 + 60 * i, 700 + 70 * j, "civil", 50,true);
                         this.civiles.push(civil);
                     }
                 }
