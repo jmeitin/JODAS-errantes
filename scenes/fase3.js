@@ -98,18 +98,18 @@ export default class fase3 extends Phaser.Scene {
                 civil.destroy(true);
                 this.score += 10;
             }   
-            else if(this.lanzada){
+            /*else if(this.lanzada){
                 civil.setSpeed(0);
-            }
+            }*/
             
         })
         if(this.lanzada === true && this.physics.overlap(this.bomba, this.carroza)){
             this.carroza.destroy(true);
             this.score += 100;
         }
-        else if(this.lanzada){
+        /*else if(this.lanzada){
             this.carroza.setSpeed(0);
-        }
+        }*/
 
         if(this.lanzada){
             this.music.stop();
