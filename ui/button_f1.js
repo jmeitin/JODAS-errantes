@@ -1,7 +1,7 @@
 import gameobject from "../clases/gameobject.js";
 
 export default class buttonf1 extends gameobject{
-    constructor(scene, x, y, type, scale, txtbox, inventario, peso_maximo, peso_obj){
+    constructor(scene, x, y, type, scale, txtbox, inventario, peso_maximo, peso_obj, sound2, sound){
         super(scene, x, y, type);         
 
         //pesos
@@ -15,7 +15,9 @@ export default class buttonf1 extends gameobject{
         this.type = type;
         this.setInteractive();
         this.setScale(scale);
-
+        this.sound = sound;
+        this.sound2 = sound2;
+        
         this.textbox = txtbox;
         
         this.on('pointerover', () => { 
@@ -36,13 +38,18 @@ export default class buttonf1 extends gameobject{
                 this.clicked = false;
                 this.quita_inventario(this.peso_act);
                 this.alpha = 1;
+                this.sound2.play();
             }
             else if(!this.clicked){
                 if(this.peso_act + this.peso_obj <= this.peso_maximo){
                     this.clicked = true;                   
                     this.añade_inventario(this.peso_act);    
-                    this.alpha = 0.7;               
-                }                
+                    this.alpha = 0.7;  
+                    this.sound.play();             
+                }   
+                else{
+                    this.sound2.play();
+                }             
             }
             
         }) 

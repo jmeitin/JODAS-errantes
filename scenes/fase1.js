@@ -82,8 +82,8 @@ export default class fase1 extends Phaser.Scene {
             delay: 0
         }; 
 
-        let sound1=this.sound.add('soundbutton', config);
-        let sound2=this.sound.add('soundbutton2', config);
+        this.sound1=this.sound.add('soundbutton', config);
+        this.sound2=this.sound.add('soundbutton2', config);
         let sound3=this.sound.add('soundbutton3', config);
 
         this.fondo_scale = 7;//tamaño de los tiles de madera de fondo
@@ -119,7 +119,6 @@ export default class fase1 extends Phaser.Scene {
             else if(this.lleva_bomba_max && this.lleva_bomba_min){
                 this.img_aviso_doble_modificador.setVisible(true);
                 this.contenedor_textos_aviso.setVisible(true);
-                console.log("aaa");
             }
             else{
                 sound3.play();
@@ -219,18 +218,18 @@ export default class fase1 extends Phaser.Scene {
     }
 
     coloca_botones(){
+        console.log(this.sound2);
+        this.bomba_plus = new button(this, 400, 350, 'bomba_plus', 1, this.tbomba_plus, this.inventario, this.peso_max,  this.peso_bomb_plus, this.sound2, this.sound1);
 
-        this.bomba_plus = new button(this, 400, 350, 'bomba_plus', 1, this.tbomba_plus, this.inventario, this.peso_max,  this.peso_bomb_plus);
+        this.bomba_minus = new button(this, 850, 150, 'bomba_minus', 0.6, this.tbomba_minus, this.inventario, this.peso_max,  this.peso_bomb_minus, this.sound2, this.sound1).setScale(0.6);
 
-        this.bomba_minus = new button(this, 850, 150, 'bomba_minus', 0.6, this.tbomba_minus, this.inventario, this.peso_max,  this.peso_bomb_minus).setScale(0.6);
+        this.sombrero = new button(this, 600, 150, 'sombrero', 1, this.tsombrero, this.inventario, this.peso_max, this.peso_hat, this.sound2, this.sound1);
 
-        this.sombrero = new button(this, 600, 150, 'sombrero', 1, this.tsombrero, this.inventario, this.peso_max, this.peso_hat);
+        this.pistola = new button(this, 300, 150, 'pistola', 1, this.tpistola, this.inventario, this.peso_max, this.peso_gun, this.sound2, this.sound1);
 
-        this.pistola = new button(this, 300, 150, 'pistola', 1, this.tpistola, this.inventario, this.peso_max, this.peso_gun);
+        this.zapatos = new button(this, 750, 400, 'zapatos', 1, this.tzapatos, this.inventario, this.peso_max, this.peso_shoes, this.sound2, this.sound1);
 
-        this.zapatos = new button(this, 750, 400, 'zapatos', 1, this.tzapatos, this.inventario, this.peso_max, this.peso_shoes);
-
-        this.capa = new button(this, 1100, 250, 'capa', 1, this.tcapa, this.inventario, this.peso_max, this.peso_cape );
+        this.capa = new button(this, 1100, 250, 'capa', 1, this.tcapa, this.inventario, this.peso_max, this.peso_cape, this.sound2 , this.sound1);
     }
 
     crea_numeros(){
