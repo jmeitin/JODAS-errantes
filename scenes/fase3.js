@@ -15,7 +15,7 @@ export default class fase3 extends Phaser.Scene {
 
     preload(){
         this.load.image('civil', './imgs/viandante0.png');
-        this.load.tilemapTiledJSON('mapajuego','./mapas/mapajuego.json');
+        this.load.tilemapTiledJSON('mapa_fase3','./mapas/mapa_fase3.json');
         this.load.image('tilemapjuego', './mapas/tilemapjuego.png');
         this.load.audio('music', ['./music/game.mp3', './music/game.ogg']);
         this.load.image('bomba', './imgs/bomba.png');
@@ -27,13 +27,14 @@ export default class fase3 extends Phaser.Scene {
     }
 
     create(){
-        this.map = this.make.tilemap({
-            key: 'mapajuego',
+        this.map_fase3 = this.make.tilemap({
+            key: 'mapa_fase3',
             tileWidth: 96,
             tileHeight: 96
         });
-        const tileset1 = this.map.addTilesetImage('tilemapjuego','tilemapjuego');
-        this.backgroundLayer = this.map.createStaticLayer('Capa de patrones 1', tileset1);
+        const tileset1 = this.map_fase3.addTilesetImage('tilemap-export96','tilemapjuego');
+        this.backgroundLayer = this.map_fase3.createStaticLayer('capa1', tileset1);
+
         this.score = 0;
         this.bomba = new Bomba(this, -500, 0, "bomba");
         this.lanzada = false;

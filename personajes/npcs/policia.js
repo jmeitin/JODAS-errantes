@@ -339,11 +339,11 @@ export default class policia extends person {
         }
 
         if(this.persiguiendo){
-            this.multiply_speed(5);
+            this.multiply_speed(1.2);
             console.log("rapido");
         }
         else{
-            this.multiply_speed(0.2);
+            this.multiply_speed(0.8);
             console.log("lento");
         }
     }
