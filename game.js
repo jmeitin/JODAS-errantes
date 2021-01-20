@@ -185,7 +185,7 @@ export default class game extends Phaser.Scene {
         })
       }
     })
-    if(this.player.x >= (this.pasofase.x - 48) && this.player.x <= (this.pasofase.x + 48) && this.player.y >= (this.pasofase.y - 48) && this.player.y <= (this.pasofase.y + 48)){
+    if(this.player.x >= (this.pasofase.x - 96) && this.player.x <= (this.pasofase.x + 96) && this.player.y >= (this.pasofase.y - 96) && this.player.y <= (this.pasofase.y + 96)){
       this.scene.start('fase3', {inventario:this.inventario});
     }
 
