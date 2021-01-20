@@ -114,7 +114,7 @@ export default class fase3 extends Phaser.Scene {
 
         if(this.lanzada){
             this.music.stop();
-            this.scene.start('end_menu', {vic:this.carroza.active === true, score:this.score,sui:false});
+            this.scene.start('end_menu', {vic:this.carroza.active === false, score:this.score,sui:false});
         }
         
     }

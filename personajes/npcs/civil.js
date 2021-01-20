@@ -72,9 +72,4 @@ export default class civil extends person{
 
     cambia_dir_x(){this.dir_x=-this.dir_x;}
     cambia_dir_y(){this.dir_y=-this.dir_y;}
-
-    // Retorna un entero aleatorio entre min (incluido) y max (excluido)
-    get_random_int(min, max) {
-        return Math.floor(Math.random() * (max - min)) + min;
-      }
 }
