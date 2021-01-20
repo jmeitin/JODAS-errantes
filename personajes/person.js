@@ -8,11 +8,11 @@ export default class person extends gameobject{
 		this.x = x;
         this.y = y;
         this.speed = speed;
-
-        // las mayus aqui son necesarias que es cosa de phaser
-        this.body.maxVelocity.x = speed;
-        this.body.maxVelocity.y = speed;
-	}
+    }
+    
+    preLoad(){
+        this.set_max_vel();
+    }
 
     //function
     move_left(){
@@ -52,13 +52,20 @@ export default class person extends gameobject{
 
     multiply_velocity (percentage){
         this.speed = this.speed + this.speed*percentage/100;
+        this.set_max_vel();
     }
     multiply_speed(multiplier){
         this.set_speed(this.speed * multiplier);
+       this.set_max_vel();
     }
     
     set_speed (speed){
         this.speed = speed;
+    }
+
+    set_max_vel(){
+        this.body.maxVelocity.x = this.speed;
+        this.body.maxVelocity.y = this.speed;
     }
 }
 
