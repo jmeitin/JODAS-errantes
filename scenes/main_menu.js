@@ -6,6 +6,7 @@ export default class main_menu extends Phaser.Scene {
     }
 
     preload(){
+        this.reinicio_animaciones();
         this.input.setDefaultCursor('url(../imgs/cursor_flecha.png), pointer')
         this.load.image('bot_comenzar', 'imgs/botones/comenzar.png');
         this.load.image('bot_creditos', 'imgs/botones/creditos.png');
@@ -15,6 +16,19 @@ export default class main_menu extends Phaser.Scene {
         this.load.audio('soundbutton', 'sounds/continue.mp3');
         this.load.image('sube_sonido','imgs/botones/sumar.png');
         this.load.image('baja_sonido','imgs/botones/restar.png');
+    }
+
+    reinicio_animaciones(){
+        if(this.anims.exists('down')) this.anims.remove('down');
+        if(this.anims.exists('left')) this.anims.remove('left');
+        if(this.anims.exists('right')) this.anims.remove('right');
+        if(this.anims.exists('up')) this.anims.remove('up');
+        if(this.anims.exists('stop')) this.anims.remove('stop');
+        if(this.anims.exists('sombrerodown')) this.anims.remove('sombrerodown');
+        if(this.anims.exists('sombreroleft')) this.anims.remove('sombreroleft');
+        if(this.anims.exists('sombreroright')) this.anims.remove('sombreroright');
+        if(this.anims.exists('sombreroup')) this.anims.remove('sombreroup');
+        if(this.anims.exists('stopsombrero')) this.anims.remove('stopsombrero');
     }
 
     create(){
