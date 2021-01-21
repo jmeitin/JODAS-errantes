@@ -70,6 +70,8 @@ export default class main_menu extends Phaser.Scene {
 
         this.boton_comenzar.on("pointerdown", ()=>{
             this.sound_b.play();
+        this.game.config.victoria = 0;
+        this.game.config.score = 0;
             this.scene.start('fase1');
             this.music.pause();
         });

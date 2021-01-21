@@ -286,11 +286,12 @@ this.campo_auditivo.body.moves = false;//no queremos moverlo con el poli
    
                            if (this.player.has_gun()) {
                                console.log ("Pues me SUICIDIO");
-                               suicidio = true;
+                               this.scene.game.config.victoria = 2;
                              }
                            // meter tambien un timer o algo
                            this.scene.parar_musica();
-                           this.scene.scene.start('end_menu',{vic:false,score:0,sui:suicidio});
+                           if(this.scene.game.config.victoria !== 2) this.scene.game.config.victoria = 0;
+                           this.scene.scene.start('end_menu');
                        }
    
                    } //control policial

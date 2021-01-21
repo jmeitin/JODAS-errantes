@@ -35,7 +35,6 @@ export default class fase3 extends Phaser.Scene {
         const tileset1 = this.map_fase3.addTilesetImage('tilemap-export96','tilemapjuego');
         this.backgroundLayer = this.map_fase3.createStaticLayer('capa1', tileset1);
 
-        this.score = 0;
         this.bomba = new Bomba(this, -500, 0, "bomba");
         this.lanzada = false;
         this.fixed = false;
@@ -67,13 +66,13 @@ export default class fase3 extends Phaser.Scene {
                 }
             }
         }
-        this.text = this.add.text(0, 0,  'Puntuación: ' + this.score);
+        this.text = this.add.text(0, 0,  'Puntuación: ' + this.game.config.score);
         this.text.setFontSize(50);
         
     }
 
     update(){
-        this.text.setText('Puntuación: ' + this.score)
+        this.text.setText('Puntuación: ' + this.game.config.score)
         if(!this.fixed && this.pointer.isDown){
             this.bomba.Fix();
             this.fixed = true;
@@ -97,7 +96,7 @@ export default class fase3 extends Phaser.Scene {
             if (this.lanzada === true && this.physics.overlap(this.bomba, civil)){
                 console.log(this.score);
                 civil.destroy(true);
-                this.score += 10;
+                this.game.config.score += 10;
             }   
             /*else if(this.lanzada){
                 civil.setSpeed(0);
@@ -106,7 +105,9 @@ export default class fase3 extends Phaser.Scene {
         })
         if(this.lanzada === true && this.physics.overlap(this.bomba, this.carroza)){
             this.carroza.destroy(true);
-            this.score += 100;
+            this.game.config.score += 100;
+            this.game.config.victoria = 1;
+            console.log("carroza morida");
         }
         /*else if(this.lanzada){
             this.carroza.setSpeed(0);
@@ -114,7 +115,7 @@ export default class fase3 extends Phaser.Scene {
 
         if(this.lanzada){
             this.music.stop();
-            this.scene.start('end_menu', {vic:this.carroza.active === false, score:this.score,sui:false});
+            this.scene.start('end_menu');
         }
         
     }
