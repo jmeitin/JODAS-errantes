@@ -17,8 +17,8 @@ export default class policia extends person {
         let img_rango = img_rango_para;
         this.imagen_rango = this.scene.add.image(this.x,this.y,img_rango)
         this.imagen_rango.setBlendMode(Phaser.BlendModes.ADD);
-        if(campo_vision_x < 800)this.imagen_rango.setScale(0.9);
-        else if(campo_vision_x > 800)this.imagen_rango.setScale(1.1);
+        if(campo_vision_x < 480)this.imagen_rango.setScale(0.9);
+        else if(campo_vision_x > 480)this.imagen_rango.setScale(1.1);
         
         this.rango_per = this.scene.add.image(this.x,this.y,img_rango).setScale(2);
         this.rango_per.setAlpha(0);
@@ -40,33 +40,23 @@ export default class policia extends person {
 
        this.container = scene.add.container(x, y);   
 
-       //POLICIA ==> TRIGGER ==> CAMPO DE SOSPECHA/CONTROL POLICIAL
-       this.control_policial = scene.add.zone(0, 0);
-       this.control_policial.setSize( this.control_policial_x,  this.control_policial_x);
-       this.scene.physics.world.enable( this.control_policial);
-       this.control_policial.body.setAllowGravity(false);
-       this.control_policial.body.moves = false;
-       
-       //POLICIA ==> TRIGGER ==> CAMPO DE VISION
-       this.campo_vision = scene.add.zone(0, 0);
-       this.campo_vision.setSize(this.campo_vision_x, this.campo_vision_x);
-       this.scene.physics.world.enable(this.campo_vision);
-       this.campo_vision.body.setAllowGravity(false);
-       this.campo_vision.body.moves = false;//no queremos moverlo con el poli
+    //Campo de vision circular
+    this.control_policial = new Phaser.Geom.Circle(0,0,this.control_policial_x);
+    this.scene.physics.world.enable(this.control_policial);
+    this.control_policial.body.setAllowGravity(false);
+    this.control_policial.body.moves = false;//no queremos moverlo con el poli
 
-       //POLICIA ==> TRIGGER ==> CAMPO AUDITIVO
-       this.campo_auditivo = scene.add.zone(0, 0);
-       this.campo_auditivo.setSize(this.campo_auditivo_x, this.campo_auditivo_x);
-       this.scene.physics.world.enable(this.campo_auditivo);
-       this.campo_auditivo.body.setAllowGravity(false);
-       this.campo_auditivo.body.moves = false;//no queremos moverlo con el poli
-       
+    //Campo de vision circular
+    this.campo_vision = new Phaser.Geom.Circle(0,0,this.campo_vision_x);
+    this.scene.physics.world.enable(this.campo_vision);
+    this.campo_vision.body.setAllowGravity(false);
+    this.campo_vision.body.moves = false;//no queremos moverlo con el poli
 
-       //EL CONTOINER ES PADRE DEN LOS CAMPOS DE DETECCION Y SIMILARES
-       //this.container.add(this.gameobject);
-       this.container.add(this.campo_vision);
-       this.container.add(this.campo_auditivo);
-       this.container.add(this.control_policial);
+//Campo de vision circular
+this.campo_auditivo = new Phaser.Geom.Circle(0,0,this.campo_auditivo_x);
+this.scene.physics.world.enable(this.campo_auditivo);
+this.campo_auditivo.body.setAllowGravity(false);
+this.campo_auditivo.body.moves = false;//no queremos moverlo con el poli
 
 
        this.dir_x = 0;
@@ -126,7 +116,6 @@ export default class policia extends person {
         this.move();
         this.dibuja_exc();
         this.rangos_vision();  
-     
         this.current_time = new Date().getTime();
     }   
 
@@ -149,7 +138,7 @@ export default class policia extends person {
 
     move(){
         //si no veo a player && ha pasado cierto tiempo cambio de dir
-        if(!this.scene.physics.overlap(this.player, this.campo_vision) && this.current_time >=this.last_time + 5000){
+        if(!Phaser.Geom.Circle.ContainsPoint(this.campo_vision,this.player) && this.current_time >=this.last_time + 5000){
             this.exc_ama.setAlpha(0);
             this.exc_roja.setAlpha(0);
             this.rango_per.setAlpha(0);
@@ -193,8 +182,12 @@ export default class policia extends person {
         }
          
 
-        this.container.x = this.x;
-        this.container.y = this.y;      
+        this.campo_vision.x = this.x;
+        this.campo_vision.y = this.y;     
+        this.campo_auditivo.x = this.x;
+        this.campo_auditivo.y = this.y;
+        this.control_policial.x=this.x;
+        this.control_policial.y = this.y;
     }
 
    
@@ -240,7 +233,7 @@ export default class policia extends person {
            this.jugador_y = this.player.y;
    
            //PLAYER ESTA DENTRO DEL RANGO AUDITIVO
-           if (this.scene.physics.overlap(this.player, this.campo_auditivo)){
+           if (Phaser.Geom.Circle.ContainsPoint(this.campo_auditivo,this.player)){
 
                if (this.player_civil){ //PLAYER HA CHOCADO CON UN CIVIL
                 this.calcular_dir(this.jugador_x, this.jugador_y);    
@@ -252,7 +245,7 @@ export default class policia extends person {
    
            
                //PLAYER ESTA DENTRO DEL RANGO DE VISION
-               if(this.scene.physics.overlap(this.player, this.campo_vision)) { 
+               if(Phaser.Geom.Circle.ContainsPoint(this.campo_vision,this.player)) { 
                 this.timer_arriba.paused = true;
                 this.timer_derecha.paused = true;
                    this.exc_ama.setAlpha(0);
@@ -272,7 +265,7 @@ export default class policia extends person {
                    
    
                    //CONTROL POLICIAL
-                   if(this.scene.physics.overlap(this.player,  this.control_policial)){
+                   if(Phaser.Geom.Circle.ContainsPoint(this.control_policial,this.player)){
                        if(!this.persiguiendo){
                            //el policia descubre que eres terrorista
                            this.set_persiguiendo(true, this.player.sombrero);

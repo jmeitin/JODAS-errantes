@@ -65,21 +65,21 @@ export default class game extends Phaser.Scene {
     this.player_x = 300;
     this.player_y = 900;
     this.player_speed = 200;
-    this.control_policial_x = 400;
-    this.campo_vision_x = 800; //A DEFINIR
-    this.campo_auditivo_x = 1200;  //A DEFINIR
+    this.control_policial_x = 240;
+    this.campo_vision_x = 480; //A DEFINIR
+    this.campo_auditivo_x = 800;  //A DEFINIR
 
     // MODIFICAMOS LOS CAMPOS DE VISION EN BASE A LO OBJETOS DEL INVENTARIO
     if (this.inventario.includes('bomba_plus')){ //AUMENTA EL RANGO DE VISION DEL POLICIA
-      this.campo_vision_x += this.campo_vision_x * 5/100; //--------------------------------------------------A DEFINIR
+      this.campo_vision_x += this.campo_vision_x * 10/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MEJOR");
     }
     if (this.inventario.includes('bomba_minus')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
-      this.campo_vision_x -= this.campo_vision_x * 5/100; //--------------------------------------------------A DEFINIR
+      this.campo_vision_x -= this.campo_vision_x * 10/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MENOS"); //---
     }
     if (this.inventario.includes('capa')){ //DISMINUYE EL RANGO DE VISION DEL POLICIA
-      this.campo_vision_x -= this.campo_vision_x * 5/100; //--------------------------------------------------A DEFINIR
+      this.campo_vision_x -= this.campo_vision_x * 10/100; //--------------------------------------------------A DEFINIR
       console.log("VEO MENOS"); //---
     }
 
