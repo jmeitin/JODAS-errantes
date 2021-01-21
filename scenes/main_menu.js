@@ -110,7 +110,7 @@ export default class main_menu extends Phaser.Scene {
 
         this.boton_creditos.on("pointerdown", ()=>{
             this.sound_b.play();
-            console.log('joder!');
+            this.scene.start('creditos');
             this.music.pause();
         })
        

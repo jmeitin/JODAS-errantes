@@ -45,6 +45,7 @@
 
       import game from "./game.js";
       import main_menu from "./scenes/main_menu.js";
+      import creditos from "./scenes/creditos.js"
       import fase1 from "./scenes/fase1.js";
       import game_menu from "./scenes/game_menu.js";
       import end_menu from "./scenes/end_menu.js";
@@ -63,13 +64,13 @@
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         },//la primera escena de la lista de abajo es la que se muestra nada mas empezar
-        scene: [main_menu , fase1, game, tutorial_fase2, fase3, game_menu, end_menu],
+        scene: [main_menu , creditos, fase1, game, tutorial_fase2, fase3, game_menu, end_menu],
         //scene: [Game, fase1],
         physics: {
           default: "arcade",
           arcade: { gravity: { y: 0 }, 
-          //debug: true
-          debug: false
+          debug: true
+          //debug: false
           }, //vemos los colliders
         },
       };
