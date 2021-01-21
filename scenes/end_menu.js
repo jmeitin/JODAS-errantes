@@ -1,26 +1,17 @@
 export default class end_menu extends Phaser.Scene{
     constructor(){
         super({key:"end_menu"});
-        this.bool_victoria;
-        this.score;
-        this.suicidio;
-    }
-
-    init(data){
-        this.bool_victoria = data.vic;
-        this.score = data.score;
-        this.suicidio = data.sui;
     }
 
     preload(){
         this.input.setDefaultCursor('url(../imgs/cursor_flecha.png), pointer')
-        if(this.bool_victoria){
+        if(this.game.config.victoria === 1){
             this.load.image('fondo_menu_final','imgs/fondos/victoria.png');
         }
         else{
             this.load.image('fondo_menu_final','imgs/fondos/derrota.png');
         }
-        if(this.suicidio) {
+        if(this.game.config.victoria === 2) {
             this.load.audio('suicidio','sounds/suicidio.mp3');
             this.load.image('suicidio_texto','imgs/fondos/suicidio_texto.png');
         }
@@ -28,7 +19,7 @@ export default class end_menu extends Phaser.Scene{
     }
 
     create(){
-        if(this.suicidio){
+        if(this.game.config.victoria === 2){
             const config = {
                 mute: false,
                 volume: 0.2,
@@ -60,7 +51,7 @@ export default class end_menu extends Phaser.Scene{
         this.cameras.main.fadeIn(100);
         this.add.image(710,400,'fondo_menu_final').setScale(1.5);
 
-        this.add.text(500,650,"Puntuacion: " + this.score).setFontSize(50);
+        this.add.text(500,650,"Puntuacion: " + this.game.config.score).setFontSize(50);
         this.boton_continuar = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2 + 200,"continue").setScale(3);
         this.boton_continuar.setInteractive();
         this.boton_continuar.on("pointerover",()=>{

@@ -255,7 +255,8 @@ export default class game extends Phaser.Scene {
           }
           else if (this.inventario[this.i] =='pistola'){ 
             this.parar_musica();
-            this.scene.start('end_menu',{vic:false,score:0,sui:true});
+            this.game.config.victoria = 2;
+            this.scene.start('end_menu');
           }
 
         }
