@@ -7,7 +7,7 @@ export default class main_menu extends Phaser.Scene {
 
     preload(){
         this.reinicio_animaciones();
-        this.input.setDefaultCursor('url(../imgs/cursor_flecha.png), pointer')
+        this.input.setDefaultCursor('url(imgs/cursor_flecha.png), pointer');
         this.load.image('bot_comenzar', 'imgs/botones/comenzar.png');
         this.load.image('bot_creditos', 'imgs/botones/creditos.png');
         this.load.image('bot_sonido', 'imgs/botones/sonido.png');
