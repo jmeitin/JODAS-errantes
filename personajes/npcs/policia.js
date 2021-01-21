@@ -40,23 +40,23 @@ export default class policia extends person {
 
        this.container = scene.add.container(x, y);   
 
-    //Campo de vision circular
-    this.control_policial = new Phaser.Geom.Circle(0,0,this.control_policial_x);
-    this.scene.physics.world.enable(this.control_policial);
-    this.control_policial.body.setAllowGravity(false);
-    this.control_policial.body.moves = false;//no queremos moverlo con el poli
+        //Campo de control circular
+        this.control_policial = new Phaser.Geom.Circle(0,0,this.control_policial_x);
+        this.scene.physics.world.enable(this.control_policial);
+        this.control_policial.body.setAllowGravity(false);
+        this.control_policial.body.moves = false;//no queremos moverlo con el poli
 
-    //Campo de vision circular
-    this.campo_vision = new Phaser.Geom.Circle(0,0,this.campo_vision_x);
-    this.scene.physics.world.enable(this.campo_vision);
-    this.campo_vision.body.setAllowGravity(false);
-    this.campo_vision.body.moves = false;//no queremos moverlo con el poli
+        //Campo de vision circular
+        this.campo_vision = new Phaser.Geom.Circle(0,0,this.campo_vision_x);
+        this.scene.physics.world.enable(this.campo_vision);
+        this.campo_vision.body.setAllowGravity(false);
+        this.campo_vision.body.moves = false;//no queremos moverlo con el poli
 
-//Campo de vision circular
-this.campo_auditivo = new Phaser.Geom.Circle(0,0,this.campo_auditivo_x);
-this.scene.physics.world.enable(this.campo_auditivo);
-this.campo_auditivo.body.setAllowGravity(false);
-this.campo_auditivo.body.moves = false;//no queremos moverlo con el poli
+        //Campo auditivo circular
+        this.campo_auditivo = new Phaser.Geom.Circle(0,0,this.campo_auditivo_x);
+        this.scene.physics.world.enable(this.campo_auditivo);
+        this.campo_auditivo.body.setAllowGravity(false);
+        this.campo_auditivo.body.moves = false;//no queremos moverlo con el poli
 
 
        this.dir_x = 0;
