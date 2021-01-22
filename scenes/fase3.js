@@ -48,7 +48,17 @@ export default class fase3 extends Phaser.Scene {
         }
         this.scale = this.initScale;
         this.pointer = this.input.activePointer;
-        this.music=this.sound.add('music', {loop: true});
+        const config = {
+            mute: false,
+            volume: 0.2,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: true,
+            delay: 0
+        };
+      
+        this.music=this.sound.add('music', config);
         this.music.play();
         this.carroza = new Civil(this, 870, 1020, "carroza", 50, true);
         this.civiles = [];
