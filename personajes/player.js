@@ -1,12 +1,13 @@
 import person from "./person.js"
 
 export default class player extends person{
-    constructor(scene, x, y, type, cursorkeys, speed, inventario, flecha_img, pos_final){
+    constructor(scene, x, y, type, cursorkeys, speed, inventario, flecha_img, pos_final_x, pos_final_y){
         super(scene, x, y, type, speed);
       
         this.flecha_p = this.scene.add.image(x, y, flecha_img);
         // cambiar estas coordenadas por las que sean con el mapa terminado
-        this.coor_fin_x = pos_final;
+        this.coor_fin_x = pos_final_x;
+        this.coor_fin_y = pos_final_y;
         this.body.setSize(70, 150); //ajustar el collider del objeto
 
         this.cursorkeys = cursorkeys;  
@@ -175,7 +176,7 @@ export default class player extends person{
 
     update_flecha(){
       let coor_x = this.coor_fin_x - this.x;
-      let coor_y = 0 - this.y;
+      let coor_y = this.coor_fin_y - this.y;
       let vector = new Phaser.Math.Vector2(coor_x,coor_y);
       this.flecha_p.setPosition(this.x, this.y - 350);
       this.flecha_p.setRotation(vector.angle())

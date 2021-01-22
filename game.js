@@ -105,7 +105,7 @@ export default class game extends Phaser.Scene {
     const spawnpoint =this.map.findObject("person", obj => obj.name === "spawnplayer");
 
     this.flecha = 'flecha';
-    this.player = new player(this, spawnpoint.x, spawnpoint.y,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha, this.pasofase.x);  
+    this.player = new player(this, spawnpoint.x, spawnpoint.y,  'player', this.cursor_keys, this.player_speed, this.inventario, this.flecha, this.pasofase.x, this.pasofase.y);  
     this.physics.add.collider(this.player, this.colision_layer);
     
     //CIVILES
