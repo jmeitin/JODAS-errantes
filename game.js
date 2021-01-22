@@ -68,6 +68,7 @@ export default class game extends Phaser.Scene {
     this.control_policial_x = 240;
     this.campo_vision_x = 480; //A DEFINIR
     this.campo_auditivo_x = 800;  //A DEFINIR
+    this.npc_speed = 100;
 
     // MODIFICAMOS LOS CAMPOS DE VISION EN BASE A LO OBJETOS DEL INVENTARIO
     if (this.inventario.includes('bomba_plus')){ //AUMENTA EL RANGO DE VISION DEL POLICIA
@@ -118,17 +119,12 @@ export default class game extends Phaser.Scene {
     this.civiles = []; // constructor(scene, x, y, type, speed, fase3){
     
 
-      let civil_1 = new civil(this, spawnciviles[0].x, spawnciviles[0].y, "civil", 100, false, false);
+    for (this.i = 0; this.i < spawnciviles.length; this.i++){
+      let civil_1 = new civil(this, spawnciviles[this.i].x, spawnciviles[this.i].y, "civil", this.npc_speed, false, false);
       this.physics.add.collider(civil_1, this.colision_layer);
       this.civiles.push(civil_1);
-      let civil_2 = new civil(this, spawnciviles[1].x, spawnciviles[1].y, "civil", 100, false, false);
-      this.physics.add.collider(civil_2, this.colision_layer);
-      this.civiles.push(civil_2);
-      let civil_3 = new civil(this, spawnciviles[2].x, spawnciviles[2].y, "civil", 100, false, false);
-      this.physics.add.collider(civil_3, this.colision_layer);
-      this.civiles.push(civil_3);
-
-
+    }
+      
 
     //POLICIA CONTAINER ==> OBJETO VACIO al que hago PADRE de los CAMPOS DE VISION & SPRITE
     const spawnpolice =[
@@ -145,46 +141,25 @@ export default class game extends Phaser.Scene {
      this.map.findObject("person", obj => obj.name === "spawnpolice11"),
      this.map.findObject("person", obj => obj.name === "spawnpolice12")
     ];
+
     this.policias=[];
 
-    let police = new policia(this, spawnpolice[0].x, spawnpolice[0].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
-    this.physics.add.collider(police, this.colision_layer);
-    this.policias.push (police);
-    let police1 = new policia(this, spawnpolice[1].x, spawnpolice[1].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
-    this.physics.add.collider(police1, this.colision_layer);
-    this.policias.push (police1);
-    let police2 = new policia(this, spawnpolice[2].x, spawnpolice[2].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
-    this.physics.add.collider(police2, this.colision_layer);
-    this.policias.push (police2);
-    let police3 = new policia(this, spawnpolice[3].x, spawnpolice[3].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-    this.physics.add.collider(police3, this.colision_layer);
-    this.policias.push (police3);
-    let police4 = new policia(this, spawnpolice[4].x, spawnpolice[4].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-    this.physics.add.collider(police4, this.colision_layer);
-    this.policias.push (police4);
-    let police5 = new policia(this, spawnpolice[5].x, spawnpolice[5].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
-    this.physics.add.collider(police5, this.colision_layer);
-    this.policias.push (police5);
-    let police6 = new policia(this, spawnpolice[6].x, spawnpolice[6].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-    this.physics.add.collider(police6, this.colision_layer);
-    this.policias.push (police6);
-    let police7 = new policia(this, spawnpolice[7].x, spawnpolice[7].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-    this.physics.add.collider(police7, this.colision_layer);
-    this.policias.push (police7);
-    let police8 = new policia(this, spawnpolice[8].x, spawnpolice[8].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
-    this.physics.add.collider(police8, this.colision_layer);
-    this.policias.push (police8);
-    let police9 = new policia(this, spawnpolice[9].x, spawnpolice[9].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-    this.physics.add.collider(police9, this.colision_layer);
-    this.policias.push (police9);
-    let police10 = new policia(this, spawnpolice[10].x, spawnpolice[10].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-    this.physics.add.collider(police10, this.colision_layer);
-    this.policias.push (police10);
-    let police11 = new policia(this, spawnpolice[11].x, spawnpolice[11].y, 100, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
-    this.physics.add.collider(police11, this.colision_layer);
-    this.policias.push (police11);
+    for (this.i= 0; this.i < spawnpolice.length; this.i++){
+      if (this.i === 0 || this.i === 1 || this.i === 2 || this.i === 5 || this.i === 8){
+        let police = new policia(this, spawnpolice[this.i].x, spawnpolice[this.i].y, this.npc_speed, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',false);
+        this.physics.add.collider(police, this.colision_layer);
+        this.policias.push (police);
+        console.log ("new policia");
+      }
+      else {
+        let police = new policia(this, spawnpolice[this.i].x, spawnpolice[this.i].y, this.npc_speed, 'police', this.campo_vision_x, this.campo_auditivo_x,  this.control_policial_x, this.player, this.civiles, 'img_rango','ex_ama','ex_roja',true);
+        this.physics.add.collider(police, this.colision_layer);
+        this.policias.push (police);
+        console.log ("else");
+      }
+    }
 
-    
+
 
     this.colision_layer.setCollisionByProperty({colision: true});   //Si los tiled tienen colision a true, se choca con la pared
     this.cameras.main.startFollow(this.player);    
@@ -193,7 +168,6 @@ export default class game extends Phaser.Scene {
 
     //CREAMOS INVENTARIO
     this.crea_inventario();
-
   }
 
   update(time, delta) {
