@@ -64,7 +64,7 @@ export default class game extends Phaser.Scene {
     //VARIABLES DE JUEGO
     this.player_x = 300;
     this.player_y = 900;
-    this.player_speed = 900;
+    this.player_speed = 200;
     this.control_policial_x = 240;
     this.campo_vision_x = 480; //A DEFINIR
     this.campo_auditivo_x = 800;  //A DEFINIR
