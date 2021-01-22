@@ -1,6 +1,8 @@
 export default class tutorial_fase3 extends Phaser.Scene{
     constructor(){
         super({key:"tutorial_fase3"});   
+
+        this.pulsado = false;
     }
 
     init (data){
@@ -16,8 +18,9 @@ export default class tutorial_fase3 extends Phaser.Scene{
         this.tutorialText = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,'tutorialf3').setScale(2);
         this.tutorialText.setInteractive();
 
-        this.tutorialText.on('pointerdown', () => {
+        this.tutorialText.on('pointerup', () => {
             this.scene.start('fase3', {inventario:this.inventario}); //fase 3
+            
         });
     }
 }

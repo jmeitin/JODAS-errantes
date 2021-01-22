@@ -86,9 +86,7 @@ export default class fase3 extends Phaser.Scene {
         if(!this.fixed && this.pointer.isDown){
             this.bomba.Fix();
             this.fixed = true;
-            //this.lanzada = true;
-            //game.time.events.add(Phaser.Timer.SECOND, destroyBomb, this)
-            //this.input.setDefaultCursor('default, pointer');
+
         }
         if(this.fixed && !this.lanzada){
             if(this.scale < this.initScale + 0.5){
@@ -108,9 +106,7 @@ export default class fase3 extends Phaser.Scene {
                 civil.destroy(true);
                 this.game.config.score += 10;
             }   
-            /*else if(this.lanzada){
-                civil.setSpeed(0);
-            }*/
+
             
         })
         if(this.lanzada === true && this.physics.overlap(this.bomba, this.carroza)){
@@ -119,9 +115,7 @@ export default class fase3 extends Phaser.Scene {
             this.game.config.victoria = 1;
             console.log("carroza morida");
         }
-        /*else if(this.lanzada){
-            this.carroza.setSpeed(0);
-        }*/
+
 
         if(this.lanzada){
             this.music.stop();

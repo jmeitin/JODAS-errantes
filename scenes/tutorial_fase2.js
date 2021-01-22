@@ -16,7 +16,7 @@ export default class tutorial_fase2 extends Phaser.Scene{
         this.tutorialText = this.add.image(this.game.renderer.width/2, this.game.renderer.height/2,'tutorialf2').setScale(2);
         this.tutorialText.setInteractive();
 
-        this.tutorialText.on('pointerdown', () => {
+        this.tutorialText.on('pointerup', () => {
             this.scene.start('main', {inventario:this.inventario}); //fase 2
         });
     }
