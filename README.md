@@ -14,10 +14,15 @@ Plataformas: PC.
 
 Descripción: Brull es un videojuego web top-down del género de acción y sigilo en el que el jugador debe realizar un ataque terrorista contra la Familia Real, siguiendo distintas fases dentro del nivel, escogiendo diferentes objetos que pueden ayudar a conseguir el éxito.
 Páginas de interés
+
 Página web: https://jmeitin.github.io/JODAS-errantes/
+
 Repositorio: https://github.com/jmeitin/JODAS-errantes
+
 Twitter: https://twitter.com/JODASerrantes
+
 Pivotal: https://www.pivotaltracker.com/n/projects/2467974	
+
 
 ![Screenshot](./imgs/readme/screenshot.jpg)
 
@@ -26,21 +31,37 @@ Pivotal: https://www.pivotaltracker.com/n/projects/2467974
 
 ### Índice
 ASPECTOS GENERALES	3
+
 MENÚS Y MODOS DE JUEGO	3
+
 Menús y modos de juego	3
+
 Menú Principal:	3
+
 Menú In Game (de pausa):	3
+
 Interfaz y control	4
+
 JUGABILIDAD:	5
+
 Mecánicas	5
+
 Jugador:	5
+
 Selección de objetos:	5
+
 Objetos:	5
+
 Los policías:	5
+
 Los civiles:	6
+
 Familia real:	6
+
 Dinámicas	6
+
 Contenidos:	7
+
 Relato breve de una partida:	7
 
 
