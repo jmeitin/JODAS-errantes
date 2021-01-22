@@ -29,7 +29,7 @@ Pivotal: https://www.pivotaltracker.com/n/projects/2467974
 
 
 
-### Índice
+# Índice
 ASPECTOS GENERALES	3
 
 MENÚS Y MODOS DE JUEGO	3
@@ -81,7 +81,7 @@ Relato breve de una partida:	7
 
 
 
-### ASPECTOS GENERALES
+# ASPECTOS GENERALES
 Experiencia: Se pretende el entretenimiento del usuario sin la intención de enviar ningún mensaje ideológico. El objetivo es meramente lúdico. No se pretende dañar directa o indirectamente la memoria de las víctimas del terrorismo.
 Claves estéticas: Los colores y diseños tanto del entorno como de los personajes son apagados y reflejan los sentimientos y descripción que da Baroja en su novela.
 Narrativa: El terrorista Brull pretende atentar contra los reyes de España, que se encuentran en la Calle Mayor de Madrid. El terrorista deberá de realizar los preparativos previos, ya sea recolectar materiales para la creación de la bomba, el acercarse al lugar del atentado.
@@ -89,7 +89,7 @@ Tema: El terrorismo y anarquismo.
 Ambientación: Madrid, 1906. El atentado anarquista del 31 de mayo en contra de la Familia Real.
 Dinámica: El jugador vaga por las calles de Madrid hasta llegar al lugar indicado para tirar la bomba. En caso de conseguirlo, deberá huir sin que le atrape la policía.
 
-### MENÚS Y MODOS DE JUEGO
+# MENÚS Y MODOS DE JUEGO
 Modos de juego: El único modo de juego disponible es el modo de un solo jugador, en el que éste podrá jugar las veces que quiera, ya sea por completar el juego de formas distintas o intentar obtener la máxima puntuación posible.
 Menús y modos de juego
 Habrá dos menús dentro del juego:
@@ -112,7 +112,7 @@ Menú Victoria/Derrota:
 A este menú se accede usando la pistola, ganando o perdiendo la partida. Consta de una única opción:
 Continuar: El jugador vuelve al menú principal.
 
-### Interfaz y control
+# Interfaz y control
 
 ## Controles:  
 Los controles del juego van a ser los siguientes:
@@ -128,9 +128,9 @@ En la zona inferior derecha de la pantalla habrá un botón de continuar (se tra
 Fase 2 (Previa): En la zona superior izquierda de la pantalla habrá una barra con los objetos que lleva el jugador idéntica a la de la fase anterior. Habrá una flecha en el borde de la pantalla señalando la dirección en la que está el objetivo del jugador, y cuando esté el jugador cercano al objetivo, y estén los dos en la pantalla simultáneamente, la flecha señalará el lugar exacto del objetivo.
 Fase 3 (Bomba): El jugador ve la calle desde el tejado. Hay un punto que se mueve con el ratón que es el centro de la explosión. El jugador puede seleccionar el punto de la calle donde explota la bomba moviendo el ratón y haciendo click izquierdo. Al hacer click el rango de la bomba se empieza a mover de arriba a abajo y se queda quieto cuando se deja de hacer click izquierdo, y dependiendo de cómo haya quedado tendrá más o menos radio de explosión (al principio tiene el radio original de la bomba y va creciendo hasta un máximo del rango más 0,5, cuando se pasa vuelve al radio original). Por la calle marcha un convoy de civiles guardando la carroza del rey en el centro, el objetivo es acabar con la carroza.
 
-### JUGABILIDAD:
+# JUGABILIDAD:
 ## Mecánicas
-# Jugador:
+### Jugador:
 Muerte: Muere si lo atrapan o si se suicida en la fase 2.
 Movimiento: El jugador se mueve en 4 direcciones.
 
@@ -141,15 +141,15 @@ Además hay un botón para iniciar la siguiente fase el cual solo se puede pulsa
 ## Objetos:
 Cuanto menos peso lleves más puntuación tienes al final.
 
-# Poco peso [1] → Un uso (activo) o pasivos con bufos menores:
+### Poco peso [1] → Un uso (activo) o pasivos con bufos menores:
 Pistola [Activo]: Es un objeto “trampa”, que incita al jugador a usarlo, por su aparente utilidad, pero si el jugador lo activa el personaje se pega un tiro. Además, si la policía captura al jugador, en lugar de ser capturado se suicida (sin más diferencias). 
 Potenciador extra de la bomba [Pasivo]: Más radio en la explosión y más difícil de ocultar, haciendo más fácil el minijuego de la Fase 3, pero aumentando el radio de detección por los civiles y policías (+  % radio explosión, +  % radio visión).
 Modificador de bomba pequeña [Pasivo]: Menos radio de explosion, pero se reducen las sospechas hacia ti (-  % radio explosión, -  % radio visión). 
 
-# Peso medio [2] → Objetos activos con múltiples usos y objetos pasivos con bufos que afecten de forma notable a la dificultad del juego:
+### Peso medio [2] → Objetos activos con múltiples usos y objetos pasivos con bufos que afecten de forma notable a la dificultad del juego:
 Zapatillas [Pasivo]: Aumenta la velocidad de movimiento (+  %).
 
-# Peso tocho [3] → Activos con usos muy poderosos o pasivos que hacen el juego mucho más fácil:
+### Peso tocho [3] → Activos con usos muy poderosos o pasivos que hacen el juego mucho más fácil:
 Sombrero [Activo]: Cambia tu identidad y hace que la policía no se fije en ti. Solo se puede activar cuando te están persiguiendo y no estás dentro del rango visual.
 Capa [Pasivo]: Aunque el jugador entre en un rango de sospecha, será más difícil que le detecten (-  % radio visión).
 
@@ -197,9 +197,9 @@ El arte del juego será PixelArt 2D, con una gama de colores más clásicos y co
 El juego está dirigido a personas a partir de los 18 años, ya que es un juego muy violento, en el que se enfoca un tema como es el propio terrorismo y anarquismo.
 
 ## Contenidos:
-# Historia:
+### Historia:
 Brull lleva planificando meses el atentado contra la Familia Real. Llega el día 31 de mayo de 1906. Brull coge la bomba y se acerca al lugar del atentado. Tras evitar ser visto por policía y civiles, llega al edificio del atentado. Sube al tejado y lanza la bomba. Desde ese momento Brull deberá escapar de allí ileso.
-# Personajes:
+### Personajes:
 Brull: Se trata del protagonista y el personaje que maneja el jugador. Es un terrorista anarquista que su objetivo es realizar la misión de atentar contra la Familia Real y poder eliminarla y cumplir sus objetivos. Sacrificará cualquier cosa con tal de cumplir su objetivo.
 Familia Real: Se encuentran realizando un evento oficial en la calle Mayor de Madrid.
 Policías: Son los responsables de proteger a la Familia Real de cualquier peligro que les pueda suceder. Se encontrarán en las inmediaciones del lugar del atentado.
@@ -214,7 +214,7 @@ Llegará al edificio destino y comenzará la fase de la bomba, donde tendrá que
 
 
 
-### Arquitectura UML
+# Arquitectura UML
 
 
 ## Plataforma de gestión
@@ -228,7 +228,7 @@ La plataforma de comunicación que hemos utilizado durante el desarrollo del jue
 En esta plataforma hemos hablado todos los problemas del proyecto, las reuniones de los dailies meetings, comentado aspectos fundamentales del proyecto e ideas relevantes a este.
 
 
-### Referencias:
+# Referencias:
 ## Hitman:
 Este juego de sigilo nos recuerda a lo que queremos hacer en las dos primeras fases del juego, con una vista top-down y una jugabilidad lenta y estratégica.
 
