@@ -36,10 +36,10 @@ export default class fase1 extends Phaser.Scene {
         this.load.image('fondo', 'imgs/planks/plank1.png');
 
         //cargamos imagenes de objetos
-        this.load.image('bomba_minus', 'imgs/objetos/bomb_minus.png')
+        this.load.image('bomba_minus', 'imgs/objetos/dynamite_01.png')
         this.load.image('bomba_plus', 'imgs/objetos/bomb.png');
         this.load.image('capa', 'imgs/objetos/capa.png');
-        this.load.image('pistola', 'imgs/objetos/shotgun1.png');
+        this.load.image('pistola', 'imgs/objetos/pistol.png');
         this.load.image('sombrero', 'imgs/objetos/sombrero.png');
         this.load.image('zapatos', 'imgs/objetos/zapatos.png');
 
