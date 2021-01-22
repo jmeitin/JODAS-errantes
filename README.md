@@ -97,13 +97,22 @@ Menú principal: Es el menú que aparece al iniciar el juego.
 Menú In Game: Es el menú que aparece al pausar la partida.
 Menú Victoria/Derrota: Es el menú que aparece al ganar o perder la partida.
 
+![derrota](./imgs/readme/derrota.jpg)
+
+
 ## Menú Principal:  
+
+![menu](./imgs/readme/menu.jpg)
+
 En este menú nos encontramos los siguientes botones:
 Comenzar: Comienza una partida, enviando al jugador a la pantalla de la fase 1 del juego.
 Sonido: Podrá configurar el volumen.
 Créditos: Muestra en una pantalla los integrantes del grupo que han desarrollado el juego.
 
 ## Menú In Game (de pausa):  
+
+![menuingame](./imgs/readme/menuingame.jpg)
+
 A este menú se accede pulsando la tecla P durante una partida. Consta de tres opciones diferentes:
 Continuar: El jugador continúa con la partida que está realizando.
 Música: El jugador ajusta la intensidad de la música con botones para aumentarla o disminuirla.
@@ -116,6 +125,9 @@ Continuar: El jugador vuelve al menú principal.
 
 ## Controles:  
 Los controles del juego van a ser los siguientes:
+
+![controles](./imgs/readme/controles.jpg)
+
 Flechas/WASD: desplaza al jugador en horizontal, vertical o diagonal.
 Números: selección de un objeto del inventario que lleva el jugador.
 Ratón: selección de objetos para el nivel, interacción con los menús, selección y deselección del lugar de tirar la bomba.
@@ -216,6 +228,9 @@ Llegará al edificio destino y comenzará la fase de la bomba, donde tendrá que
 
 # Arquitectura UML
 
+![uml2](./imgs/readme/uml2.jpg)
+
+![uml1](./imgs/readme/uml1.jpg)
 
 ## Plataforma de gestión
 La plataforma de gestión que hemos utilizado durante el desarrollo del juego es Pivotal Tracker. Pivotal Tracker es una herramienta de gestión de proyectos ágiles desarrollada por expertos en desarrollo de software ágil. Fácil de usar, Tracker posibilita la colaboración en tiempo real en torno a un registro compartido priorizado.
