@@ -64,7 +64,7 @@ export default class game extends Phaser.Scene {
     //VARIABLES DE JUEGO
     this.player_x = 300;
     this.player_y = 900;
-    this.player_speed = 200;
+    this.player_speed = 900;
     this.control_policial_x = 240;
     this.campo_vision_x = 480; //A DEFINIR
     this.campo_auditivo_x = 800;  //A DEFINIR
@@ -192,7 +192,7 @@ export default class game extends Phaser.Scene {
     //PASO A LA FASE 3
     if(this.player.x >= (this.pasofase.x - 96) && this.player.x <= (this.pasofase.x + 96) && this.player.y >= (this.pasofase.y - 96) && this.player.y <= (this.pasofase.y + 96)){
       this.music.stop();
-      this.scene.start('fase3', {inventario:this.inventario});
+      this.scene.start('tutorial_fase3', {inventario:this.inventario});
     }
 
     //modificamos posicion de inventario
