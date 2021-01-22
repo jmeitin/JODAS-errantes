@@ -69,6 +69,8 @@ export default class game extends Phaser.Scene {
     this.campo_vision_x = 480; //A DEFINIR
     this.campo_auditivo_x = 800;  //A DEFINIR
     this.npc_speed = 100;
+    this.desfase_inventario_x = 600;
+    this.desfase_inventario_y = 300;
 
     // MODIFICAMOS LOS CAMPOS DE VISION EN BASE A LO OBJETOS DEL INVENTARIO
     if (this.inventario.includes('bomba_plus')){ //AUMENTA EL RANGO DE VISION DEL POLICIA
@@ -170,36 +172,37 @@ export default class game extends Phaser.Scene {
     this.crea_inventario();
   }
 
+  //BUCLE DE JUEGO
   update(time, delta) {
     this.player.movement_manager();
-    
-    
 
     if(this.player.pausa()) {
       this.scene.run('game_menu');
       this.scene.pause();
     }
 
-    this.civiles.forEach((civil_1)=>{
+    this.civiles.forEach((civil_1)=>{ //SI PLAYER CHOCA CON UN CIVIL ==> AVISA A LOS POLICIAS
       if (this.physics.overlap(this.player, civil_1)){
         this.policias.forEach((poli)=>{
           poli.player_choco_con_civil(true);
         })
       }
     })
+
+    //PASO A LA FASE 3
     if(this.player.x >= (this.pasofase.x - 96) && this.player.x <= (this.pasofase.x + 96) && this.player.y >= (this.pasofase.y - 96) && this.player.y <= (this.pasofase.y + 96)){
       this.music.stop();
       this.scene.start('fase3', {inventario:this.inventario});
     }
 
     //modificamos posicion de inventario
-    this.contenedor_inventario.x = this.player.x - 600;
-    this.contenedor_inventario.y = this.player.y - 300;
+    this.contenedor_inventario.x = this.player.x - this.desfase_inventario_x;
+    this.contenedor_inventario.y = this.player.y - this.desfase_inventario_y;
     
   }
 
   crea_inventario(){
-      this.contenedor_inventario = this.add.container(this.player.x - 600, this.player.y - 300);
+      this.contenedor_inventario = this.add.container(this.player.x - this.desfase_inventario_x, this.player.y - this.desfase_inventario_y);
       console.log(this.inventario.length);
       this.coloca_me_en = 0;
       
@@ -208,9 +211,7 @@ export default class game extends Phaser.Scene {
         this.contenedor_inventario.add(this.add.image(this.coloca_me_en, 0, this.inventario[this.i]).setScale(0.3));
         
         this.coloca_me_en += 100;
-
       }
-
   }
 
   funcion_botones(){
@@ -261,7 +262,6 @@ export default class game extends Phaser.Scene {
             this.game.config.victoria = 2;
             this.scene.start('end_menu');
           }
-
         }
         else if(this.objetos_activos_activados[this.i] == true){ //descativamos objeto
 
@@ -273,7 +273,6 @@ export default class game extends Phaser.Scene {
             this.player.set_sombrero(false);           
           }
         }
-        
       }
 
   }

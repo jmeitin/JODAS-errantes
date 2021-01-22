@@ -25,6 +25,7 @@ export default class end_menu extends Phaser.Scene{
               };
               let music = this.sound.add('suicidio',config);
               music.play();
+              //en delay t ==> llama a la funcion this.mensaje_suicidio. No se repite
               this.timer2 = this.time.addEvent({delay:9000, callback:this.mensaje_suicidio, callbackScope:this,repeat:0});
               this.timer = this.time.addEvent({delay:12000, callback: this.set_scene, callbackScope:this, repeat:0});
         }
